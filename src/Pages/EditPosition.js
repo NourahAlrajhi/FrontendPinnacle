@@ -228,7 +228,7 @@ const EditPosition = () => {
     { error && showAlertSuccess33(error) }
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr: consumer, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
-    const response = await fetch('/api/Position/' + id, {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
       method: 'PATCH',
       body: JSON.stringify(Positionssss),
       headers: {
@@ -261,7 +261,7 @@ const EditPosition = () => {
   useEffect(() => {
     console.log("formRows: ", consumer);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Position/' + id, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()

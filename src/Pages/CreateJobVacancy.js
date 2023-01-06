@@ -222,7 +222,7 @@ const CreateJobbVacancy = () => {
         if (!Recruiter) {
             return
         }
-        const response = await fetch('/api/Position/' + ID, {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + ID, {
             headers: { 'Authorization': `Bearer ${Recruiter.token}` },
         })
         const json = await response.json()
@@ -259,7 +259,7 @@ const CreateJobbVacancy = () => {
     useEffect(() => {
         console.log("formRows: ", Positions);
         const fetchPosition = async () => {
-            const response = await fetch('/api/Position', {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position', {
                 headers: { 'Authorization': `Bearer ${Recruiter.token}` },
             })
             const json = await response.json()
@@ -310,7 +310,7 @@ const CreateJobbVacancy = () => {
         //  { error && showAlertSuccess33(error) }
         const Vacancy = { Position: PositioArray, title: PositionChoosen, Esubject: EmailSubject, Ebody: EmailBody, linkExpDate: value, linkExpTime: value, status: "Active" }
 
-        const response = await fetch('/api/Position/Update', {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
             headers: {
@@ -357,7 +357,7 @@ const CreateJobbVacancy = () => {
         console.log("No file have been uploaded");
         const Vacancy = { Positionnn: PositioArray, titleee: PositionChoosen, Esubjecttt: EmailSubject, Ebodyyy: EmailBody, linkExpDateee: value, linkExpTimeee: value, statusss: "Open" }
 
-        const response = await fetch('/api/Position/Update', {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
             headers: {
@@ -406,7 +406,7 @@ const CreateJobbVacancy = () => {
 
         //   const Positionssss = { data, VACANCYID }
 
-        const responseee = await fetch('/api/Candidate/UPLOAD', {
+        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/UPLOAD', {
             method: 'POST',
             body: data,
             headers: {
@@ -423,7 +423,7 @@ const CreateJobbVacancy = () => {
 
 
 
-            const response = await fetch('/api/Candidate/Candidate/' + json._id, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/Candidate/' + json._id, {
                 headers: { 'Authorization': `Bearer ${Recruiter.token}` },
             })
             const jsonnnn = await response.json()
@@ -504,7 +504,7 @@ const CreateJobbVacancy = () => {
 
         //   const Positionssss = { data, VACANCYID }
 
-        const responseee = await fetch('/api/Candidate/UPLOAD', {
+        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/UPLOAD', {
             method: 'POST',
             body: data,
             headers: {
@@ -521,7 +521,7 @@ const CreateJobbVacancy = () => {
 
 
 
-            const response = await fetch('/api/Candidate/' + json._id, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/' + json._id, {
                 headers: { 'Authorization': `Bearer ${Recruiter.token}` },
             })
             const jsonnnn = await response.json()

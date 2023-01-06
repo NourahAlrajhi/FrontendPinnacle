@@ -131,7 +131,7 @@ export default function Active_vacancy_table(props) {
 
     console.log("formRows: ", Vacancy);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Candidate/List', {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/List', {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()
@@ -159,7 +159,7 @@ export default function Active_vacancy_table(props) {
   const GetClosedVacancy = async (e) => {
     console.log("Enterrrr GetClosedVacancy")
     let VacancyClosed = ['']
-    const response = await fetch('/api/Candidate/VacancyExpired', {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/VacancyExpired', {
       headers: { 'Authorization': `Bearer ${Recruiter.token}` },
     })
     const jsonnn = await response.json()
@@ -182,7 +182,7 @@ export default function Active_vacancy_table(props) {
       //POST
       console.log(VacancyList)
 
-      const response = await fetch('/api/Candidate/VacancyStatusToClosed', {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/VacancyStatusToClosed', {
         method: 'PATCH',
         body: JSON.stringify(VacancyList),
         headers: {

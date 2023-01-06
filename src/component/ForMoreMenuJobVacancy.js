@@ -70,7 +70,7 @@ export default function LongMenu2({ Vacancyy , VacancyyName}) {
         if (!Recruiter) {
             return
         }
-        const response = await fetch('/api/Candidate/' + DeletdId, {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/' + DeletdId, {
             method: 'DELETE',
 
             headers: { 'Authorization': `Bearer ${Recruiter.token}` },

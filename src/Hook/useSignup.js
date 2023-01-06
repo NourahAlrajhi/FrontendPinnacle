@@ -10,7 +10,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/Recruiter/signup', {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ logName, password, name })

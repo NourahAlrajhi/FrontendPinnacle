@@ -286,7 +286,7 @@ const PositionForm = () => {
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
 
-    const response = await fetch('/api/Position', {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position', {
       method: 'POST',
       body: JSON.stringify(Positionssss),
       headers: {

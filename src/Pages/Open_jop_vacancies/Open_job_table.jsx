@@ -97,7 +97,7 @@ export default function Open_job_table() {
 useEffect(() => {
   console.log("formRows: ", Vacancy);
   const fetchPosition = async () => {
-    const response = await fetch('/api/Candidate/ListOpen', {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/ListOpen', {
       headers: { 'Authorization': `Bearer ${Recruiter.token}` },
     })
     const json = await response.json()

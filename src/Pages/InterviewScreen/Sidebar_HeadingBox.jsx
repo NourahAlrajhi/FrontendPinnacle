@@ -26,7 +26,7 @@ function Sidebar_HeadingBox(props) {
     useEffect(() => {
         //console.log("formRows: ", consumer);
         const fetchPosition = async () => {
-            const response = await fetch('/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
             })
             const json = await response.json()
             if (response.ok) {
@@ -52,7 +52,7 @@ function Sidebar_HeadingBox(props) {
 
 
         const fetchVacancyInfo = async () => {
-            const response = await fetch('/api/Recruiter/EnetrVacancyInfo/' + VacancyID, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfo/' + VacancyID, {
             })
             const json = await response.json()
             if (response.ok) {

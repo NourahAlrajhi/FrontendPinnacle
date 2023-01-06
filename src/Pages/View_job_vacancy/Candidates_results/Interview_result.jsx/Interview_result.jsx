@@ -21,7 +21,7 @@ export default function Interview_result() {
   useEffect(() => {
     //console.log("formRows: ", Positions);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Candidate/CandidateInfo/' + id3 + '/' + id2, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/CandidateInfo/' + id3 + '/' + id2, {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()

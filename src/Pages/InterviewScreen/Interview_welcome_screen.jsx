@@ -45,7 +45,7 @@ function Interview_welcome_screen() {
     useEffect(() => {
         //console.log("formRows: ", consumer);
         const fetchPosition = async () => {
-            const response = await fetch('/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
             })
             const json = await response.json()
             if (response.ok) {
@@ -72,7 +72,7 @@ function Interview_welcome_screen() {
 
         const fetchVacancyInfo = async () => {
             let currentDate = new Date().toISOString()
-            const response = await fetch('/api/Recruiter/EnetrVacancyInfo/' + VacancyID, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfo/' + VacancyID, {
             })
             const json = await response.json()
             if (response.ok) {

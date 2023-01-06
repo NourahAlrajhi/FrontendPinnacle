@@ -131,7 +131,7 @@ export default function StickyHeadTable() {
   useEffect(() => {
     console.log("formRows: ", Positions);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Position', {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position', {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()

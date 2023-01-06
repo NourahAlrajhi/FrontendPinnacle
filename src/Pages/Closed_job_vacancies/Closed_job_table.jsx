@@ -100,7 +100,7 @@ export default function Closed_job_table() {
   useEffect(() => {
     console.log("formRows: ", Vacancy);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Candidate/ListClosed', {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/ListClosed', {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()

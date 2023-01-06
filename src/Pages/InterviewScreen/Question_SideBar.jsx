@@ -33,7 +33,7 @@ function Question_SideBar(props) {
        
 
         const fetchVacancyInfo = async () => {
-            const response = await fetch('/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
             })
             const json = await response.json()
             if (response.ok) {

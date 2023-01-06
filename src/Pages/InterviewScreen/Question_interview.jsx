@@ -46,7 +46,7 @@ function Question_interview(props) {
   useEffect(() => {
     //console.log("formRows: ", consumer);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
       })
       const json = await response.json()
       if (response.ok) {
@@ -74,7 +74,7 @@ function Question_interview(props) {
 
     const fetchVacancyInfo = async () => {
 
-      const response = await fetch('/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
       })
       const json = await response.json()
       if (response.ok) {

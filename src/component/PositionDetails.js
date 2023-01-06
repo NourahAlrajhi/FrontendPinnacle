@@ -42,7 +42,7 @@ const PositionDetails = ({ Position }) => {
         if (!Recruiter) {
             return
         }
-        const response = await fetch('/api/Position/' + Position._id, {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + Position._id, {
             method: 'DELETE',
 
             headers: { 'Authorization': `Bearer ${Recruiter.token}` },

@@ -120,7 +120,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
   useEffect(() => {
     console.log("formRows: ", CandidatInfo);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Candidate/' + VacancyID, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/' + VacancyID, {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()

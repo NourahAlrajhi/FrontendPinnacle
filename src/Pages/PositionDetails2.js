@@ -135,7 +135,7 @@ const PositionDetails2 = () => {
     setDisabled(true);
     setIsShown(current => !current);
 
-    const response = await fetch('/api/Position/' + id, {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
       headers: { 'Authorization': `Bearer ${Recruiter.token}` },
     })
     const json = await response.json()
@@ -202,7 +202,7 @@ const PositionDetails2 = () => {
     }
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr: consumer, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
-    const response = await fetch('/api/Position/' + id, {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
       method: 'PATCH',
       body: JSON.stringify(Positionssss),
       headers: {
@@ -233,7 +233,7 @@ const PositionDetails2 = () => {
   useEffect(() => {
     console.log("formRows: ", consumer);
     const fetchPosition = async () => {
-      const response = await fetch('/api/Position/' + id, {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
       })
       const json = await response.json()
