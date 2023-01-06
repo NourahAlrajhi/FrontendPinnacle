@@ -1,5 +1,5 @@
 {
-  "proxy": "https://pinnacle-4eib.onrender.com",
+  "proxy": "https://backend-pinnacle.herokuapp.com/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
