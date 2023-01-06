@@ -13,7 +13,7 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/Recruiter/login', {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ logName, password ,})
