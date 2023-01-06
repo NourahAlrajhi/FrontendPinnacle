@@ -184,7 +184,7 @@ const Sidebar = ({ children }) => {
                             alt={"header_img"}
                             loading="lazy"
                         />
-                        <Typography  style={{ margin: "1px" ,fontSize:"22px"}} fontWeight={10}>
+                        <Typography  style={{ margin: "1px" ,fontSize:"22px"}} fontWeight={700}>
                             Pinnacle
                         </Typography>
                     </Box>
