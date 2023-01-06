@@ -468,10 +468,10 @@ const CreateJobbVacancy = () => {
                 console.log("55555555555555555555555555555555")
                 console.log(json._id)
 
-              /*   const Positionssss = { CandidateALLINFO, EmailSubject, EmailBody, e,PositionChoosen,Datee,Time,CandidateDocId:json._id}
+                 const Positionssss = { CandidateALLINFO, EmailSubject, EmailBody, e,PositionChoosen,Datee,Time,CandidateDocId:json._id}
                  console.log("Enter the final destination");
                  console.log(`${CandidateEmail}`)
-                 const response = await fetch('/api/Candidate/sendEmail', {
+                 const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/sendEmail', {
                      method: 'POST',
                      body: JSON.stringify(Positionssss),
                      headers: { 
@@ -481,7 +481,7 @@ const CreateJobbVacancy = () => {
                      console.log("response", response);
                      console.log("Sending Emailllls")
                      return response.json()
-                 }).catch(err => console.log(err))*/
+                 }).catch(err => console.log(err))
             }
 
 
