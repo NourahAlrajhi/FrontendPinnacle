@@ -1,0 +1,335 @@
+.Interview_section {
+  background-image: url("../../images/pinnical-image1.png"),
+  url("../../images/pinnical-image2.png");
+background-position: -10% -10%, right bottom;
+background-repeat: no-repeat;
+background-size: min(50%, 600px), min(50%, 400px);
+height: 100vh;
+width: 100vw;
+background-color: white;
+overflow: hidden;
+}
+
+.Interview_section_dasboard{
+  background-image:
+  url("../../images/pinnical-image2.png");
+background-position: right bottom;
+background-repeat: no-repeat;
+background-size:  min(50%, 400px);
+height: 100vh;
+width: 100vw;
+background-color: white;
+overflow: hidden;
+}
+
+/* ---------------.form_div-------------- */
+.main_div {
+  overflow: auto;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+}
+
+.BoxDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(500px, 90%);
+  height: 100%;
+  min-height: 700px;
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.BoxDiv .frame {
+  background-color: red;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  margin: 2rem 0;
+  background: rgba(266, 266, 266, 0.1);
+  /* backdrop-filter: saturate(180%) blur(10px); */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.BoxDiv .frame::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 1%;
+  height: 100%;
+  width: 98%;
+  background-color: #1F278B;
+  border-radius: 15px;
+  z-index: -1;
+  transform: rotate(-1deg);
+}
+
+.BoxDiv .frame .name_heading {
+  display: flex;
+  align-items: center;
+  color: #222;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+}
+
+.BoxDiv .frame .name_heading img {
+  width: 40px;
+  height: 40px;
+}
+
+
+/* --------filds----------- */
+
+.BoxDiv .frame .heading {
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 1rem 0 0.5 0;
+}
+
+.BoxDiv .frame .pera {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+
+.BoxDiv .frame .camraViewDiv {
+  border: 2px solid whitesmoke;
+  width: 50%;
+  aspect-ratio: 16 / 16;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  background-color: lightgray;
+}
+
+
+
+.BoxDiv .frame .microPhone {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.BoxDiv .frame .microPhone .microIcon {
+  font-size: 2rem;
+  border: 1px solid #f6f6f6;
+  color: #f6f6f6;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  padding: 5px;
+  margin: auto;
+  cursor: pointer;
+}
+
+
+.BoxDiv .frame .setUpLine {
+  color: #f6f6f6;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.BoxDiv .startButton {
+  width: 100%;
+  display: flex;
+  place-content: center;
+
+
+}
+
+
+/* -------question screen component----- */
+.question_heading {
+  font-size: 3rem;
+  text-align: center;
+  font-weight: 500;
+  margin: 2rem 0;
+}
+
+.camra_div {
+  position: relative;
+  margin: auto;
+  width: min(auto, 100%);
+  aspect-ratio: 16 / 9;
+  box-shadow: 0px -4px 15px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(244,244,244,1) 35%, rgba(254,254,254,1) 52%, rgba(230,230,230,1) 79%);
+	background-size: 100% 100%;
+	animation: gradient 1s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 100%;
+	}
+	50% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 0% 100%;
+	}
+}
+
+
+
+.buttonDiv {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+
+}
+
+.buttonDiv .Dot_button {
+  background: transparent;
+  box-shadow: none;
+  z-index: 5;
+}
+
+.buttonDiv .Dot_button:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.PodcastsIcon {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: #1F278B;
+  color: white;
+  padding: 8px;
+  box-sizing: content-box;
+  border-radius: 50%;
+}
+
+.webCamp{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.webCamp .camraField{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/* --------nextQuestionBtn------- */
+.nextQuestionBtn {
+  display: flex;
+  justify-content: end;
+  padding: 1rem;
+}
+
+.nextQuestionBtn .button_next {
+  background-color: #1F278B;
+  color: #f6f6f6;
+}
+
+.nextQuestionBtn .button_next:hover {
+  background-color: #f6f6f6;
+  color: #1F278B;
+}
+
+
+/* ----------sideBar heading box------ */
+
+.site_logo {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+}
+
+.condidate_name {
+  margin: 2rem 0;
+  text-align: center;
+  text-align: left;
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.condidate_name .name {
+  font-size: 2rem;
+  font-weight: 500;
+
+}
+
+.condidate_name .position {
+  font-weight: 600;
+}
+
+
+/* ------------sidebar steps color change-------- */
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #7024C4 !important;
+  border: none;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: #7024C4 !important;
+  border: none;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root {
+  color: lightgray !important;
+  border: 1px solid gray;
+  border-radius: 50%;
+  position: relative !important;
+
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root .css-117w1su-MuiStepIcon-text {
+  color: gray !important;
+}
+
+/* ------------thanksScreen----------- */
+.thanksScreen{
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+@media only screen and (max-width: 900px) {
+
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  html,
+  body {
+    font-size: 13px;
+  }
+}

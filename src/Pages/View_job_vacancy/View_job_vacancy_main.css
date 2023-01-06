@@ -1,0 +1,88 @@
+.contianer_main {
+    background-color: #FFFFFF;
+    height: 80vh;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    min-height: 700px;
+    margin-bottom: 60px;
+    padding: 1rem;
+
+}
+.contianer_main::-webkit-scrollbar
+{
+	width: 2px;
+	height: 2px;
+	background-color: #F3F3F3;
+}
+
+.table_main_container {
+    width: 99%;
+    margin: 2rem auto;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 1px solid black
+}
+
+.table_main_container  .table_header_col {
+    display: grid !important;
+    grid-template-columns: 80% 20% !important;
+    align-items: center;
+    min-width: 200px;
+}
+
+/* .table_main_container  .table_header_col .select_filter {
+    background-color: #EFF0F6 !important;
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+    color: #4F5E74;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+
+/* ----select to remove border------ */
+.table_main_container  .table_header_col .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.table_main_container  .table_header_col .upDownBtns {
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------calendar_graph_box styling------- */
+.calendar_graph_box .css-mwp9p2-MuiPaper-root > *{
+    border: none !important;
+}
+.calendar_graph_box .css-mwp9p2-MuiPaper-root , .calendar_graph_box .css-175ib4q-MuiPaper-root-MuiTableContainer-root{
+    background-color: transparent !important;
+    width: 100% !important;
+    aspect-ratio: 16 / 8 !important;
+    border: none;
+}
+
+/* --table-- */
+.calendar_graph_box .css-1nfbgt6-MuiTable-root{
+    border: 1px solid #E2E8F0;
+}
+
+/* -cell- */
+
+.calendar_graph_box .css-1az34od-MuiTableCell-root.MuiTableCell-body{
+    width: 50px;
+  height: 60px;
+  border-color: #E2E8F0;
+  /* border-width: 2px; */
+}
+
+/* --p-- */
+.calendar_graph_box .css-toho8z{
+    text-align: left !important;
+}
+.calendar_graph_box .css-1gugldu-MuiTypography-root{
+width: auto !important;
+
+}
