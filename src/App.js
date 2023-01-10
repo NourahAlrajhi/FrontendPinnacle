@@ -60,7 +60,7 @@ function App() {
 
           <Route element={<Layout />}>
             <Route
-              path="/home"
+            extact path="/home"
               element={Recruiter ? <Home /> : <Navigate to="/" />}
             />
             <Route

@@ -137,7 +137,7 @@ function Interview_welcome_screen() {
 
                                     <Box component="div" className='camraViewDiv'>
                                         {/* <img src="https://picsum.photos/200/300" alt="#" /> */}
-                                        <Webcam ref={webRef} className="camraField" />
+                                        <Webcam audio={false} imageSmoothing={true} mirrored={true} ref={webRef} className="camraField" />
                                     </Box>
                                     {/* ----//camra div------ */}
                                     {/* ----mick div------ */}

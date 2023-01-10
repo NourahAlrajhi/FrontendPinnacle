@@ -463,7 +463,7 @@ const CreateJobbVacancy = () => {
                 }
 
                 )
-                console.log("55555555555555555555555555555555")
+             /*   console.log("55555555555555555555555555555555")
                 console.log(CandidateALLINFO)
                 console.log("55555555555555555555555555555555")
                 console.log(json._id)
@@ -481,7 +481,7 @@ const CreateJobbVacancy = () => {
                      console.log("response", response);
                      console.log("Sending Emailllls")
                      return response.json()
-                 }).catch(err => console.log(err))
+                 }).catch(err => console.log(err))*/
             }
 
 
