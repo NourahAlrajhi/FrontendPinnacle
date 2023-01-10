@@ -111,7 +111,7 @@ function Question_screen(props) {
 
   };
 
-
+/////////
 
   const handleStartRecording = async() => {
    
@@ -218,7 +218,7 @@ function Question_screen(props) {
         console.log("lllllllllllllllll")
         console.log(videoBlob)
         console.log("lllllllllllllllll")
-        fetch('/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID, {
+        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID, {
           method: 'POST',
           body: formData
         })
