@@ -5,7 +5,7 @@ import { FcFile } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
 import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useVacancyContext } from "../Hook/UseVacancy"
-
+import {create} from 'zustand';
 import { useQuestionContext } from '../Hook/UseQuestion'
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"
 import { useEffect, useState } from 'react'
@@ -43,7 +43,7 @@ import AdapterJalaali from '@date-io/jalaali';
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useParams } from "react-router-dom";
 import { read, utils, writeFile, useExcelDownloder } from 'xlsx';
-
+import {Popup_validate} from '../component/Popup_validate'
 
 const DummyCandidateALLINFO = [{
     CandidateID: "",
@@ -198,6 +198,7 @@ const CreateJobbVacancy = () => {
         //console.log( isShownCancelButton)
         var msg = parse('<h3 style="text-align: center">Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</h3>')
         confirmAlert({
+           // title: 'Confirmation Message',
             message: msg,
             buttons: [
                 {

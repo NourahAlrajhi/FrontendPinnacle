@@ -44,7 +44,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 const inputArr = [
   {
     type: "text",
-    id: 0,
+    id: v4(),
     questions: "",
     expectedAnswers: "",
     imprtanceOfQ: ""

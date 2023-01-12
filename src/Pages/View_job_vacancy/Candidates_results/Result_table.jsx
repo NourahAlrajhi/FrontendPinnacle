@@ -15,6 +15,7 @@ import Active_vacancy_table_search_bar from "../../Table_components/table_search
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import { useRecruiterContext } from "../../../Hook/UseRecruiterContext"
+
 import Button from "@mui/material/Button";
 // -------table component----------------
 //import { IconContext } from './iconContext';
@@ -107,6 +108,15 @@ export default function Result_table({ exportBtnId, VacancyID }) {
   const [searchInput, setSearchInput] = useState("");
   const { Positions, dispatch } = usePositionsContext()
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+
+  const showAlertSuccess = () => {
+    var msg = parse('<h3 style="text-align: center">No Result Yet!</h3>')
+    confirmAlert({
+      message: msg,
+      buttons: []
+    })
+  }
 
   const capitalizeWords = (str) => {
     return str
@@ -269,12 +279,24 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "8%", border: 0 }}>
-                      Pass
+                      {item.Result}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer" }} onClick={() => navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}`)}>
+                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer" }} onClick={() => {
+                      {
+                        item.Result === "Not Attended" ?
+                        showAlertSuccess()
+                        : 
+                        navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}`)
 
+                      }
+                    }}>
                       <GrShare size={20} color="#14359F" />
                     </TableCell>
+
+
+
+
+
                   </TableRow>
                 )
                 )

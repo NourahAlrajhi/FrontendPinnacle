@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import Webcam from "react-webcam";
 import { useRef } from "react";
 import { useCallback } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function Question_screen(props) {
@@ -27,13 +28,15 @@ function Question_screen(props) {
 
 
 
+  const navigate = useNavigate();
 
   const { VacancyID } = useParams();
   const { CandidateDocID } = useParams();
   const { CandidateID } = useParams();
   const { Recruiter } = useRecruiterContext()
   const [CandidateName, setCandidateName] = useState('')
-
+  const [VacancyQuestion, setVacancyQuestion] = useState([{}])
+  const [QUESTIONS, setQUESTIONS] = useState([{}])
 
 
 
@@ -69,6 +72,52 @@ function Question_screen(props) {
   }, [VacancyID, CandidateDocID, CandidateID])
 
 
+
+
+
+  useEffect(() => {
+    //console.log("formRows: ", consumer);
+
+
+    const fetchVacancyInfo = async () => {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+      })
+      const json = await response.json()
+      if (response.ok) {
+        console.log("Enter Question page to get vacancy infoooooooooooormationnnnnn")
+        setVacancyQuestion(json.Position)
+        console.log(json.Position)
+
+
+        json.Position && json.Position.map((item, i) => {
+          setQUESTIONS(item.arr)
+
+          console.log(item.arr)
+
+        })
+
+        /* json.Candidate_Info && json.Candidate_Info.map((item, i) => {
+             console.log(`${item.id}`)
+
+             if (item.id == CandidateID) {
+                 console.log("enetr the condition of welcome page retriveing")
+                 console.log(item.Candidate_Name)
+
+                 setCandidateName(item.Candidate_Name)
+             }
+         }
+         )*/
+      }
+    }
+
+
+    if (!Recruiter) {
+
+      fetchVacancyInfo()
+    }
+  }, [VacancyID, CandidateDocID, CandidateID])
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -84,7 +133,7 @@ function Question_screen(props) {
   // --------web camp ----
   var FinishFirstQuestion = false
   const webRef = useRef(null)
-
+  const recordedVideo=null
   const [recording, setRecording] = useState(false);
   const [stream, setStream] = useState(null);
   const [recordedVideos, setRecordedVideos] = useState([]);
@@ -111,22 +160,28 @@ function Question_screen(props) {
 
   };
 
-/////////
+  /////////
 
-  const handleStartRecording = async() => {
-   
-    try {
+  const handleStartRecording = async () => {
+    if (isRecording) {
+      console.log("Enterrrrrrrrrrrrrrrrrrrrrrrrrrrr ")
+      console.log(isRecording)
+      try {
+
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         setStream(stream);
         streamRef.current = stream;
         const recordedVideo = new MediaRecorder(stream);
         recordedVideo.start();
         setRecordedVideos([...recordedVideos, recordedVideo]);
-    } catch (error) {
+      } catch (error) {
         console.error("Error: ", error);
         alert("Please grant permission to use the camera and microphone");
-    }}
-  
+      }
+    }
+
+  }
+
 
 
   /*const handleStartRecordingForFullInterview = () => {
@@ -187,11 +242,12 @@ function Question_screen(props) {
 
 
 
-  const handleStopRecording= () => {
+  const handleStopRecording = () => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop());
       setStream(null);
     }
+
   }
 
 
@@ -200,11 +256,19 @@ function Question_screen(props) {
 
     handleStopRecording();
     handleStartRecording();
+
+
   };
 
   const handleSendVideos = () => {
+    stream.getTracks().forEach(function(track) {
+      track.stop();
+    });
     console.log("Enter the handleSendVideos")
-    recordedVideos.forEach(recordedVideo => {
+
+
+    recordedVideos.forEach((recordedVideo, index) => {
+
       recordedVideo.ondataavailable = e => {
         const videoBlob = new Blob([e.data], { type: 'video/webm' });
         const videoUrl = URL.createObjectURL(videoBlob);
@@ -213,16 +277,20 @@ function Question_screen(props) {
         video.controls = true;
         document.body.appendChild(video);
 
+        console.log(QUESTIONS[index].id)
+
         const formData = new FormData();
         formData.append('CandidateInterview', videoBlob);
+        //  formData.append('QuestionId', QUESTIONS[index].id);
         console.log("lllllllllllllllll")
         console.log(videoBlob)
         console.log("lllllllllllllllll")
-        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID, {
+        //https://backend-pinnacle.herokuapp.com/
+        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id, {
           method: 'POST',
           body: formData
         })
-          .then(response => response.json())
+
           .then(data => {
 
             console.log(data);
@@ -233,8 +301,13 @@ function Question_screen(props) {
           });
       }
 
+
+
       recordedVideo.stop();
-    });
+    }
+    )
+
+
 
     setRecordedVideos([]);
 
@@ -243,33 +316,35 @@ function Question_screen(props) {
 
   useEffect(() => {
 
-    if (isRecording) {
-    handleStartRecording()
+    if (/*isRecording*/props.activeStep !== props.steps.length) {
+      console.log("111111111100000000--------")
+      handleStartRecording()
     }
-      // cleanup function
-      return () => {
-        handleStopRecording();
-      };
-  }, [isRecording])
+    // cleanup function
+    
+  }, [/*isRecording*/props.activeStep])
 
 
   useEffect(() => {
-    if(props.activeStep === props.steps.length ) {
+    if (props.activeStep === props.steps.length) {
+    //  handleStopRecording()
       setIsRecording(false); // change the state to stop the recording
-        alert('Thank you for visiting our website, your Interview has been recorded')
+      alert('Thank you for visiting our website, your Interview has been recorded')
     }
-  }, [props.activeStep ])
+  }, [props.activeStep])
 
   return (
     <>
-     
+
       <Container maxWidth="lg" sx={{ overflow: "auto" }}>
         {props.activeStep === props.steps.length ? (
           <box component="div" className="thanksScreen">
             All Done
-            Thank You For Your Time, {CandidateName}!
-            <box component="div" className="thanksScreen">
-              <Button variant="contained" onClick={ handleSendVideos} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>
+            Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+         {/*    <box component="div" className="thanksScreen">
+              <Button variant="contained" onClick={()=>stream.getTracks().forEach(function(track) {
+  track.stop();
+})} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  */}
           </box>
 
         ) : (
@@ -310,9 +385,20 @@ function Question_screen(props) {
 
 
               {/* onClick={handleDownload}*/}
-              <Button variant="contained" endIcon={<ArrowForwardOutlinedIcon />} onClick={() => { props.handleNext(); handleCutAndStartOver() }} className="button_next">
+              <Button variant="contained" endIcon={<ArrowForwardOutlinedIcon />} onClick={() => {
+                props.handleNext();
+                {
+                  props.activeStep + 1 === props.steps.length ? handleSendVideos()
+                    //navigate("/");
+                    :
+
+                    handleCutAndStartOver();
+                  /* handleCutAndStartOver()*/
+                }
+              }} className="button_next">
                 Move To Next Question
               </Button>
+
 
             </Box>
           </>

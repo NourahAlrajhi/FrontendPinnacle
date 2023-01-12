@@ -39,6 +39,8 @@ function Interview_welcome_screen() {
     };
     const [CandidateName, setCandidateName] = useState('')
     const [FinishDuration, setFinishDuration] = useState(false)
+    const [FinishInterview, setFinishInterview] = useState(false)
+
 
 
 
@@ -58,8 +60,11 @@ function Interview_welcome_screen() {
                         console.log(item.Candidate_Name)
 
                         setCandidateName(item.Candidate_Name)
-
+                        if (item.RECORDS.length > 1) {
+                            setFinishInterview(true)
+                        }
                     }
+                   
 
 
 
@@ -131,8 +136,8 @@ function Interview_welcome_screen() {
                             {/* ---inputs--- */}
                             <div className='content'>
                                 <p className='heading'> Welcome {CandidateName}!</p>
-                                {!FinishDuration ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : <p className='pera' style={{padding:"40px" , textAlign:"center" , color:"red"}}>This Interview Link is Expired</p>}
-                                {!FinishDuration ? <div className='filds'>
+                                {!FinishDuration&&!FinishInterview ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration? <p className='pera' style={{padding:"40px" , textAlign:"center" , color:"red"}}>This Interview Link is Expired</p>:<p className='pera' style={{padding:"40px" , textAlign:"center" , color:"red"}}>You Already Finish The Interview</p>}
+                                {!FinishDuration&&!FinishInterview  ? <div className='filds'>
                                     {/* ----camra div----- */}
 
                                     <Box component="div" className='camraViewDiv'>
@@ -154,7 +159,7 @@ function Interview_welcome_screen() {
                                         <p >All Set Up</p>
                                     </Box>
                                     {/* -----//setUpLine---- */}
-                                </div> : <h2 style={{padding:"40px" ,textAlign:"center"}}>See you next Time , and be carfull with your appointment!</h2>}
+                                </div> : FinishDuration?<h2 style={{padding:"40px" ,textAlign:"center"}}>See you next Time , and be carfull with your appointment!</h2> : <h2 style={{padding:"40px" ,textAlign:"center"}}>Wait For your Result</h2>}
                             </div>
                             {/* ---//inputs--- */}
                         </div>
@@ -163,7 +168,7 @@ function Interview_welcome_screen() {
 
                             {/* <NavLink style={{ textDecoration: "none" }} >*/}
 
-                            {!FinishDuration ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`)}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
+                            {!FinishDuration&&!FinishInterview  ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`)}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
 
                             {/* <Common_button btnText={"Start Interview"}  />*/}
                             {/*  </NavLink>*/}
