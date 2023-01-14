@@ -232,7 +232,8 @@ const PositionForm = () => {
   };*/
 
 
-  const showAlertSuccess22 = () => {
+  const showAlertSuccess22 = (e) => {
+     e.preventDefault();
     console.log('enterrrrrrrrrrr cancel')
     if (name === '' && description === '' && noticePeriod === '' && ExpectedSalary === '' && arr === inputArr) {
       navigate("/PositionList")
@@ -320,7 +321,7 @@ const PositionForm = () => {
 
   return (
     <>
-      <form className="create" onSubmit={handleSubmit}>
+      <form className="create" /*onSubmit={handleSubmit}*/>
         <Grid
           /*container
           spacing={2}
@@ -883,8 +884,8 @@ const PositionForm = () => {
                
 
 
-                <button className="CancelAddPosition" style={{ cursor: "pointer" }} onClick={() => showAlertSuccess22()}>Cancel</button>
-                <button className="AddPosition" style={{ cursor: "pointer" }} >Add Position</button>
+                <button className="CancelAddPosition" style={{ cursor: "pointer" }} onClick={showAlertSuccess22}>Cancel</button>
+                <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>
 
               </Grid>
               {/* --- submit Button--- */}

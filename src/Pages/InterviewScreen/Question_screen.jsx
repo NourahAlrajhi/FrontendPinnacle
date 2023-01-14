@@ -37,6 +37,7 @@ function Question_screen(props) {
   const [CandidateName, setCandidateName] = useState('')
   const [VacancyQuestion, setVacancyQuestion] = useState([{}])
   const [QUESTIONS, setQUESTIONS] = useState([{}])
+  const [InterviewedCandidates, setInterviewedCandidates] = useState(0)
 
 
 
@@ -95,18 +96,22 @@ function Question_screen(props) {
           console.log(item.arr)
 
         })
+      }
+    }
 
-        /* json.Candidate_Info && json.Candidate_Info.map((item, i) => {
-             console.log(`${item.id}`)
 
-             if (item.id == CandidateID) {
-                 console.log("enetr the condition of welcome page retriveing")
-                 console.log(item.Candidate_Name)
+    const fetchVacancyInfo2 = async () => {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfo/' + VacancyID, {
+      })
+      const json = await response.json()
+      if (response.ok) {
 
-                 setCandidateName(item.Candidate_Name)
-             }
-         }
-         )*/
+        setInterviewedCandidates(json.InterviewedCandidates)
+        console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+        console.log(json.InterviewedCandidates)
+        console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+
+
       }
     }
 
@@ -114,6 +119,7 @@ function Question_screen(props) {
     if (!Recruiter) {
 
       fetchVacancyInfo()
+      fetchVacancyInfo2()
     }
   }, [VacancyID, CandidateDocID, CandidateID])
 
@@ -133,7 +139,7 @@ function Question_screen(props) {
   // --------web camp ----
   var FinishFirstQuestion = false
   const webRef = useRef(null)
-  const recordedVideo=null
+  const recordedVideo = null
   const [recording, setRecording] = useState(false);
   const [stream, setStream] = useState(null);
   const [recordedVideos, setRecordedVideos] = useState([]);
@@ -261,7 +267,7 @@ function Question_screen(props) {
   };
 
   const handleSendVideos = () => {
-    stream.getTracks().forEach(function(track) {
+    stream.getTracks().forEach(function (track) {
       track.stop();
     });
     console.log("Enter the handleSendVideos")
@@ -281,12 +287,11 @@ function Question_screen(props) {
 
         const formData = new FormData();
         formData.append('CandidateInterview', videoBlob);
-        //  formData.append('QuestionId', QUESTIONS[index].id);
         console.log("lllllllllllllllll")
         console.log(videoBlob)
         console.log("lllllllllllllllll")
         //https://backend-pinnacle.herokuapp.com/
-        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id, {
+        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
           method: 'POST',
           body: formData
         })
@@ -304,15 +309,24 @@ function Question_screen(props) {
 
 
       recordedVideo.stop();
-    }
-    )
-
-
-
+    })
+    handleIncremntNumber()
     setRecordedVideos([]);
 
   }
 
+
+  const handleIncremntNumber = async (e) => {
+    console.log("Enter beginingggggg handleIncremntNumber")
+    //https://backend-pinnacle.herokuapp.com/
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/IncremntInterviewdCandidate/' + CandidateDocID + '/' + CandidateID + '/' + VacancyID + '/' + InterviewedCandidates, {
+      method: 'POST',
+    })
+    const json = await response.json()
+    if (response.ok) {
+      console.log("Increment Sucessfully!!!!")
+    }
+  }
 
   useEffect(() => {
 
@@ -321,13 +335,13 @@ function Question_screen(props) {
       handleStartRecording()
     }
     // cleanup function
-    
+
   }, [/*isRecording*/props.activeStep])
 
 
   useEffect(() => {
     if (props.activeStep === props.steps.length) {
-    //  handleStopRecording()
+      //  handleStopRecording()
       setIsRecording(false); // change the state to stop the recording
       alert('Thank you for visiting our website, your Interview has been recorded')
     }
@@ -341,7 +355,7 @@ function Question_screen(props) {
           <box component="div" className="thanksScreen">
             All Done
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
-         {/*    <box component="div" className="thanksScreen">
+            {/*    <box component="div" className="thanksScreen">
               <Button variant="contained" onClick={()=>stream.getTracks().forEach(function(track) {
   track.stop();
 })} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  */}

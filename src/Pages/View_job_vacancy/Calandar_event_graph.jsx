@@ -21,7 +21,7 @@ function Calandar_event_graph() {
   const events = [
     {
       id: "event-1",
-      label: "Medical consultation",
+      label: "Web Designer Vacancy Deadline",
       groupLabel: "Dr Shaun Murphy",
       user: "Dr Shaun Murphy",
       color: "#f28f6a",
@@ -29,11 +29,11 @@ function Calandar_event_graph() {
       endHour: "05:00 AM",
       date: "2023-01-01",
       createdAt: new Date(),
-      createdBy: "Kristina Mayer"
+      createdBy: "Nourah"
     },
     {
       id: "event-2",
-      label: "Medical consultation",
+      label: "Data Analysis Vacancy Deadline",
       groupLabel: "Dr Claire Brown",
       user: "Dr Claire Brown",
       color: "#099ce5",
@@ -41,11 +41,11 @@ function Calandar_event_graph() {
       endHour: "10:00 AM",
       date: "2023-01-09",
       createdAt: new Date(),
-      createdBy: "Kristina Mayer"
+      createdBy: "Raya"
     },
     {
       id: "event-3",
-      label: "Medical consultation",
+      label: "Computer Engineer Vacancy Deadline",
       groupLabel: "Dr Menlendez Hary",
       user: "Dr Menlendez Hary",
       color: "#263686",
@@ -53,11 +53,11 @@ function Calandar_event_graph() {
       endHour: "14 PM",
       date: "2023-01-15",
       createdAt: new Date(),
-      createdBy: "Kristina Mayer"
+      createdBy: "Danah"
     },
     {
       id: "event-4",
-      label: "Consultation prénatale",
+      label: "Chief Engineer Vacancy Deadline",
       groupLabel: "Dr Shaun Murphy",
       user: "Dr Shaun Murphy",
       color: "#f28f6a",
@@ -65,7 +65,7 @@ function Calandar_event_graph() {
       endHour: "09:00 AM",
       date: "2023-01-24",
       createdAt: new Date(),
-      createdBy: "Kristina Mayer"
+      createdBy: "Ghada"
     }
   ]
 
@@ -87,7 +87,7 @@ function Calandar_event_graph() {
 
   return (
     // --custom css add for styling --
-    <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }} className="calendar_graph_box">
+    <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem",paddingTop:"0px" }} className="calendar_graph_box">
       <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Calendar</Typography>
       <Scheduler
         locale="en"

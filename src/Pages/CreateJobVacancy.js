@@ -310,7 +310,7 @@ const CreateJobbVacancy = () => {
 
         //  { error && showAlertSuccess33(error) }
         const Vacancy = { Position: PositioArray, title: PositionChoosen, Esubject: EmailSubject, Ebody: EmailBody, linkExpDate: value, linkExpTime: value, status: "Active" }
-
+//https://backend-pinnacle.herokuapp.com/
         const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
@@ -405,7 +405,7 @@ const CreateJobbVacancy = () => {
         const data = new FormData();
         data.append('uploadfile', selectedFile)
 
-        //   const Positionssss = { data, VACANCYID }
+//https://backend-pinnacle.herokuapp.com/
 
         const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/UPLOAD', {
             method: 'POST',
@@ -423,7 +423,7 @@ const CreateJobbVacancy = () => {
 
 
 
-
+//https://backend-pinnacle.herokuapp.com/
             const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/Candidate/' + json._id, {
                 headers: { 'Authorization': `Bearer ${Recruiter.token}` },
             })
@@ -464,7 +464,7 @@ const CreateJobbVacancy = () => {
                 }
 
                 )
-             /*   console.log("55555555555555555555555555555555")
+               console.log("55555555555555555555555555555555")
                 console.log(CandidateALLINFO)
                 console.log("55555555555555555555555555555555")
                 console.log(json._id)
@@ -482,7 +482,7 @@ const CreateJobbVacancy = () => {
                      console.log("response", response);
                      console.log("Sending Emailllls")
                      return response.json()
-                 }).catch(err => console.log(err))*/
+                 }).catch(err => console.log(err))
             }
 
 

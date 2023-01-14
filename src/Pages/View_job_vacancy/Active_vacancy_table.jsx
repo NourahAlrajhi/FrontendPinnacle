@@ -350,7 +350,7 @@ export default function Active_vacancy_table(props) {
                     {/* <TableCell align="right">Last Date : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
 
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
-                      10
+                    {item.InterviewedCandidates}            
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       {item.CandidateList}
@@ -383,7 +383,8 @@ export default function Active_vacancy_table(props) {
                   </TableCell>
                   {/*  <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
-                    22                  </TableCell>
+                  {item.InterviewedCandidates}            
+                       </TableCell>
                   {console.log(item.CandidateList)}
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                     {item.CandidateList}

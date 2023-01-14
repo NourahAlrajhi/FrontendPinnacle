@@ -15,7 +15,7 @@ function Candidates_results_main() {
     <>
       <Box className='Candidates_result_main_cotainer'>
         {/* ---Result_sheet_creat--- */}
-        <Result_sheet_creat exportBtnId={exportBtnId} />
+        <Result_sheet_creat exportBtnId={exportBtnId} VacancyID={id}/>
         {/* ---Result_table--- */}
         <Result_table exportBtnId={exportBtnId} VacancyID={id}/>
       </Box>

@@ -17,6 +17,7 @@ export default function Interview_result() {
   const { id3 } = useParams();
   const [CandidateName, setCandidateName] = useState('')
   const [CandidatePhoneNumber, setCandidatePhoneNumber] = useState('')
+  const [CandidateResultr,setCandidateResultr]= useState('')
 
   useEffect(() => {
     //console.log("formRows: ", Positions);
@@ -35,6 +36,8 @@ export default function Interview_result() {
             console.log(item.Candidate_Phone__Number)
             setCandidateName(item.Candidate_Name)
             setCandidatePhoneNumber(item.Candidate_Phone__Number)
+            setCandidateResultr(item.Result)
+
           }
 
 
@@ -79,7 +82,7 @@ export default function Interview_result() {
         <Box>
           <Typography variant='h6' >Final Decision</Typography>
           {/* passed */}
-          <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: "#DEF8EE", fontWeight: "600", color: "#4AA785", borderRadius: "10px" }}>Passed</Box>
+          <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: "#DEF8EE", fontWeight: "600", color: "#4AA785", borderRadius: "10px" }}>{CandidateResultr}</Box>
           {/* Not Attended */}
           {/* <Box component="span" sx={{display:"inline-block" ,margin:"10px 0", padding:"5px 15px" , background:"#DEF8EE"  , fontWeight:"600", color:"#4AA785" , borderRadius:"10px"}}>Not Attended </Box> */}
           {/* Failed */}

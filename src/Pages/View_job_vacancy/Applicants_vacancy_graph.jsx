@@ -48,7 +48,7 @@ export const options = {
 
 };
 
-const labels = ['Data Architect', 'Data Scientist', 'Junior Dev ', 'Web Designer', 'QA Tester'];
+const labels = ['Data Architect', 'Data Scientist', 'Computer Engineer', 'Web Designer', 'Chief Engineer'];
 // const labels = Utils.months({count: 7});
 
 

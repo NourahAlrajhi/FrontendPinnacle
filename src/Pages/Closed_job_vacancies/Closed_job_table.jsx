@@ -15,6 +15,7 @@ import Option_button from "../Table_components/Option_button";
 import { useEffect, useState } from 'react'
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import LongMenu2 from '../../component/ForMoreMenuJobVacancy'
 
 
 
@@ -220,13 +221,13 @@ export default function Closed_job_table() {
                     <Typography sx={{ color: "lightgray" }}>ACCESS CODE</Typography>
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
-                  48
+                  {row.InterviewedCandidates} 
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
                   {row.CandidateList}
                   </TableCell>
-                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }}>
-                    <Option_button />
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
                   </TableRow>
                 )
@@ -247,13 +248,13 @@ export default function Closed_job_table() {
                     <Typography sx={{ color: "lightgray" }}>ACCESS CODE</Typography>
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
-                   48
+                  {row.InterviewedCandidates} 
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
                   {row.CandidateList}
                   </TableCell>
-                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }}>
-                    <Option_button />
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
                 </TableRow>
               ))}
