@@ -291,10 +291,10 @@ export default function Active_vacancy_table(props) {
                   <Common_table_button btnText={"INTERVIEWED CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
-                  <Common_table_dropdown btnText={"ALL CANDIDATES"} />
+                  <Common_table_button btnText={"ALL CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
-                  <Common_table_dropdown btnText={"CLOSING DATE"} />
+                  <Common_table_button btnText={"CLOSING DATE"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
                   {/* ----option button create here ---- */}
@@ -310,20 +310,20 @@ export default function Active_vacancy_table(props) {
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                     }}>
-                      <Select
+                     {/* <Select
                         value={Option}
                         onChange={OptionSelect}
                         displayEmpty
                         inputProps={{ 'aria-label': 'Without label' }}
                         sx={{ padding: "0 10px 0 0", height: "10px" }}
-                      >
-                        <MenuItem value="" sx={{ border: "none" }}>
+                  >*/}
+                         <MenuItem value="" sx={{ border: "none" }}>   >
                           Options
                         </MenuItem>
-                        <MenuItem value={10}>Option1</MenuItem>
+                       {/* <MenuItem value={10}>Option1</MenuItem>
                         <MenuItem value={20}>Option2</MenuItem>
                         <MenuItem value={30}>Option3</MenuItem>
-                      </Select>
+                </Select>*/}
                     </Box>
                   </Box>
                   {/* ----//option button create here ---- */}
