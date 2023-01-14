@@ -226,7 +226,7 @@ const Sidebar = ({ children }) => {
                 </List>
                 {open ? <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F" }} startIcon={<AddIcon />} onClick={() => navigate("/CreateJobbVacancy")}>New Job Vacancy</Button> : <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F", width: "50px", minWidth: "auto" }} startIcon={<AddIcon />}></Button>}
                 {/* --demo button for show interview screen-- */}
-                <Button variant="contained" sx={{ margin: " 20px 10px", backgroundColor: "gray" }} onClick={() => navigate("/Interview_welcome_screen")}>Interview screen</Button>
+               {/* <Button variant="contained" sx={{ margin: " 20px 10px", backgroundColor: "gray" }} onClick={() => navigate("/Interview_welcome_screen")}>Interview screen</Button>*/}
 
             </Drawer>
             {/* ---------//Sidebar------- */}

@@ -226,10 +226,10 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                     <Common_table_button btnText={"Phone Number"} />
                   </TableCell>
                   <TableCell sx={{ border: 0 }}>
-                    <Common_table_dropdown btnText={"Result"} />
+                    <Common_table_button btnText={"Result"} />
                   </TableCell>
                   <TableCell sx={{ border: 0 }}>
-                    <Common_table_dropdown btnText={"Interview Results"} />
+                    <Common_table_button btnText={"Interview Results"} />
                   </TableCell>
 
                 </TableRow>
