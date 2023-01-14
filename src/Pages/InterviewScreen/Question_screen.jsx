@@ -298,7 +298,7 @@ function Question_screen(props) {
         const json = await response.json()
         if (response.ok) {
           //console.log("Increment Sucessfully!!!!")
-          console.log(data);
+          console.log(json);
         }
         if (!response.ok) {
           //console.log("Increment Sucessfully!!!!")
