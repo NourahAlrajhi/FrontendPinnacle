@@ -275,7 +275,7 @@ function Question_screen(props) {
 
     recordedVideos.forEach((recordedVideo, index) => {
 
-      recordedVideo.ondataavailable = e => {
+      recordedVideo.ondataavailable = async (e)=> {
         const videoBlob = new Blob([e.data], { type: 'video/webm' });
         const videoUrl = URL.createObjectURL(videoBlob);
         const video = document.createElement('video');
