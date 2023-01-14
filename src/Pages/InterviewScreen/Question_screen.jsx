@@ -291,19 +291,28 @@ function Question_screen(props) {
         console.log(videoBlob)
         console.log("lllllllllllllllll")
         //https://backend-pinnacle.herokuapp.com/
-        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
           method: 'POST',
           body: formData
         })
+        const json = await response.json()
+        if (response.ok) {
+          //console.log("Increment Sucessfully!!!!")
+          console.log(data);
+        }
+        if (!response.ok) {
+          //console.log("Increment Sucessfully!!!!")
+          console.error("There is an errrorrrrr");
+        }
 
-          .then(data => {
+         /* .then(data => {
 
             console.log(data);
 
           })
           .catch(error => {
             console.error(error);
-          });
+          });*/
       }
 
 
