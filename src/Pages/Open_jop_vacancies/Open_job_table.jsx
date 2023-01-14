@@ -203,7 +203,7 @@ useEffect(() => {
                   <Common_table_button btnText={"INTERVIEWED CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
-                  <Common_table_dropdown btnText={"ALL CANDIDATES"} />
+                  <Common_table_button btnText={"ALL CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
                   <Option_common_button />

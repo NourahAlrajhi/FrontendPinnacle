@@ -24,20 +24,20 @@ const Option_common_button = () => {
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                 }}>
-                    <Select
+                   {/*  <Select
                         value={Option}
                         onChange={OptionSelect}
                         displayEmpty
                         inputProps={{ 'aria-label': 'Without label' }}
                         sx={{ padding: "0 10px 0 0", height: "10px" }}
-                    >
+            >*/}
                         <MenuItem value="" sx={{ border: "none" }}>
                             Options
                         </MenuItem>
-                        <MenuItem value={10}>Option1</MenuItem>
+                       {/*  <MenuItem value={10}>Option1</MenuItem>
                         <MenuItem value={20}>Option2</MenuItem>
                         <MenuItem value={30}>Option3</MenuItem>
-                    </Select>
+                    </Select>   >*/}
                 </Box>
             </Box>
             {/* ----//option button create here ---- */}

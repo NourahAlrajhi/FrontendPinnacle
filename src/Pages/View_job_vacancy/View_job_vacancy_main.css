@@ -60,7 +60,7 @@
 .calendar_graph_box .css-mwp9p2-MuiPaper-root , .calendar_graph_box .css-175ib4q-MuiPaper-root-MuiTableContainer-root{
     background-color: transparent !important;
     width: 100% !important;
-    aspect-ratio: 30 / 8 !important;
+    aspect-ratio: 5 / 8 !important;
     border: none;
 }
 

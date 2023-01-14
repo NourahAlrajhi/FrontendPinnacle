@@ -317,7 +317,7 @@ export default function Active_vacancy_table(props) {
                         inputProps={{ 'aria-label': 'Without label' }}
                         sx={{ padding: "0 10px 0 0", height: "10px" }}
                   >*/}
-                         <MenuItem value="" sx={{ border: "none" }}>   >
+                         <MenuItem value="" sx={{ border: "none" }}>   
                           Options
                         </MenuItem>
                        {/* <MenuItem value={10}>Option1</MenuItem>
