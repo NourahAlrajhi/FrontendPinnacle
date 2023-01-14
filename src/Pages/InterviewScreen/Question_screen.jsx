@@ -275,7 +275,7 @@ function Question_screen(props) {
 
     recordedVideos.forEach((recordedVideo, index) => {
 
-      recordedVideo.ondataavailable = async (e)=> {
+      recordedVideo.ondataavailable =  (e)=> {
         const videoBlob = new Blob([e.data], { type: 'video/webm' });
         const videoUrl = URL.createObjectURL(videoBlob);
         const video = document.createElement('video');
@@ -291,28 +291,19 @@ function Question_screen(props) {
         console.log(videoBlob)
         console.log("lllllllllllllllll")
         //https://backend-pinnacle.herokuapp.com/
-        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
+        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
           method: 'POST',
           body: formData
         })
-        const json = await response.json()
-        if (response.ok) {
-          //console.log("Increment Sucessfully!!!!")
-          console.log(json);
-        }
-        if (!response.ok) {
-          //console.log("Increment Sucessfully!!!!")
-          console.error("There is an errrorrrrr");
-        }
 
-         /* .then(data => {
+          .then(data => {
 
             console.log(data);
 
           })
           .catch(error => {
             console.error(error);
-          });*/
+          });
       }
 
 
