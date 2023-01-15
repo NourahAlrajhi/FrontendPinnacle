@@ -344,7 +344,7 @@ export default function Active_vacancy_table(props) {
                   >
 
 
-                    <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }} onClick={() => navigate("/Dashboard/View_job_vacancy_main/Candidates_results_main")}>
+                    <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }} >
                       {capitalizeWords(item.title)}
                     </TableCell>
                     {/* <TableCell align="right">Last Date : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
@@ -378,7 +378,7 @@ export default function Active_vacancy_table(props) {
                   }}
                 >
                   {console.log(item._id)}
-                  <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }} onClick={() => navigate("/Dashboard/View_job_vacancy_main/Candidates_results_main")}>
+                  <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }} >
                     {capitalizeWords(item.title)}
                   </TableCell>
                   {/*  <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}

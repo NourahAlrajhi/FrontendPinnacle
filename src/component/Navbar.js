@@ -30,6 +30,8 @@ const Navbar = (props) => {
   const { id } = useParams();
   const { id3 } = useParams();
   const { id2 } = useParams();
+  const { id4 } = useParams();
+
 
   let { Name } = useParams();
   console.log(id)
@@ -69,7 +71,7 @@ const Navbar = (props) => {
      JobVacancyName()
      }*/
 
-  const NAVBAR_TEXTS = [{ page: "/PositionList", text: "Positions" }, { page: "/", text: "Login" }, { page: `/PositionDetails2/${id}`, text: "View Position Details" }, { page: "/PositionForm", text: "Create New Position" }, { page: "/home", text: "Dashboard" }, { page: `/EditPosition/${id}`, text: "Edit Position Details" }, { page: "/CreateJobbVacancy", text: "New Job Vacancy" }, { page: "/Dashboard/View_job_vacancy_main", text: "Active Job Vacancies" }, { page: `/Dashboard/View_job_vacancy_main/Candidates_results_main/${id}/${myString}`, text: Name }, { page: `/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${id3}/${id2}`, text: " Candidate Interview Results" }, { page: "/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main", text: "Open Job Vacancies" }, { page: "/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main", text: "Closed Job Vacancies" }]
+  const NAVBAR_TEXTS = [{ page: "/PositionList", text: "Positions" }, { page: "/", text: "Login" }, { page: `/PositionDetails2/${id}`, text: "View Position Details" }, { page: "/PositionForm", text: "Create New Position" }, { page: "/home", text: "Dashboard" }, { page: `/EditPosition/${id}`, text: "Edit Position Details" }, { page: "/CreateJobbVacancy", text: "New Job Vacancy" }, { page: "/Dashboard/View_job_vacancy_main", text: "Active Job Vacancies" }, { page: `/Dashboard/View_job_vacancy_main/Candidates_results_main/${id}/${myString}`, text: Name }, { page: `/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${id3}/${id2}/${id4}`, text: " Candidate Interview Results" }, { page: "/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main", text: "Open Job Vacancies" }, { page: "/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main", text: "Closed Job Vacancies" }]
   console.log(`!!!!!!!!!!/PositionDetails2/${id}`)
   const location = useLocation();
 

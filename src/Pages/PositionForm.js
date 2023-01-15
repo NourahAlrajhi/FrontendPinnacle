@@ -93,6 +93,14 @@ const PositionForm = () => {
   const [error, setError] = useState(null)
   const { dispatch } = usePositionsContext()
   const { Recruiter } = useRecruiterContext()
+  const [disabled2, setdisabled2] = useState(true);
+
+  const [IsName, setIsName] = useState(false);
+  const [IsDescription, setIsDescription] = useState(false);
+  const [IsSalary, setIsSalary] = useState(false);
+  const [IsNoticPeriod, setIsNoticPeriod] = useState(false);
+  const [IsQuestions, setIsQuestions] = useState(false);
+
 
 
 
@@ -214,6 +222,25 @@ const PositionForm = () => {
 
       return newArr;
     });
+
+    var indexx;
+    for (indexx = 0; indexx < arr.length; ++indexx) {
+        if (!arr[indexx].questions) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].expectedAnswers) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].imprtanceOfQ) {
+          setIsQuestions(true)
+        }
+    }
+
+  
+    if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
+      setdisabled2(false)
+  }
+
   };
 
   /*const handleChangeForImportance = e => {
@@ -383,7 +410,13 @@ const PositionForm = () => {
                             </InputAdornment>
                           ),
                         }}
-                        onChange={(e) => setname(e.target.value)}
+                        onChange={(e) => {setname(e.target.value);
+                          setIsName(true);
+                          if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
+                            setdisabled2(false)
+                        }
+                      }
+                        }
                         value={name}
                         placeholder="Enter Position Name"
 
@@ -400,7 +433,12 @@ const PositionForm = () => {
                       label="Job Description"
                       multiline
                       rows={4}
-                      onChange={(e) => setdescription(e.target.value)}
+                      onChange={(e) => {setdescription(e.target.value);
+                        setIsDescription(true);
+                        if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
+                          setdisabled2(false)
+                      }
+                      }}
                       value={description}
                       placeholder="Enter Job Description"
                       sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
@@ -483,7 +521,12 @@ const PositionForm = () => {
                         placeholder="Enter Expected Salary"
                         type="number"
 
-                        onChange={(e) => setExpectedSalary(e.target.value)}
+                        onChange={(e) => {setExpectedSalary(e.target.value);
+                          setIsSalary(true);
+                        if (IsName && IsDescription && !IsSalary && IsNoticPeriod && IsQuestions) {
+                          setdisabled2(false)
+                      }
+                        }}
                         value={ExpectedSalary}
                         InputLabelProps={{
                           shrink: true,
@@ -509,7 +552,12 @@ const PositionForm = () => {
                       <TextField
                         id="outlined-required"
                         label="Notic Period"
-                        onChange={(e) => setnoticePeriod(e.target.value)}
+                        onChange={(e) => {setnoticePeriod(e.target.value);
+                          setIsNoticPeriod(true);
+                          if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
+                            setdisabled2(false)
+                        }
+                        }}
                         value={noticePeriod}
                         InputProps={{
                           startAdornment: (
@@ -885,7 +933,8 @@ const PositionForm = () => {
 
 
                 <button className="CancelAddPosition" style={{ cursor: "pointer" }} onClick={showAlertSuccess22}>Cancel</button>
-                <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>
+                <button style={!disabled2 ? { cursor: "pointer",border: "none", padding: "7px 20px",   borderRadius: "5px",   color: "white",  backgroundColor: "#14359F",  width: "13%"} : { cursor: "pointer",border: "none", padding: "7px 20px",   borderRadius: "5px",   color: "white",  backgroundColor: "gray",  width: "13%"}} disabled={disabled2} onClick={handleSubmit}> Add Position </button>
+               {/* <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>*/}
 
               </Grid>
               {/* --- submit Button--- */}

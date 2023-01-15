@@ -93,7 +93,7 @@ function App() {
               <Route path="/Dashboard/View_job_vacancy_main" element={Recruiter ? <Active_vacancy /> : <Navigate to="/" />} />
               <Route path="/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main" element={Recruiter ? <Closed_jop_vacancies_main /> : <Navigate to="/" />} />
               <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/:id/:Name" element={Recruiter ? <Candidates_results_main /> : <Navigate to="/" />} />
-              <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/:id3/:id2" element={Recruiter ? <Interview_result /> : <Navigate to="/" />} />
+              <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/:id3/:id2/:id4" element={Recruiter ? <Interview_result /> : <Navigate to="/" />} />
               <Route exact path="/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main" element={Recruiter ? <Open_jop_vacancies_main /> : <Navigate to="/" />} />
             </Route>
 

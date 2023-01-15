@@ -37,6 +37,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import parse from 'html-react-parser';
 import LongMenu2 from '../../../component/ForMoreMenuJobVacancy'
 import { GrShare } from "react-icons/gr";
+import { BsDot } from "react-icons/bs";
+import { RxDotFilled } from "react-icons/rx";
 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -253,12 +255,20 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                         {item.Candidate_Name}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}> {item.Candidate_Phone__Number}</TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "8%", border: 0 }}>
-                        Pass
+                      <TableCell align="left" sx={{ paddingLeft: "8%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                        <RxDotFilled />    {item.Result}
                       </TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer" }} onClick={() => navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}`)}>
-                        <GrShare />
-                      </TableCell>
+                      <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
+                      {
+                        item.Result === "Not Attended" ?
+                          showAlertSuccess()
+                          :
+                          navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
+
+                      }
+                    }}>
+                      <GrShare size={20} />
+                    </TableCell>
                     </TableRow>
                   )
                   )
@@ -278,19 +288,19 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                       {item.Candidate_Name}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "8%", border: 0 }}>
-                      {item.Result}
+                    <TableCell align="left" sx={{ paddingLeft: "8%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                      <RxDotFilled />    {item.Result}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer" }} onClick={() => {
+                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
                       {
                         item.Result === "Not Attended" ?
-                        showAlertSuccess()
-                        : 
-                        navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}`)
+                          showAlertSuccess()
+                          :
+                          navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 
                       }
                     }}>
-                      <GrShare size={20} color="#14359F" />
+                      <GrShare size={20} />
                     </TableCell>
 
 
