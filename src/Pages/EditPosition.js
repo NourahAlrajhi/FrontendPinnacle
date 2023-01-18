@@ -5,7 +5,7 @@ import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"
 import { useEffect, useState } from 'react'
 import { Button, Divider, Grid, Typography } from "@mui/material";
-
+import{CiLock,CiUnlock}  from "react-icons/ci";
 import InputAdornment from '@mui/material/InputAdornment';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import Paper from '@mui/material/Paper';
@@ -37,7 +37,8 @@ const inputArr = [
     id: 0,
     questions: "",
     expectedAnswers: "",
-    imprtanceOfQ: ""
+    imprtanceOfQ: "",
+    SelectedToBeOpenQuestion: false
 
   }
 ];
@@ -99,6 +100,7 @@ const EditPosition = () => {
   }
 
   const addInput = () => {
+    if(consumer.length != 10){
     console.log("Enterr addInput")
     getConsumer(s => {
       return [
@@ -108,10 +110,15 @@ const EditPosition = () => {
           id: v4(),
           questions: "",
           expectedAnswers: "",
-          imprtanceOfQ: ""
+          imprtanceOfQ: "",
+          SelectedToBeOpenQuestion: false
         }
       ];
     });
+  }
+  else{
+    alert('You Reach The Limit Of The Question')
+  }
   };
 
   const handleGameClick = (event) => {
@@ -280,6 +287,41 @@ const EditPosition = () => {
   }, [id, Recruiter])
 
 
+  function handleTests(index) {
+    let updateData = consumer.map((item, i) => {
+      return index === i ? { ...item, SelectedToBeOpenQuestion: !item.SelectedToBeOpenQuestion } : item;
+    });
+    getConsumer(updateData);
+  }
+
+  function handleTests2(index) {
+    let updateData = consumer.map((item, i) => {
+      return index === i ? { ...item, SelectedToBeOpenQuestion: !item.SelectedToBeOpenQuestion } : item;
+    });
+    getConsumer(updateData);
+  }
+
+  const HandelOpenEndQuestion = (removeIndex) => {
+   
+    const index = removeIndex;
+    console.log(index)
+
+    let newFormValues = [...consumer];
+    const deleteTodoIndex = newFormValues.findIndex((item) => item.id === index);
+    newFormValues[deleteTodoIndex].expectedAnswers = "Open Ended Question"
+    newFormValues[deleteTodoIndex].imprtanceOfQ = "Open Ended Question"
+  }
+
+  const HandelOpenEndQuestion2 = (removeIndex) => {
+ 
+    const index = removeIndex;
+    console.log(index)
+
+    let newFormValues = [...consumer];
+    const deleteTodoIndex = newFormValues.findIndex((item) => item.id === index);
+    newFormValues[deleteTodoIndex].expectedAnswers = ""
+    newFormValues[deleteTodoIndex].imprtanceOfQ = ""
+  }
 
   return (
     <>
@@ -556,7 +598,7 @@ const EditPosition = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography  fontWeight={700}>
-                      3. Questions
+                    3. Questions <p style={{fontSize:"10px",marginTop: '0px', marginLeft: '10px',}}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4"}} /></p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -637,7 +679,7 @@ const EditPosition = () => {
                               <Grid item xs={6} md={3}>
                                 <TextField
                                   type="text"
-                                  disabled={disabled}
+                                  disabled={!arr.SelectedToBeOpenQuestion ? disabled:!disabled}
                                   // id="outlined-required"
                                   label=" Expected Answer"
                                   value={arr.expectedAnswers}
@@ -663,7 +705,7 @@ const EditPosition = () => {
                                     value={arr.imprtanceOfQ}
                                     //     onChange={handleChange}
                                     id={i}
-                                    disabled={disabled}
+                                    disabled={!arr.SelectedToBeOpenQuestion ? disabled:!disabled}
                                     label="importance"
                                     defaultValue="EUR"
                                     className='imprtanceOfQ'
@@ -684,10 +726,14 @@ const EditPosition = () => {
 
                               {
                                 i && isShown ?
-                                  <Grid item xs={1}>
-                                    <BiTrash onClick={() =>
-                                      removeFormFieldsss(arr.id)
-                                    } style={{ marginTop: '20px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />   </Grid> : null
+                                <Grid item xs={1}>
+                                <BiTrash onClick={() =>
+                                  removeFormFieldsss(arr.id)
+                                } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
+                                {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
+                                  : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }}/>
+                                }
+                              </Grid> : null
                               }
                             </Grid>
                           </Grid>

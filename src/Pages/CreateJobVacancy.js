@@ -5,7 +5,7 @@ import { FcFile } from "react-icons/fc";
 import { Link, useNavigate } from 'react-router-dom';
 import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useVacancyContext } from "../Hook/UseVacancy"
-import {create} from 'zustand';
+import { create } from 'zustand';
 import { useQuestionContext } from '../Hook/UseQuestion'
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"
 import { useEffect, useState } from 'react'
@@ -43,7 +43,8 @@ import AdapterJalaali from '@date-io/jalaali';
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useParams } from "react-router-dom";
 import { read, utils, writeFile, useExcelDownloder } from 'xlsx';
-import {Popup_validate} from '../component/Popup_validate'
+import { Popup_validate } from '../component/Popup_validate'
+import * as XLSX from 'xlsx';
 
 const DummyCandidateALLINFO = [{
     CandidateID: "",
@@ -53,7 +54,6 @@ const DummyCandidateALLINFO = [{
 const CreateJobbVacancy = () => {
 
     const { Vacancy, dispatchhh } = useVacancyContext()
-
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
@@ -101,15 +101,15 @@ const CreateJobbVacancy = () => {
         console.log(newValue.toISOString())
 
         setEmailBody("Dear Candidate," +
-        `Thank you for your application to the ${PositionChoosen} role at ELM.` +
-        "We would like to invite you to interview for the role by joining this link." +
-        "The interview will last between10 - 30 minuts in total." +
-        "Please note that the link will expire on the following date and time: "+
-        `Date : ${ (new Date(newValue).getDate())+ "/" + (new Date(newValue).getMonth()+1) + "/" + (new Date(newValue).getFullYear()) }  `+
-        ` Time : ${dayjs(newValue).get('hour') + ":" + dayjs(newValue).get('minute') + ":" + dayjs(newValue).get('second')}`
+            `Thank you for your application to the ${PositionChoosen} role at ELM.` +
+            "We would like to invite you to interview for the role by joining this link." +
+            "The interview will last between10 - 30 minuts in total." +
+            "Please note that the link will expire on the following date and time: " +
+            `Date : ${(new Date(newValue).getDate()) + "/" + (new Date(newValue).getMonth() + 1) + "/" + (new Date(newValue).getFullYear())}  ` +
+            ` Time : ${dayjs(newValue).get('hour') + ":" + dayjs(newValue).get('minute') + ":" + dayjs(newValue).get('second')}`
         )
 
-       // console.log( newValue.getHours() +"-"+newValue.getMinutes())
+        // console.log( newValue.getHours() +"-"+newValue.getMinutes())
         //  console.log(dayjs(newValue))
         if (isShownPositioArray && isShownselectedFile && !isShownvalue) {
             setdisabled2(false)
@@ -198,7 +198,7 @@ const CreateJobbVacancy = () => {
         //console.log( isShownCancelButton)
         var msg = parse('<h3 style="text-align: center">Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</h3>')
         confirmAlert({
-           // title: 'Confirmation Message',
+            // title: 'Confirmation Message',
             message: msg,
             buttons: [
                 {
@@ -242,12 +242,12 @@ const CreateJobbVacancy = () => {
             setPositionChoosen(json.name)
             console.log(json.name)
             setEmailSubject(`ELM: ${json.name}`)
-     
+
             setEmailBody("Dear Candidate," +
-            `Thank you for your application to the ${json.name} role at ELM.` +
-            "We would like to invite you to interview for the role by joining this link." +
-            "The interview will last between10 - 30 minuts in total." +
-            "Please note that the link will expire on the following date and time:")
+                `Thank you for your application to the ${json.name} role at ELM.` +
+                "We would like to invite you to interview for the role by joining this link." +
+                "The interview will last between10 - 30 minuts in total." +
+                "Please note that the link will expire on the following date and time:")
             console.log(`ELM: ${json.name}`)
             setDisabled(false);
             // console.log(isShownPositioArray +"-------" +isShownselectedFile+"---------"+EmailSubject)
@@ -310,7 +310,7 @@ const CreateJobbVacancy = () => {
 
         //  { error && showAlertSuccess33(error) }
         const Vacancy = { Position: PositioArray, title: PositionChoosen, Esubject: EmailSubject, Ebody: EmailBody, linkExpDate: value, linkExpTime: value, status: "Active" }
-//https://backend-pinnacle.herokuapp.com/
+        //https://backend-pinnacle.herokuapp.com/
         const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
@@ -330,7 +330,7 @@ const CreateJobbVacancy = () => {
             setVACANCYID(json._id)
             console.log("Enter beginingggggg3")
             setError(null)
-            handleSubmitxsxlSheet(json._id,json.linkExpDate,json.linkExpTime)
+            handleSubmitxsxlSheet(json._id, json.linkExpDate, json.linkExpTime)
             //  dispatchhh({ type: 'CREATE_Vacancy', payload: json })
             showAlertSuccess()
             navigate(`/Dashboard/View_job_vacancy_main`);
@@ -393,19 +393,19 @@ const CreateJobbVacancy = () => {
 
 
 
-    const handleSubmitxsxlSheet = async (e,Datee,Time) => {
+    const handleSubmitxsxlSheet = async (e, Datee, Time) => {
         console.log("sssssssssssssssssssssssss")
         console.log(e)
         console.log("sssssssssssssssssssssssss")
         let CandidateEmail = ['']
 
-     let CandidateALLINFO = [{}]
+        let CandidateALLINFO = [{}]
 
         console.log("Enter handleSubmitxsxlSheet")
         const data = new FormData();
         data.append('uploadfile', selectedFile)
 
-//https://backend-pinnacle.herokuapp.com/
+        //https://backend-pinnacle.herokuapp.com/
 
         const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/UPLOAD', {
             method: 'POST',
@@ -423,7 +423,7 @@ const CreateJobbVacancy = () => {
 
 
 
-//https://backend-pinnacle.herokuapp.com/
+            //https://backend-pinnacle.herokuapp.com/
             const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/Candidate/' + json._id, {
                 headers: { 'Authorization': `Bearer ${Recruiter.token}` },
             })
@@ -438,21 +438,21 @@ const CreateJobbVacancy = () => {
                     console.log(`${item.Candidate_Email}`)
 
 
-                  /*  setCandidateALLINFO(s => {
-                        return [
-                            ...s,
-                            {
-                                CandidateID: item.id,
-                                CandidateEmail: item.Candidate_Email
-                            }
-                        ];
-                    });*/
+                    /*  setCandidateALLINFO(s => {
+                          return [
+                              ...s,
+                              {
+                                  CandidateID: item.id,
+                                  CandidateEmail: item.Candidate_Email
+                              }
+                          ];
+                      });*/
 
                     /* CandidateALLINFO = [{
                          CandidateID: item.id,
                          CandidateEmail: item.Candidate_Email
                      }]*/
-                     CandidateALLINFO[j] = {
+                    CandidateALLINFO[j] = {
                         CandidateID: item.id,
                         CandidateEmail: item.Candidate_Email
                     }
@@ -464,25 +464,26 @@ const CreateJobbVacancy = () => {
                 }
 
                 )
-               console.log("55555555555555555555555555555555")
+                console.log("55555555555555555555555555555555")
                 console.log(CandidateALLINFO)
                 console.log("55555555555555555555555555555555")
                 console.log(json._id)
 
-                 const Positionssss = { CandidateALLINFO, EmailSubject, EmailBody, e,PositionChoosen,Datee,Time,CandidateDocId:json._id}
-                 console.log("Enter the final destination");
-                 console.log(`${CandidateEmail}`)
-                 const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/sendEmail', {
-                     method: 'POST',
-                     body: JSON.stringify(Positionssss),
-                     headers: { 
-                         'Content-Type': 'application/json',
-                         'Authorization': `Bearer ${Recruiter.token}` },
-                 }).then(response => {
-                     console.log("response", response);
-                     console.log("Sending Emailllls")
-                     return response.json()
-                 }).catch(err => console.log(err))
+                const Positionssss = { CandidateALLINFO, EmailSubject, EmailBody, e, PositionChoosen, Datee, Time, CandidateDocId: json._id }
+                console.log("Enter the final destination");
+                console.log(`${CandidateEmail}`)
+                const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/sendEmail', {
+                    method: 'POST',
+                    body: JSON.stringify(Positionssss),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${Recruiter.token}`
+                    },
+                }).then(response => {
+                    console.log("response", response);
+                    console.log("Sending Emailllls")
+                    return response.json()
+                }).catch(err => console.log(err))
             }
 
 
@@ -572,6 +573,12 @@ const CreateJobbVacancy = () => {
 
 
 
+    const downloadExcel = (data) => {
+        const worksheet = XLSX.utils.json_to_sheet([{ Candidate_Name: '', Candidate_Email: '', Candidate_Phone__Number: '' }]);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Candidates");
+        XLSX.writeFile(workbook, `ExcelFormat.xlsx`);
+    };
 
 
 
@@ -595,6 +602,7 @@ const CreateJobbVacancy = () => {
                 >
                     {/* ----content---- */}
                     <Grid container>
+
 
 
 
@@ -636,6 +644,17 @@ const CreateJobbVacancy = () => {
                                         </TextField>
                                     </FormControl>
                                 </Grid>
+                                <Grid elevation={3} style={{
+                                    position: "absolute",
+                                    left: "880px",
+                                    paddingTop: "60px"
+
+                                }}>
+                                    <a style={{
+                                        width: "330px",
+                                        height: "70px",
+                                        color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
+                                    }} onClick={()=>navigate(`/PositionForm`)}>Add Position</a></Grid>
 
                             </Grid>
                         </Grid>
@@ -787,6 +806,17 @@ const CreateJobbVacancy = () => {
                                     </FormControl>
 
                                 </Grid>
+                                <Grid elevation={3} style={{
+                                    position: "absolute",
+                                    left: "840px",
+                                    paddingTop: "92px"
+
+                                }}>
+                                    <a style={{
+                                        width: "330px",
+                                        height: "70px",
+                                        color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
+                                    }} onClick={downloadExcel}>Excel Format</a></Grid>
                             </Grid>
                         </Grid>
                         {/* ----// File upload---- */}

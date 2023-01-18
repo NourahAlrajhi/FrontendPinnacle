@@ -216,9 +216,8 @@ export default function Closed_job_table() {
                     },
                   }}
                 >
-                  <TableCell align="left" sx={{ paddingLeft: "3%", border: 0 }}>
-                    <Typography sx={{ fontSize: "1.2rem" }}>{capitalizeWords(row.title)}</Typography>
-                    <Typography sx={{ color: "lightgray" }}>ACCESS CODE</Typography>
+                       <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }}>
+              {capitalizeWords(row.title)}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
                   {row.InterviewedCandidates} 

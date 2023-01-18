@@ -1,5 +1,6 @@
 // components
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
+import{CiLock,CiUnlock}  from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useQuestionContext } from '../Hook/UseQuestion'
@@ -21,6 +22,7 @@ import Box from '@mui/material/Box';
 import { v4 } from 'uuid';
 import * as React from 'react';
 import { BiTrash } from "react-icons/bi";
+import { MdOutlineLockOpen } from "react-icons/md";
 import classnames from 'classnames';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
@@ -47,7 +49,8 @@ const inputArr = [
     id: v4(),
     questions: "",
     expectedAnswers: "",
-    imprtanceOfQ: ""
+    imprtanceOfQ: "",
+    SelectedToBeOpenQuestion: false
 
   }
 ];
@@ -101,6 +104,10 @@ const PositionForm = () => {
   const [IsNoticPeriod, setIsNoticPeriod] = useState(false);
   const [IsQuestions, setIsQuestions] = useState(false);
 
+
+  const [disabled, setDisabled] = useState(false);
+  const [OpenEndedAnswer, setOpenEndedAnswer] = useState('');
+  const [OpenEndedImportnace, setOpenEndedImportnace] = useState('');
 
 
 
@@ -179,6 +186,8 @@ const PositionForm = () => {
 
 
   const addInput = () => {
+
+    if(arr.length != 10){
     console.log("Enterr addInput")
     setIsShown(true);
 
@@ -190,10 +199,16 @@ const PositionForm = () => {
           id: v4(),
           questions: "",
           expectedAnswers: "",
-          imprtanceOfQ: ""
+          imprtanceOfQ: "",
+          SelectedToBeOpenQuestion: false
         }
       ];
     });
+  }
+  else{
+    alert('You Reach The Limit Of The Question')
+
+  }
   };
 
 
@@ -225,21 +240,21 @@ const PositionForm = () => {
 
     var indexx;
     for (indexx = 0; indexx < arr.length; ++indexx) {
-        if (!arr[indexx].questions) {
-          setIsQuestions(true)
-        }
-        if (!arr[indexx].expectedAnswers) {
-          setIsQuestions(true)
-        }
-        if (!arr[indexx].imprtanceOfQ) {
-          setIsQuestions(true)
-        }
+      if (!arr[indexx].questions) {
+        setIsQuestions(true)
+      }
+      if (!arr[indexx].expectedAnswers) {
+        setIsQuestions(true)
+      }
+      if (!arr[indexx].imprtanceOfQ) {
+        setIsQuestions(true)
+      }
     }
 
-  
+
     if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
       setdisabled2(false)
-  }
+    }
 
   };
 
@@ -260,7 +275,7 @@ const PositionForm = () => {
 
 
   const showAlertSuccess22 = (e) => {
-     e.preventDefault();
+    e.preventDefault();
     console.log('enterrrrrrrrrrr cancel')
     if (name === '' && description === '' && noticePeriod === '' && ExpectedSalary === '' && arr === inputArr) {
       navigate("/PositionList")
@@ -345,6 +360,41 @@ const PositionForm = () => {
   }
 
 
+  function handleTests(index) {
+    let updateData = arr.map((item, i) => {
+      return index === i ? { ...item, SelectedToBeOpenQuestion: !item.SelectedToBeOpenQuestion } : item;
+    });
+    setArr(updateData);
+  }
+
+  function handleTests2(index) {
+    let updateData = arr.map((item, i) => {
+      return index === i ? { ...item, SelectedToBeOpenQuestion: !item.SelectedToBeOpenQuestion } : item;
+    });
+    setArr(updateData);
+  }
+
+  const HandelOpenEndQuestion = (removeIndex) => {
+   
+    const index = removeIndex;
+    console.log(index)
+
+    let newFormValues = [...arr];
+    const deleteTodoIndex = newFormValues.findIndex((item) => item.id === index);
+    newFormValues[deleteTodoIndex].expectedAnswers = "Open Ended Question"
+    newFormValues[deleteTodoIndex].imprtanceOfQ = "Open Ended Question"
+  }
+
+  const HandelOpenEndQuestion2 = (removeIndex) => {
+ 
+    const index = removeIndex;
+    console.log(index)
+
+    let newFormValues = [...arr];
+    const deleteTodoIndex = newFormValues.findIndex((item) => item.id === index);
+    newFormValues[deleteTodoIndex].expectedAnswers = ""
+    newFormValues[deleteTodoIndex].imprtanceOfQ = ""
+  }
 
   return (
     <>
@@ -389,7 +439,7 @@ const PositionForm = () => {
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Typography  fontWeight={700}>
+                    <Typography fontWeight={700}>
                       1. Position Description
                     </Typography>
                   </Grid>
@@ -410,12 +460,13 @@ const PositionForm = () => {
                             </InputAdornment>
                           ),
                         }}
-                        onChange={(e) => {setname(e.target.value);
+                        onChange={(e) => {
+                          setname(e.target.value);
                           setIsName(true);
                           if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
                             setdisabled2(false)
+                          }
                         }
-                      }
                         }
                         value={name}
                         placeholder="Enter Position Name"
@@ -433,11 +484,12 @@ const PositionForm = () => {
                       label="Job Description"
                       multiline
                       rows={4}
-                      onChange={(e) => {setdescription(e.target.value);
+                      onChange={(e) => {
+                        setdescription(e.target.value);
                         setIsDescription(true);
                         if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
                           setdisabled2(false)
-                      }
+                        }
                       }}
                       value={description}
                       placeholder="Enter Job Description"
@@ -521,11 +573,12 @@ const PositionForm = () => {
                         placeholder="Enter Expected Salary"
                         type="number"
 
-                        onChange={(e) => {setExpectedSalary(e.target.value);
+                        onChange={(e) => {
+                          setExpectedSalary(e.target.value);
                           setIsSalary(true);
-                        if (IsName && IsDescription && !IsSalary && IsNoticPeriod && IsQuestions) {
-                          setdisabled2(false)
-                      }
+                          if (IsName && IsDescription && !IsSalary && IsNoticPeriod && IsQuestions) {
+                            setdisabled2(false)
+                          }
                         }}
                         value={ExpectedSalary}
                         InputLabelProps={{
@@ -552,11 +605,12 @@ const PositionForm = () => {
                       <TextField
                         id="outlined-required"
                         label="Notic Period"
-                        onChange={(e) => {setnoticePeriod(e.target.value);
+                        onChange={(e) => {
+                          setnoticePeriod(e.target.value);
                           setIsNoticPeriod(true);
                           if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
                             setdisabled2(false)
-                        }
+                          }
                         }}
                         value={noticePeriod}
                         InputProps={{
@@ -585,7 +639,7 @@ const PositionForm = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography fontWeight={700}>
-                      3. Questions
+                      3. Questions <p style={{fontSize:"10px",marginTop: '0px', marginLeft: '10px',}}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4"}} /></p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -665,6 +719,7 @@ const PositionForm = () => {
                                 <TextField
                                   type="text"
                                   // id="outlined-required"
+                                  disabled={!item.SelectedToBeOpenQuestion ? disabled:!disabled}
                                   label=" Expected Answer"
                                   value={item.value}
                                   inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
@@ -686,6 +741,7 @@ const PositionForm = () => {
                                     select
                                     value={item.value}
                                     //     onChange={handleChange}
+                                    disabled={!item.SelectedToBeOpenQuestion ? disabled:!disabled}
                                     id={i}
                                     label="importance"
                                     defaultValue="EUR"
@@ -709,7 +765,11 @@ const PositionForm = () => {
                                   <Grid item xs={1}>
                                     <BiTrash onClick={() =>
                                       removeFormFields(item.id)
-                                    } style={{ marginTop: '20px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />   </Grid> : null
+                                    } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
+                                    {!item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
+                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }}/>
+                                    }
+                                  </Grid> : null
                               }
                             </Grid>
                           </Grid>
@@ -929,12 +989,12 @@ const PositionForm = () => {
                 }}
               >
 
-               
+
 
 
                 <button className="CancelAddPosition" style={{ cursor: "pointer" }} onClick={showAlertSuccess22}>Cancel</button>
-                <button style={!disabled2 ? { cursor: "pointer",border: "none", padding: "7px 20px",   borderRadius: "5px",   color: "white",  backgroundColor: "#14359F",  width: "13%"} : { cursor: "pointer",border: "none", padding: "7px 20px",   borderRadius: "5px",   color: "white",  backgroundColor: "gray",  width: "13%"}} disabled={disabled2} onClick={handleSubmit}> Add Position </button>
-               {/* <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>*/}
+                <button style={!disabled2 ? { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "white", backgroundColor: "#14359F", width: "13%" } : { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "white", backgroundColor: "gray", width: "13%" }} disabled={disabled2} onClick={handleSubmit}> Add Position </button>
+                {/* <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>*/}
 
               </Grid>
               {/* --- submit Button--- */}

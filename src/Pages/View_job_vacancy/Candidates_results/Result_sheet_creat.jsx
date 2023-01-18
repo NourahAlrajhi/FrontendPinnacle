@@ -104,16 +104,17 @@ function Result_sheet_creat({ exportBtnId, VacancyID }) {
   }*/
 
   return (
-    <Box className='Result_sheet_creat' sx={{ width: "100%", minHeight: "40vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1rem" }}>
-      <Typography variant='h4' >Candidates Results</Typography>
+    <Box className='Result_sheet_creat' sx={{ width: "100%", minHeight: "10vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1rem" }}>
+      <Typography variant='h5' >Candidates Results</Typography>
       {/* btn css in custom css */}
       <Button
         className="download-table-xls-button"
-        style={{ background: "#14359F",  border: "1px solid rgba(0, 0, 0, 0.1)",
+        style={{ background: "#14359F",  border: "1px  rgba(0, 0, 0, 0.1)",
         borderRadius:"8px",
         color:"white",
         padding: "0.8rem 1.5rem ",
         cursor: "pointer",
+        
          }}
         //  table={exportBtnId}
         //  filename={VACANCYNAME+'Result'}
