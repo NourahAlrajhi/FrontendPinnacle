@@ -14,7 +14,8 @@ import Common_table_dropdown from "../Table_components/Common_table_dropdown";
 import Active_vacancy_table_search_bar from "../Table_components/table_search_bar";
 import { useNavigate } from "react-router";
 import Option_button from "../Table_components/Option_button";
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Button from "@mui/material/Button";
 // -------table component----------------
 import SearchIcon from "@mui/icons-material/Search";
@@ -110,7 +111,7 @@ export default function Active_vacancy_table(props) {
   const { Recruiter } = useRecruiterContext()
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [RecruiterVacancy, setRecruiterVacancy] = useState(Recruiter.Vavancy);
-  const [VacancyResult, setVacancyResult] = useState([{}]);
+
   // ---select options--
   const [Option, setOption] = React.useState("");
 
@@ -143,6 +144,9 @@ export default function Active_vacancy_table(props) {
         console.log(RecruiterVacancy.length)
         console.log(CandidateNumber)
         GetClosedVacancy()
+     
+          setVacancyResult(json)
+        
 
       }
 
@@ -238,6 +242,35 @@ export default function Active_vacancy_table(props) {
   // ----//popover function------
 
   let navigate = useNavigate();
+
+  const [VacancyResult, setVacancyResult] = useState([{}]);
+  const [yearDirection, setYearDirection] = useState("asc");
+  const [IsAskForSort, setIsAskForSort] = useState(false);  
+
+  const sortByYear = () => {
+    console.log("Enterrrrrrrrrrr here")
+    setIsAskForSort(true)
+    if (yearDirection === "asc") {
+      setVacancyResult(
+        VacancyResult.slice().sort((a, b) => {
+          console.log(a.linkExpTime);
+          return new Date(b.linkExpTime) - new Date(a.linkExpTime);
+        })
+      );
+      setYearDirection("desc");
+    }
+  
+    if (yearDirection === "desc") {
+      setVacancyResult(
+        VacancyResult.slice().sort((a, b) => {
+          console.log(a.linkExpTime);
+          return new Date(a.linkExpTime) - new Date(b.linkExpTime);
+        })
+      );
+      setYearDirection("asc");
+    }
+  };
+
   return (
     <>
       {/* table_main_container => add custom css */}
@@ -294,7 +327,29 @@ export default function Active_vacancy_table(props) {
                   <Common_table_button btnText={"ALL CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
-                  <Common_table_button btnText={"CLOSING DATE"} />
+
+                <Box className='table_header_col'>
+                <Box component="div" sx={{
+                    backgroundColor: "#EFF0F6",
+                    padding: "5px",
+                    textAlign: "center",
+                    borderRadius: "10px",
+                    color: "#4F5E74",
+                    width: "100%",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                }}>
+                    <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >CLOSING DATE</Button>
+                </Box>
+                {/* upDownBtns => add custom css */}
+                <Box className='upDownBtns'>
+                    <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropUpIcon /></Button>
+                    <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropDownIcon /></Button>
+                </Box>
+            </Box>
+
+                  {/*    <Common_table_button btnText={"CLOSING DATE"} /> */}
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
                   {/* ----option button create here ---- */}
@@ -367,7 +422,7 @@ export default function Active_vacancy_table(props) {
                 )
                 )
                 // loop over filtered products, so only searched products are shown
-              ) : Vacancy && Vacancy.map((item, i) => (
+              ) :!IsAskForSort? Vacancy && Vacancy.map((item, i) => (
                 <TableRow
                   key={item._id}
                   sx={{
@@ -398,7 +453,36 @@ export default function Active_vacancy_table(props) {
 
                 </TableRow>
               )
-              )
+              ): VacancyResult && VacancyResult.map((item, i) => (
+                <TableRow
+                  key={item._id}
+                  sx={{
+                    "&:nth-of-type(odd), &:nth-of-type(even)": {
+                      border: 0,
+                      borderBottom: 0,
+                    },
+                  }}
+                >
+                  {console.log(item._id)}
+                  <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }} >
+                    {capitalizeWords(item.title)}
+                  </TableCell>
+                  {/*  <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
+                  {item.InterviewedCandidates}            
+                       </TableCell>
+                  {console.log(item.CandidateList)}
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    {item.CandidateList}
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    {(new Date(item.linkExpDate).getDate()) + "/" + (new Date(item.linkExpDate).getMonth() + 1) + "/" + (new Date(item.linkExpDate).getFullYear())}
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    <LongMenu2 Vacancyy={item._id} VacancyyName={item.title} />
+                  </TableCell>
+
+                </TableRow>))
               }
             </TableBody>
           </Table>

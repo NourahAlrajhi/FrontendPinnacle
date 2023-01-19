@@ -23,10 +23,10 @@ const Common_table_button = (props) => {
                     <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }}>{props.btnText}</Button>
                 </Box>
                 {/* upDownBtns => add custom css */}
-                <Box className='upDownBtns'>
+                {/* <Box className='upDownBtns'>
                     <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }}><ArrowDropUpIcon /></Button>
                     <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }}><ArrowDropDownIcon /></Button>
-                </Box>
+                </Box>*/}
             </Box>
         </>
     )

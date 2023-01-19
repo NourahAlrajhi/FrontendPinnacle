@@ -148,7 +148,9 @@ function Question_screen(props) {
   //const [recordingForFullInterview, setrecordingForFullInterview] = useState(false);
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
-
+  const [seconds, setSeconds] = useState(10)
+  const [minutes, setMinutes] = useState(0)
+  const [CloseTheTimer, setCloseTheTimer] = useState(false);
 
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
@@ -165,6 +167,49 @@ function Question_screen(props) {
 
 
   };
+
+ 
+  function updateTime() {
+    if(!CloseTheTimer){
+      if (minutes == 0 && seconds == 0) {
+        //alert('The Time For This Question is Finish Please Move To The Next Question')
+        handleCutAndStartOverWhenTimerIsOut()
+        //reset
+       // setSeconds(0);
+       // setMinutes(20);
+      }
+      else {
+        if (seconds == 0) {
+          setMinutes(minutes => minutes - 1);
+          setSeconds(59);
+        } else {
+          setSeconds(seconds => seconds - 1);
+        }
+      }
+
+    }
+ 
+  }
+  
+  function updateTimeWhenClickNext() {
+   
+      //reset
+      setSeconds(10);
+      setMinutes(0);
+
+  
+  }
+
+  useEffect(() => {
+    // use set timeout and be confident because updateTime will cause rerender
+    // rerender mean re call this effect => then it will be similar to how setinterval works
+    // but with easy to understand logic
+    const token = setTimeout(updateTime, 1000)
+
+    return function cleanUp() {
+      clearTimeout(token);
+    }
+  })
 
   /////////
 
@@ -256,17 +301,38 @@ function Question_screen(props) {
 
   }
 
+  const handleCutAndStartOverWhenTimerIsOut = () => {
+    console.log("Enter the handleCutAndStartOverWhenTimerIsOut")
+    alert('The Time For This Question is Finish, You Will Be Move To The Next Question')
+
+    props.handleNext();
+    {
+      props.activeStep + 1 === props.steps.length ? handleSendVideos()
+        //navigate("/");
+        :
+
+        handleCutAndStartOver();
+      /* handleCutAndStartOver()*/
+    }
+    setSeconds(10);
+    setMinutes(0);
+  //  handleStopRecording();
+  //  handleStartRecording();
+
+
+  }; 
 
   const handleCutAndStartOver = () => {
     console.log("Enter the handleCutAndStartOver")
 
     handleStopRecording();
     handleStartRecording();
-
+    updateTimeWhenClickNext()
 
   };
 
   const handleSendVideos = () => {
+    setCloseTheTimer(true)
     stream.getTracks().forEach(function (track) {
       track.stop();
     });
@@ -350,7 +416,7 @@ function Question_screen(props) {
   return (
     <>
 
-      <Container maxWidth="lg" sx={{ overflow: "auto" }}>
+      <Container maxWidth="lg" sx={{ overflow: "auto",marginTop:"1px" }}> 
         {props.activeStep === props.steps.length ? (
           <box component="div" className="thanksScreen">
             All Done
@@ -364,8 +430,11 @@ function Question_screen(props) {
         ) : (
 
           <>
-            <p className="question_heading">{props.questionHeading}</p>
-            <Box component="div" className="camra_div">
+               <Button variant="contained"   sx={{ padding: "0.5rem 2rem", marginLeft:"840px",background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
+                timer: {minutes}:{seconds}
+              </p></Button> 
+            <p className="question_heading" sx={{ overflow: "auto",marginTop:"1px" }}>{props.questionHeading}</p>
+            <Box component="div" className="camra_div" sx={{ overflow: "auto",marginTop:"1px" }}>
               {/* ----popover button--- */}
               <div className="buttonDiv">
                 <Button aria-describedby={id} variant="contained" onClick={handleClick} className="Dot_button">
@@ -386,7 +455,7 @@ function Question_screen(props) {
               </div>
               {/* ----//popover button--- */}
               {/* -----camra div---- */}
-              <Box component="div" className="webCamp">
+              <Box component="div" className="webCamp" >
                 <Webcam audio={true} imageSmoothing={true} mirrored={true} ref={webRef} className="camraField" videoConstraints={videoConstraints} muted="muted" />
               </Box>
               {/* -----//camra div---- */}

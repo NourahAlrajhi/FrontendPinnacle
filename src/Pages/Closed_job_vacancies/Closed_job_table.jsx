@@ -17,7 +17,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import LongMenu2 from '../../component/ForMoreMenuJobVacancy'
 
-
+import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 import { usePositionsContext } from "../../Hook/usePositionsContext"
 import { useRecruiterContext } from "../../Hook/UseRecruiterContext"
@@ -94,8 +96,34 @@ export default function Closed_job_table() {
   const { Recruiter } = useRecruiterContext()
   const [RecruiterVacancy, setRecruiterVacancy] = useState(Recruiter.Vavancy);
   const [VacancyResult, setVacancyResult] = useState([{}]);
+  const [yearDirection, setYearDirection] = useState("asc");
+  const [IsAskForSort, setIsAskForSort] = useState(false);
 
 
+
+  const sortByYear = () => {
+    console.log("Enterrrrrrrrrrr here")
+    setIsAskForSort(true)
+    if (yearDirection === "asc") {
+      setVacancyResult(
+        VacancyResult.slice().sort((a, b) => {
+          console.log(a.createdAt);
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        })
+      );
+      setYearDirection("desc");
+    }
+  
+    if (yearDirection === "desc") {
+      setVacancyResult(
+        VacancyResult.slice().sort((a, b) => {
+          console.log(a.createdAt);
+          return new Date(a.createdAt) - new Date(b.createdAt);
+        })
+      );
+      setYearDirection("asc");
+    }
+  };
 
 
   useEffect(() => {
@@ -111,7 +139,8 @@ export default function Closed_job_table() {
         console.log(RecruiterVacancy)
         console.log("===========")
         console.log(RecruiterVacancy.length)
-  
+        setVacancyResult(json)
+        console.log(json)
       }
     }
     if (Recruiter) {
@@ -200,6 +229,30 @@ export default function Closed_job_table() {
                   <Common_table_button btnText={"ALL CANDIDATES"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
+                <Box className='table_header_col'>
+                <Box component="div" sx={{
+                    backgroundColor: "#EFF0F6",
+                    padding: "5px",
+                    textAlign: "center",
+                    borderRadius: "10px",
+                    color: "#4F5E74",
+                    width: "100%",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                }}>
+                    <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >YEAR</Button>
+                </Box>
+                {/* upDownBtns => add custom css */}
+                <Box className='upDownBtns'>
+                    <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropUpIcon /></Button>
+                    <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropDownIcon /></Button>
+                </Box>
+            </Box>
+
+                
+                </TableCell>
+                <TableCell sx={{ border: 0 }}>
                   <Option_common_button />
                 </TableCell>
               </TableRow>
@@ -226,13 +279,18 @@ export default function Closed_job_table() {
                   {row.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                  {(new Date(row.createdAt).getFullYear())}
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                     <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
                   </TableRow>
                 )
                 )
                 // loop over filtered products, so only searched products are shown
-              ) : Vacancy && Vacancy.map((row, index) => (
+              
+
+              ) :!IsAskForSort? Vacancy && Vacancy.map((row, index) => (
                 <TableRow
                 key={row._id}
                   sx={{
@@ -253,10 +311,43 @@ export default function Closed_job_table() {
                   {row.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                  {(new Date(row.createdAt).getFullYear())}
+                 </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                     <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
                 </TableRow>
-              ))}
+              )):
+              
+              VacancyResult && VacancyResult.map((row, index) => (
+                <TableRow
+                key={row._id}
+                  sx={{
+                    "&:nth-of-type(odd), &:nth-of-type(even)": {
+                      border: 0,
+                      borderBottom: 0,
+                    },
+                  }}
+                >
+                  <TableCell align="left" sx={{ cursor: "pointer", border: 0, paddingLeft: "4%" }}>
+              {capitalizeWords(row.title)}
+                  {/*  <Typography sx={{ color: "lightgray" }}>ACCESS CODE</Typography>*/}
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
+                  {row.InterviewedCandidates} 
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
+                  {row.CandidateList}
+                  </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                  {(new Date(row.createdAt).getFullYear())}
+                 </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
+                  </TableCell>
+                </TableRow>
+              ))
+              }
             </TableBody>
           </Table>
         </TableContainer>
