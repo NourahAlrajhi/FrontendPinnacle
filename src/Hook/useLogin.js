@@ -15,7 +15,7 @@ export const useLogin = () => {
         setError(null)
         if (logName === "Rahaf2001" ) {
             //https://backend-pinnacle.herokuapp.com/
-            const response = await fetch('/api/Recruiter/login/Admin', {
+            const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/login/Admin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ logName, password })
