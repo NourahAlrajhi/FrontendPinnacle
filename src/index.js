@@ -10,11 +10,12 @@ import { PositionsContextProvider } from './Context/PositionContext'
 import { MenuProvider } from 'react-native-popup-menu';
 import { VacancyContextProvider } from './Context/VacancyContext'
 import { QuestionContextProvider } from './Context/QuestionContext'
-
+import { AdminContextProvider } from './Context/AdminContext'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
+    <AdminContextProvider>
     <RecruiterContextProvider>
       <PositionsContextProvider>
         <QuestionContextProvider>
@@ -26,7 +27,7 @@ root.render(
         </QuestionContextProvider>
       </PositionsContextProvider>
     </RecruiterContextProvider>
-
+    </AdminContextProvider>
   </React.StrictMode>
 );
 

@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useRecruiterContext } from "./Hook/UseRecruiterContext"
+import { useAdminContext } from "./Hook/useAdminContext"
 
 // pages & components
 import Home from './Pages/Home'
@@ -13,6 +14,8 @@ import Sidebar from './component/SideBar'
 import EditPosition from './Pages/EditPosition'
 import CreateJobbVacancy from './Pages/CreateJobVacancy'
 import { Layout } from './component/Layout'
+import { AdminLayout } from './component/AdminLayout'
+
 
 
 import { useLocation } from 'react-router-dom';
@@ -25,10 +28,14 @@ import Interview_result from './Pages/View_job_vacancy/Candidates_results/Interv
 import Active_vacancy from './Pages/View_job_vacancy/Active_vacancy';
 import Interview_welcome_screen from './Pages/InterviewScreen/Interview_welcome_screen';
 import Question_interview from './Pages/InterviewScreen/Question_interview';
+import UploadRecruiterList from './Pages/AdminPages/UploadRecruiterList'
+import RecruiterList from './Pages/AdminPages/RecruiterList'
+import AdminDashBoard from './Pages/AdminPages/AdminDashBoard'
 
 function App() {
 
   const { Recruiter } = useRecruiterContext()
+  const { Admin } = useAdminContext()
   const NAVBAR_TEXTS = [{ page: "/Interview_welcome_screen/:VacancyID/:CandidateDocID/:CandidateID", text: true }, { page: "/Question_interview/:VacancyID/:CandidateDocID/:CandidateID", text: true }]
   //const location = useLocation();
 
@@ -40,7 +47,7 @@ function App() {
 
 
 
-      {!Recruiter ?
+      {!Recruiter && !Admin ?
 
         <Routes>
 
@@ -52,58 +59,81 @@ function App() {
 
         </Routes>
 
-        :
+        : Recruiter  ?
 
 
 
-        <Routes>
+          <Routes>
 
-          <Route element={<Layout />}>
-            <Route
-            extact path="/home"
-              element={Recruiter ? <Home /> : <Navigate to="/" />}
-            />
-            <Route
-              extact path="/"
-              element={!Recruiter ? <Login /> : <Navigate to="/home" />} />
-            <Route
-              path="/PositionList"
-              element={Recruiter ? <PositionList /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/PositionDetails2/:id"
-              element={Recruiter ? <PositionDetails2 /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/PositionForm"
-              element={Recruiter ? <PositionForm /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/EditPosition/:id"
-              element={Recruiter ? <EditPosition /> : <Navigate to="/" />}
-            />
-            <Route
-              path="/CreateJobbVacancy"
-              element={Recruiter ? <CreateJobbVacancy /> : <Navigate to="/" />}
-            />
+            <Route element={<Layout />}>
+              <Route
+                extact path="/home"
+                element={Recruiter ? <Home /> : <Navigate to="/" />}
+              />
+              <Route
+                extact path="/"
+                element={!Recruiter ? <Login /> : <Navigate to="/home" />} />
+              <Route
+                path="/PositionList"
+                element={Recruiter ? <PositionList /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/PositionDetails2/:id"
+                element={Recruiter ? <PositionDetails2 /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/PositionForm"
+                element={Recruiter ? <PositionForm /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/EditPosition/:id"
+                element={Recruiter ? <EditPosition /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/CreateJobbVacancy"
+                element={Recruiter ? <CreateJobbVacancy /> : <Navigate to="/" />}
+              />
 
 
 
-            <Route path="/Dashboard/View_job_vacancy_main" element={Recruiter ? <View_job_vacancy_main /> : <Navigate to="/" />}>
-              <Route path="/Dashboard/View_job_vacancy_main" element={Recruiter ? <Active_vacancy /> : <Navigate to="/" />} />
-              <Route path="/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main" element={Recruiter ? <Closed_jop_vacancies_main /> : <Navigate to="/" />} />
-              <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/:id/:Name" element={Recruiter ? <Candidates_results_main /> : <Navigate to="/" />} />
-              <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/:id3/:id2/:id4" element={Recruiter ? <Interview_result /> : <Navigate to="/" />} />
-              <Route exact path="/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main" element={Recruiter ? <Open_jop_vacancies_main /> : <Navigate to="/" />} />
+              <Route path="/Dashboard/View_job_vacancy_main" element={Recruiter ? <View_job_vacancy_main /> : <Navigate to="/" />}>
+                <Route path="/Dashboard/View_job_vacancy_main" element={Recruiter ? <Active_vacancy /> : <Navigate to="/" />} />
+                <Route path="/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main" element={Recruiter ? <Closed_jop_vacancies_main /> : <Navigate to="/" />} />
+                <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/:id/:Name" element={Recruiter ? <Candidates_results_main /> : <Navigate to="/" />} />
+                <Route path="/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/:id3/:id2/:id4" element={Recruiter ? <Interview_result /> : <Navigate to="/" />} />
+                <Route exact path="/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main" element={Recruiter ? <Open_jop_vacancies_main /> : <Navigate to="/" />} />
+              </Route>
+
             </Route>
 
-          </Route>
+
+
+          </Routes>
+
+          :
+          <Routes>
+
+            <Route element={<AdminLayout />}>
+              <Route
+                extact path="/RecruiterList"
+                element={Admin ? <RecruiterList /> : <Navigate to="/" />}
+              />
+              <Route
+                extact path="/"
+                element={!Admin ? <Login /> : <Navigate to="/RecruiterList" />} />
+              <Route
+                path="/UploadRecruiter"
+                element={Admin ? <UploadRecruiterList /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/AdminHome"
+                element={Admin ? <AdminDashBoard /> : <Navigate to="/" />}
+              />
+            </Route>
 
 
 
-        </Routes>
-
-
+          </Routes>
 
       }
     </BrowserRouter>

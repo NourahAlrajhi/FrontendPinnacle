@@ -4,6 +4,7 @@ export const useLogout = () => {
   const { dispatch } = useRecruiterContext()
 
   const logout = () => {
+    
     // remove user from storage
     localStorage.removeItem('Recruiter')
 
