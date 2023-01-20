@@ -2,8 +2,13 @@ import { Box, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Scheduler from "react-mui-scheduler"
+import { usePositionsContext } from "../../Hook/usePositionsContext"
+import { useRecruiterContext } from "../../Hook/UseRecruiterContext"
+import { useVacancyContext } from "../../Hook/UseVacancy"
 
-function Calandar_event_graph() {
+import { useEffect } from 'react'
+
+function Calandar_event_graph({EVENTLIST}) {
   const [state] = useState({
     options: {
       transitionMode: "zoom", // or fade
@@ -17,6 +22,62 @@ function Calandar_event_graph() {
       showDatePicker: true
     }
   })
+
+  const { Vacancy, dispatchhh } = useVacancyContext()
+  const [searchInput, setSearchInput] = useState("");
+  const { Positions, dispatch } = usePositionsContext()
+  const { Recruiter } = useRecruiterContext()
+  const [eventsList, seteventsList] = useState([{}]);
+
+  useEffect(() => {
+    console.log("====================222222")
+console.log(EVENTLIST)
+console.log("====================22222")
+    console.log("formRows: ", Vacancy);
+    const fetchPosition = async () => {
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/List', {
+        headers: { 'Authorization': `Bearer ${Recruiter.token}` },
+      })
+      const json = await response.json()
+      if (response.ok) {
+        dispatchhh({ type: 'SET_Vacancy', payload: json })
+        console.log("===========")
+        console.log(json)
+        console.log("===========")
+        var j = 0
+        json && json.map((item, i) => {
+          seteventsList(s => {
+            return [
+              ...s,
+              {
+                id: item._id,
+                label: `${item.title} Deadline`,
+                color: "#263686",
+                date: `${(new Date(item.linkExpTime).getFullYear()) + "-0" + (new Date(item.linkExpTime).getMonth() + 1) + "-" + (new Date(item.linkExpTime).getDate())}`,
+              }
+            ];
+          });
+          console.log(eventsList)
+          /*  eventsList[j] = {
+              id: item._id,
+              label: `${json.title} Deadline`,
+              color: "#263686",
+              date: `${(new Date(item.linkExpTime).getFullYear()) + "-" + (new Date(item.linkExpTime).getMonth() + 1) + "-" + (new Date(item.linkExpTime).getDate())}`,
+            }
+  
+            j = i + 1*/
+        }
+        )
+        // seteventsList(eventsList)
+      }
+
+    }
+
+
+    if (Recruiter) {
+      fetchPosition()
+    }
+  }, [dispatchhh, Recruiter])
 
   const events = [
     {
@@ -87,11 +148,11 @@ function Calandar_event_graph() {
 
   return (
     // --custom css add for styling --
-    <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem",paddingTop:"0px" }} className="calendar_graph_box">
+    <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", paddingTop: "0px" }} className="calendar_graph_box">
       <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Calendar</Typography>
       <Scheduler
         locale="en"
-        events={events}
+        events={EVENTLIST}
         legacyStyle={false}
         options={state?.options}
         toolbarProps={state?.toolbarProps}

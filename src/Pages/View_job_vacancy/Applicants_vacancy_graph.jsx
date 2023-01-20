@@ -69,11 +69,35 @@ export const data = {
   }]
 };
 
-export default function Applicants_vacancy_graph() {
+export default function Applicants_vacancy_graph({DATA1,DATA2}) {
+  console.log("=============00000000000")
+  console.log(DATA1)
+  console.log("=============00000000000")
+  console.log("=============00000000000")
+  console.log(DATA2)
+  console.log("=============00000000000")
+
+  const data2 = {
+    labels: DATA1,
+    datasets: [{
+      label: 'Applicants per Open Vacancy',
+      data: DATA2,
+      backgroundColor: [
+        '#14359F',
+        '#AE6EE0',
+        '#B1E3FF',
+        '#95A4FC',
+        '#A1E3CB',
+      ],
+      borderRadius: 10,
+      barPercentage: 0.3,
+    }]
+  };
+  
   return (
     <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }} className="calendar_graph_box">
       <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Calendar</Typography>
-      <Bar options={options} data={data} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
+      <Bar options={options} data={data2} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
     </Box>
   )
 }

@@ -42,6 +42,28 @@ function Question_screen(props) {
 
 
   useEffect(() => {
+    window.addEventListener('beforeunload', alertUser)
+    window.addEventListener('unload', handleTabClosing)
+    return () => {
+      window.removeEventListener('beforeunload', alertUser)
+      window.removeEventListener('unload', handleTabClosing)
+      // handleTabClosing()
+    }
+  }, [])
+
+  const handleTabClosing = () => {
+    handleSendVideos()
+  }
+
+  const alertUser = (event: any) => {
+    event.preventDefault()
+    event.returnValue = 'Are you sure you want to close?'
+
+  }
+
+
+
+  useEffect(() => {
 
     const fetchPosition = async () => {
       const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
@@ -168,15 +190,15 @@ function Question_screen(props) {
 
   };
 
- 
+
   function updateTime() {
-    if(!CloseTheTimer){
+    if (!CloseTheTimer) {
       if (minutes == 0 && seconds == 0) {
         //alert('The Time For This Question is Finish Please Move To The Next Question')
         handleCutAndStartOverWhenTimerIsOut()
         //reset
-       // setSeconds(0);
-       // setMinutes(20);
+        // setSeconds(0);
+        // setMinutes(20);
       }
       else {
         if (seconds == 0) {
@@ -188,16 +210,16 @@ function Question_screen(props) {
       }
 
     }
- 
-  }
-  
-  function updateTimeWhenClickNext() {
-   
-      //reset
-      setSeconds(10);
-      setMinutes(0);
 
-  
+  }
+
+  function updateTimeWhenClickNext() {
+
+    //reset
+    setSeconds(10);
+    setMinutes(0);
+
+
   }
 
   useEffect(() => {
@@ -316,11 +338,11 @@ function Question_screen(props) {
     }
     setSeconds(10);
     setMinutes(0);
-  //  handleStopRecording();
-  //  handleStartRecording();
+    //  handleStopRecording();
+    //  handleStartRecording();
 
 
-  }; 
+  };
 
   const handleCutAndStartOver = () => {
     console.log("Enter the handleCutAndStartOver")
@@ -330,18 +352,18 @@ function Question_screen(props) {
     updateTimeWhenClickNext()
 
   };
-
+  //http://localhost:3000/Interview_welcome_screen/63c7cc4d3f84630d6c1671e0/63c7cc4e3f84630d6c1671e5/391b2464-a9ee-4bfa-abaf-7d169c144ede
   const handleSendVideos = () => {
     setCloseTheTimer(true)
     stream.getTracks().forEach(function (track) {
       track.stop();
     });
     console.log("Enter the handleSendVideos")
-
+    console.log("Enter the handleSendVideos Whennnnn User Close Th siteeee")
 
     recordedVideos.forEach((recordedVideo, index) => {
 
-      recordedVideo.ondataavailable =  (e)=> {
+      recordedVideo.ondataavailable = (e) => {
         const videoBlob = new Blob([e.data], { type: 'video/webm' });
         const videoUrl = URL.createObjectURL(videoBlob);
         const video = document.createElement('video');
@@ -416,7 +438,7 @@ function Question_screen(props) {
   return (
     <>
 
-      <Container maxWidth="lg" sx={{ overflow: "auto",marginTop:"1px" }}> 
+      <Container maxWidth="lg" sx={{ overflow: "auto", marginTop: "1px" }}>
         {props.activeStep === props.steps.length ? (
           <box component="div" className="thanksScreen">
             All Done
@@ -430,11 +452,11 @@ function Question_screen(props) {
         ) : (
 
           <>
-               <Button variant="contained"   sx={{ padding: "0.5rem 2rem", marginLeft:"840px",background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
-                timer: {minutes}:{seconds}
-              </p></Button> 
-            <p className="question_heading" sx={{ overflow: "auto",marginTop:"1px" }}>{props.questionHeading}</p>
-            <Box component="div" className="camra_div" sx={{ overflow: "auto",marginTop:"1px" }}>
+            <Button variant="contained" sx={{ padding: "0.5rem 2rem", marginLeft: "840px", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
+              timer: {minutes}:{seconds}
+            </p></Button>
+            <p className="question_heading" sx={{ overflow: "auto", marginTop: "1px" }}>{props.questionHeading}</p>
+            <Box component="div" className="camra_div" sx={{ overflow: "auto", marginTop: "1px" }}>
               {/* ----popover button--- */}
               <div className="buttonDiv">
                 <Button aria-describedby={id} variant="contained" onClick={handleClick} className="Dot_button">

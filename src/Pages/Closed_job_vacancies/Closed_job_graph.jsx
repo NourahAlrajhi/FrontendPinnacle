@@ -104,7 +104,43 @@ export const data = {
 };
 
 
-export default function Closed_job_graph() {
+export default function Closed_job_graph({DATA1,DATA2,DATA2FORACTUAL}) {
+
+
+ const data2 = {
+    labels: DATA1,
+    datasets: [{
+      label: 'Applicants per Open Vacancy',
+      data: DATA2,
+      backgroundColor: [
+        '#14359F',
+        '#AE6EE0',
+        '#B1E3FF',
+        '#95A4FC',
+        '#A1E3CB',
+      ],
+      borderColor: '#1C1C1C',
+      borderRadius: 10,
+      barPercentage: 0.3,
+      tension: 0.5
+    }, {
+      
+      label: 'Applicants per Open Vacancy',
+      data: DATA2FORACTUAL,
+      backgroundColor: [
+        '#14359F',
+        '#AE6EE0',
+        '#B1E3FF',
+        '#95A4FC',
+        '#A1E3CB',
+      ],
+      borderColor: '#7024C4 ',
+      borderRadius: 10,
+      barPercentage: 0.3,
+      tension: 0.5
+    }
+    ]
+  };
 
   // ----graph button function---
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -133,12 +169,12 @@ export default function Closed_job_graph() {
             <Typography >
               <Badge variant='dot' sx={{ margin: "-2px 10px 0 0" }} color="secondary" >
               </Badge>
-              Current Week
+              All Candidate
             </Typography>
             <Typography >
               <Badge variant='dot' sx={{ margin: "-2px 10px 0 0" }} color="primary">
               </Badge>
-              Current Week
+              Interviewed Candidate
             </Typography>
           </Stack>
           {/* ---3dot btn--- */}
@@ -162,7 +198,7 @@ export default function Closed_job_graph() {
         </Box>
         {/* --graph--- */}
         <Box sx={{ padding: "1rem" }}>
-          <Line options={options} data={data} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px" }} />
+          <Line options={options} data={data2} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px" }} />
         </Box>
       </Box>
     </>

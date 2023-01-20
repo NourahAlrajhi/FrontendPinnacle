@@ -40,7 +40,8 @@ function Interview_welcome_screen() {
     const [CandidateName, setCandidateName] = useState('')
     const [FinishDuration, setFinishDuration] = useState(false)
     const [FinishInterview, setFinishInterview] = useState(false)
-
+    const [QUESTIONS, setQUESTIONS] = useState([{}])
+    const [FinisHALFhInterview, setFinisHALFhInterview] = useState(false)
 
 
 
@@ -63,8 +64,26 @@ function Interview_welcome_screen() {
                         if (item.RECORDS.length > 1) {
                             setFinishInterview(true)
                         }
+
+                        const responsee = fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+                        })
+                        const jsonn = responsee.json()
+                        if (response.ok) {
+                            console.log("Enter To See if candidate is not complete the interview")
+                            console.log(jsonn.Position)
+                            jsonn.Position && jsonn.Position.map((item2, i) => {
+                                setQUESTIONS(item2.arr)
+                                if (item2.arr.length != item.RECORDS.length) {
+                                    setFinisHALFhInterview(true)
+
+                                    //Delet The Record For This Interview Here
+                                }
+
+                            })
+                        }
+
                     }
-                   
+
 
 
 
@@ -95,10 +114,26 @@ function Interview_welcome_screen() {
             }
         }
 
+        /* const fetchVacancyInfo2 = async () => {
+             const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+             })
+             const json = await response.json()
+             if (response.ok) {
+                 console.log("Enter Question page to get vacancy infoooooooooooormationnnnnn")
+                 console.log(json.Position)
+                 json.Position && json.Position.map((item, i) => {
+                     setQUESTIONS(item.arr)
+                     if (item.arr.length !=) 
+       
+               })
+             }
+         }*/
+
 
         if (!Recruiter) {
             fetchPosition()
             fetchVacancyInfo()
+            //  fetchVacancyInfo2()
         }
     }, [VacancyID, CandidateDocID, CandidateID])
 
@@ -136,8 +171,8 @@ function Interview_welcome_screen() {
                             {/* ---inputs--- */}
                             <div className='content'>
                                 <p className='heading'> Welcome {CandidateName}!</p>
-                                {!FinishDuration&&!FinishInterview ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration? <p className='pera' style={{padding:"40px" , textAlign:"center" , color:"red"}}>This Interview Link is Expired</p>:<p className='pera' style={{padding:"40px" , textAlign:"center" , color:"red"}}>You Already Finish The Interview</p>}
-                                {!FinishDuration&&!FinishInterview  ? <div className='filds'>
+                                {!FinishDuration && !FinishInterview ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link is Expired</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Finish The Interview</p>}
+                                {!FinishDuration && !FinishInterview ? <div className='filds'>
                                     {/* ----camra div----- */}
 
                                     <Box component="div" className='camraViewDiv'>
@@ -159,7 +194,7 @@ function Interview_welcome_screen() {
                                         <p >All Set Up</p>
                                     </Box>
                                     {/* -----//setUpLine---- */}
-                                </div> : FinishDuration?<h2 style={{padding:"40px" ,textAlign:"center"}}>See you next Time , and be carfull with your appointment!</h2> : <h2 style={{padding:"40px" ,textAlign:"center"}}>Wait For your Result</h2>}
+                                </div> : FinishDuration ? <h2 style={{ padding: "40px", textAlign: "center" }}>See you next Time , and be carfull with your appointment!</h2> : <h2 style={{ padding: "40px", textAlign: "center" }}>Wait For your Result</h2>}
                             </div>
                             {/* ---//inputs--- */}
                         </div>
@@ -168,7 +203,7 @@ function Interview_welcome_screen() {
 
                             {/* <NavLink style={{ textDecoration: "none" }} >*/}
 
-                            {!FinishDuration&&!FinishInterview  ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`)}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
+                            {!FinishDuration && !FinishInterview ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`)}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
 
                             {/* <Common_button btnText={"Start Interview"}  />*/}
                             {/*  </NavLink>*/}

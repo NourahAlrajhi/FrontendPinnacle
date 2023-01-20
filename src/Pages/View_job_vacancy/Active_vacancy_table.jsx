@@ -351,7 +351,7 @@ export default function Active_vacancy_table(props) {
 
                   {/*    <Common_table_button btnText={"CLOSING DATE"} /> */}
                 </TableCell>
-                <TableCell sx={{ border: 0 }}>
+                <TableCell sx={{ border: 0 ,paddingLeft: "4%" }}>
                   {/* ----option button create here ---- */}
                   <Box className='table_header_col' sx={{ gridTemplateColumns: "100% 0%" }}>
                     <Box component="div" sx={{
@@ -404,10 +404,10 @@ export default function Active_vacancy_table(props) {
                     </TableCell>
                     {/* <TableCell align="right">Last Date : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
 
-                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
+                    <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }} >
                     {item.InterviewedCandidates}            
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }}>
                       {item.CandidateList}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
@@ -437,11 +437,11 @@ export default function Active_vacancy_table(props) {
                     {capitalizeWords(item.title)}
                   </TableCell>
                   {/*  <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
-                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
+                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }} >
                   {item.InterviewedCandidates}            
                        </TableCell>
                   {console.log(item.CandidateList)}
-                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }}>
                     {item.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
@@ -468,11 +468,11 @@ export default function Active_vacancy_table(props) {
                     {capitalizeWords(item.title)}
                   </TableCell>
                   {/*  <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>*/}
-                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }} >
+                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }} >
                   {item.InterviewedCandidates}            
                        </TableCell>
                   {console.log(item.CandidateList)}
-                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                  <TableCell align="left" sx={{ paddingLeft: "7%", border: 0 }}>
                     {item.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
