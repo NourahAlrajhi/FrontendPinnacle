@@ -119,8 +119,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const Sidebar = ({ children }) => {
-    const { Recruiter } = useRecruiterContext()
+ 
 
+    const { Recruiter } = useRecruiterContext()
+    let RECRUITERNAME=`${Recruiter.RecName}`
+   let  index = RECRUITERNAME.indexOf(' '); 
+   if(index<=0){
+    RECRUITERNAME=RECRUITERNAME
+   
+   }else{
+    RECRUITERNAME=RECRUITERNAME.substring(0,index)
+   }
+ 
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => { setOpen(true); };
@@ -193,7 +203,7 @@ const Sidebar = ({ children }) => {
                 <Divider />
                 {/* ---name--- */}
                 <Typography textAlign="left" padding="20px 0 0 20px" overflow='hidden' textOverflow='ellipsis' style={{fontSize:"22px"}} fontWeight={700}>
-                    Hello, {Recruiter.RecName}
+                    Hello, {RECRUITERNAME}
                 </Typography>
                 {/* ---- */}
                 <List>
