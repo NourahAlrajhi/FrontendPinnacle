@@ -70,7 +70,7 @@ const UploadRecruiterList = () => {
 
     const [isShown, setIsShown] = useState(false);
   
-
+const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
   
 
     const [selectedFile, setselectedFile] = useState();
@@ -176,7 +176,7 @@ const UploadRecruiterList = () => {
 
         //https://backend-pinnacle.herokuapp.com/
 
-        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Admin/UPLOADMPLOYEE', {
+        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Admin/UPLOADMPLOYEE/'+EMPLOYEEID, {
             method: 'POST',
             body: data,
             headers: {

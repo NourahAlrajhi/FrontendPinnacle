@@ -346,7 +346,7 @@ const RecruiterList = () => {
   return (
     <>
       {/* table_main_container => add custom css */}
-      <Box className="table_main_container">
+      <Box className="table_main_container" >
         {/*---bar--- */}
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>
@@ -383,8 +383,9 @@ const RecruiterList = () => {
             color: "#222",
             width: "99%", margin: "1rem auto", overflow: "auto", boxShadow: "none"
           }}
+          
         >
-          <Table aria-label="simple table" sx={{ width: "max(800px ,100%)" }}>
+          <Table aria-label="simple table" sx={{ width: "max(800px ,100%)" }} overflow= "scroll">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ border: 0 }}>
