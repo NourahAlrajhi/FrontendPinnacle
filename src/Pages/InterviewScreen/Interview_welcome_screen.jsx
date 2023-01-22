@@ -61,11 +61,12 @@ function Interview_welcome_screen() {
                         console.log(item.Candidate_Name)
 
                         setCandidateName(item.Candidate_Name)
-                        if (item.RECORDS.length > 1) {
+                        setFinisHALFhInterview(item.IsStartingTheInterview)
+                       if (item.RECORDS.length > 1) {
                             setFinishInterview(true)
                         }
 
-                        const responsee = fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
+                       /* const responsee = fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
                         })
                         const jsonn = responsee.json()
                         if (response.ok) {
@@ -80,7 +81,7 @@ function Interview_welcome_screen() {
                                 }
 
                             })
-                        }
+                        }*/
 
                     }
 
@@ -154,6 +155,18 @@ function Interview_welcome_screen() {
     let navigate = useNavigate()
 
 
+
+        const SetIsEnterToInterview = async () => {
+            //https://backend-pinnacle.herokuapp.com/
+             const response = await fetch('/api/Recruiter/SetIsEnterToInterview/' + CandidateDocID+'/'+CandidateID, {
+             })
+             const json = await response.json()
+             if (response.ok) {
+                 console.log("Enter SetIsEnterToInterviewnnnnnnnnnnnnnnnnnnnnnnnnn")
+             }
+         }
+
+
     return (
 
         <>
@@ -168,11 +181,12 @@ function Interview_welcome_screen() {
                                 <img src={PinnaclLogo} alt="#" />
                                 <p className='from_heading'>Pinnacle</p>
                             </div>
+                            
                             {/* ---inputs--- */}
                             <div className='content'>
                                 <p className='heading'> Welcome {CandidateName}!</p>
-                                {!FinishDuration && !FinishInterview ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link is Expired</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Finish The Interview</p>}
-                                {!FinishDuration && !FinishInterview ? <div className='filds'>
+                                {!FinishDuration && !FinishInterview&&!FinisHALFhInterview ? <p className='pera'>Test Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link is Expired</p> : FinishInterview? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Finish The Interview</p>:<p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Entered The interview Before and did not complete it!</p>}
+                                {!FinishDuration && !FinishInterview&&!FinisHALFhInterview ? <div className='filds'>
                                     {/* ----camra div----- */}
 
                                     <Box component="div" className='camraViewDiv'>
@@ -194,7 +208,7 @@ function Interview_welcome_screen() {
                                         <p >All Set Up</p>
                                     </Box>
                                     {/* -----//setUpLine---- */}
-                                </div> : FinishDuration ? <h2 style={{ padding: "40px", textAlign: "center" }}>See you next Time , and be carfull with your appointment!</h2> : <h2 style={{ padding: "40px", textAlign: "center" }}>Wait For your Result</h2>}
+                                </div> : FinishDuration ? <h2 style={{ padding: "40px", textAlign: "center" }}>See you next Time , and be carfull with your appointment!</h2> :FinishInterview? <h2 style={{ padding: "40px", textAlign: "center" }}>Wait For your Result</h2>:<h2 style={{ padding: "40px", textAlign: "center" }}>Please contact with our help desk team to fix your problem</h2>}
                             </div>
                             {/* ---//inputs--- */}
                         </div>
@@ -203,7 +217,7 @@ function Interview_welcome_screen() {
 
                             {/* <NavLink style={{ textDecoration: "none" }} >*/}
 
-                            {!FinishDuration && !FinishInterview ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`)}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
+                            {!FinishDuration && !FinishInterview&&!FinisHALFhInterview ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => {navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`); SetIsEnterToInterview()}}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
 
                             {/* <Common_button btnText={"Start Interview"}  />*/}
                             {/*  </NavLink>*/}

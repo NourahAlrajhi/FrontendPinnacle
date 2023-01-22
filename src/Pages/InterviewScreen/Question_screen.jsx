@@ -38,6 +38,7 @@ function Question_screen(props) {
   const [VacancyQuestion, setVacancyQuestion] = useState([{}])
   const [QUESTIONS, setQUESTIONS] = useState([{}])
   const [InterviewedCandidates, setInterviewedCandidates] = useState(0)
+  const [FinisHALFhInterview, setFinisHALFhInterview] = useState(false)
 
 
 
@@ -79,6 +80,7 @@ function Question_screen(props) {
             console.log(item.Candidate_Name)
 
             setCandidateName(item.Candidate_Name)
+            //  setFinisHALFhInterview(item.IsStartingTheInterview)
 
           }
 
@@ -236,22 +238,35 @@ function Question_screen(props) {
   /////////
 
   const handleStartRecording = async () => {
-    if (isRecording) {
-      console.log("Enterrrrrrrrrrrrrrrrrrrrrrrrrrrr ")
-      console.log(isRecording)
-      try {
-
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        setStream(stream);
-        streamRef.current = stream;
-        const recordedVideo = new MediaRecorder(stream);
-        recordedVideo.start();
-        setRecordedVideos([...recordedVideos, recordedVideo]);
-      } catch (error) {
-        console.error("Error: ", error);
-        alert("Please grant permission to use the camera and microphone");
-      }
+    console.log(isRecording)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      setStream(stream);
+      streamRef.current = stream;
+      const recordedVideo = new MediaRecorder(stream);
+      recordedVideo.start();
+      setRecordedVideos([...recordedVideos, recordedVideo]);
+    } catch (error) {
+      console.error("Error: ", error);
+      alert("Please grant permission to use the camera and microphone");
     }
+
+
+  }
+
+  // stop both mic and camera
+  function stopBothVideoAndAudio() {
+    console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+
+    console.log("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+    stream.getTracks().forEach(function (track) {
+      console.log("enter trackkkkkkkk")
+      track.stop();
+    });
+
+
+
+
 
   }
 
@@ -354,10 +369,8 @@ function Question_screen(props) {
   };
   //http://localhost:3000/Interview_welcome_screen/63c7cc4d3f84630d6c1671e0/63c7cc4e3f84630d6c1671e5/391b2464-a9ee-4bfa-abaf-7d169c144ede
   const handleSendVideos = () => {
+    handleStopRecording()
     setCloseTheTimer(true)
-    stream.getTracks().forEach(function (track) {
-      track.stop();
-    });
     console.log("Enter the handleSendVideos")
     console.log("Enter the handleSendVideos Whennnnn User Close Th siteeee")
 
@@ -373,32 +386,32 @@ function Question_screen(props) {
 
         console.log(QUESTIONS[index].id)
 
-        const formData = new FormData();
-        formData.append('CandidateInterview', videoBlob);
-        console.log("lllllllllllllllll")
-        console.log(videoBlob)
-        console.log("lllllllllllllllll")
-        //https://backend-pinnacle.herokuapp.com/
-        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
-          method: 'POST',
-          body: formData
-        })
-
-          .then(data => {
-
-            console.log(data);
-
-          })
-          .catch(error => {
-            console.error(error);
-          });
+         const formData = new FormData();
+         formData.append('CandidateInterview', videoBlob);
+         console.log("lllllllllllllllll")
+         console.log(videoBlob)
+         console.log("lllllllllllllllll")
+         //https://backend-pinnacle.herokuapp.com/
+         fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
+           method: 'POST',
+           body: formData
+         })
+ 
+           .then(data => {
+ 
+             console.log(data);
+ 
+           })
+           .catch(error => {
+             console.error(error);
+           });
       }
 
 
 
       recordedVideo.stop();
     })
-    handleIncremntNumber()
+   handleIncremntNumber()
     setRecordedVideos([]);
 
   }
@@ -418,10 +431,14 @@ function Question_screen(props) {
 
   useEffect(() => {
 
-    if (/*isRecording*/props.activeStep !== props.steps.length) {
+    if (props.activeStep !== props.steps.length) {
       console.log("111111111100000000--------")
       handleStartRecording()
+
+
     }
+
+
     // cleanup function
 
   }, [/*isRecording*/props.activeStep])
@@ -432,6 +449,7 @@ function Question_screen(props) {
       //  handleStopRecording()
       setIsRecording(false); // change the state to stop the recording
       alert('Thank you for visiting our website, your Interview has been recorded')
+
     }
   }, [props.activeStep])
 
@@ -443,13 +461,14 @@ function Question_screen(props) {
           <box component="div" className="thanksScreen">
             All Done
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+
             {/*    <box component="div" className="thanksScreen">
               <Button variant="contained" onClick={()=>stream.getTracks().forEach(function(track) {
   track.stop();
 })} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  */}
           </box>
 
-        ) : (
+        ) : /*FinisHALFhInterview ?*/
 
           <>
             <Button variant="contained" sx={{ padding: "0.5rem 2rem", marginLeft: "840px", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
@@ -507,7 +526,9 @@ function Question_screen(props) {
 
             </Box>
           </>
-        )}
+
+
+        }
       </Container>
     </>
   )
