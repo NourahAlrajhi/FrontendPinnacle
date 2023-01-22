@@ -158,7 +158,7 @@ function Interview_welcome_screen() {
 
         const SetIsEnterToInterview = async () => {
             //https://backend-pinnacle.herokuapp.com/
-             const response = await fetch('/api/Recruiter/SetIsEnterToInterview/' + CandidateDocID+'/'+CandidateID, {
+             const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SetIsEnterToInterview/' + CandidateDocID+'/'+CandidateID, {
              })
              const json = await response.json()
              if (response.ok) {
