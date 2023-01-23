@@ -64,8 +64,8 @@ const CreateJobbVacancy = () => {
     const [EmailBody, setEmailBody] = useState('');
     const { Positions, dispatch } = usePositionsContext()
     const { Recruiter } = useRecruiterContext()
-
-    const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54').toISOString());
+    const startDate = new Date();
+    const [value, setValue] = React.useState(new Date().toISOString());
     const [isShownvalue, setisShownvalue] = useState(false);
 
     const [isShown, setIsShown] = useState(false);
@@ -88,7 +88,7 @@ const CreateJobbVacancy = () => {
     const [CandidatEmails, setCandidatEmails] = useState([''])
     const [disabled, setDisabled] = useState(true);
     const [isShownCancelButton, setShownCancelButton] = useState(false);
-
+  
     const [disabled2, setdisabled2] = useState(true);
 
     const handleChange = (newValue) => {
@@ -390,6 +390,12 @@ const CreateJobbVacancy = () => {
     }
 
 
+    function disablePrevDates(startDate) {
+        const startSeconds = Date.parse(startDate);
+        return (date) => {
+          return Date.parse(date) < startSeconds;
+        }
+      }
 
 
 
@@ -979,8 +985,8 @@ const CreateJobbVacancy = () => {
                                                         inputFormat="MM/DD/YYYY"
                                                         value={value}
                                                         onChange={handleChange}
-                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} />}
-
+                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 }}error={false} />}
+                                                        shouldDisableDate={disablePrevDates(startDate)}
                                                     />
                                                     {" "}
                                                     <TimePicker

@@ -1,6 +1,6 @@
 // components
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
-import{CiLock,CiUnlock}  from "react-icons/ci";
+import { CiLock, CiUnlock } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';
 import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useQuestionContext } from '../Hook/UseQuestion'
@@ -32,7 +32,27 @@ import FormControl from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
+import { makeStyles } from '@mui/styles';
+//import {  makeStyles } from "@material-ui/styles";
 
+
+const useHelperTextStyles = makeStyles(() => ({
+	root: {
+		marginLeft: 240
+	}
+}));
+
+const useHelperTextStyles2 = makeStyles(() => ({
+	root: {
+		marginLeft: 210
+	}
+}));
+
+const useHelperTextStylesForQuestion = makeStyles(() => ({
+	root: {
+		marginLeft: 20
+	}
+}));
 // ----modal css----
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -108,8 +128,8 @@ const PositionForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [OpenEndedAnswer, setOpenEndedAnswer] = useState('');
   const [OpenEndedImportnace, setOpenEndedImportnace] = useState('');
-
-
+  const CHARACTER_LIMIT_ForName = 20;
+  const CHARACTER_LIMIT_ForNoticPeriod = 20;
 
 
   /*const triggerQuestion = (VALUE, ID) => {
@@ -187,28 +207,28 @@ const PositionForm = () => {
 
   const addInput = () => {
 
-    if(arr.length != 10){
-    console.log("Enterr addInput")
-    setIsShown(true);
+    if (arr.length != 10) {
+      console.log("Enterr addInput")
+      setIsShown(true);
 
-    setArr(s => {
-      return [
-        ...s,
-        {
-          type: "text",
-          id: v4(),
-          questions: "",
-          expectedAnswers: "",
-          imprtanceOfQ: "",
-          SelectedToBeOpenQuestion: false
-        }
-      ];
-    });
-  }
-  else{
-    alert('You Reach The Limit Of The Question')
+      setArr(s => {
+        return [
+          ...s,
+          {
+            type: "text",
+            id: v4(),
+            questions: "",
+            expectedAnswers: "",
+            imprtanceOfQ: "",
+            SelectedToBeOpenQuestion: false
+          }
+        ];
+      });
+    }
+    else {
+      alert('You Reach The Limit Of The Question')
 
-  }
+    }
   };
 
 
@@ -375,7 +395,7 @@ const PositionForm = () => {
   }
 
   const HandelOpenEndQuestion = (removeIndex) => {
-   
+
     const index = removeIndex;
     console.log(index)
 
@@ -386,7 +406,7 @@ const PositionForm = () => {
   }
 
   const HandelOpenEndQuestion2 = (removeIndex) => {
- 
+
     const index = removeIndex;
     console.log(index)
 
@@ -395,7 +415,8 @@ const PositionForm = () => {
     newFormValues[deleteTodoIndex].expectedAnswers = ""
     newFormValues[deleteTodoIndex].imprtanceOfQ = ""
   }
-
+	const helperTextStyles = useHelperTextStyles();
+  const helperTextStyles2 = useHelperTextStyles2()
   return (
     <>
       <form className="create" /*onSubmit={handleSubmit}*/>
@@ -451,6 +472,11 @@ const PositionForm = () => {
                     >
 
                       <TextField
+                      	FormHelperTextProps={{
+                          classes:{
+                            root:helperTextStyles.root
+                          }
+                      }}
                         id="outlined-required"
                         label="Position Name"
                         InputProps={{
@@ -459,6 +485,7 @@ const PositionForm = () => {
                               <ImProfile />
                             </InputAdornment>
                           ),
+
                         }}
                         onChange={(e) => {
                           setname(e.target.value);
@@ -474,6 +501,10 @@ const PositionForm = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
+                        
+                        helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
+
                       />
                     </FormControl>
                   </Grid>
@@ -603,6 +634,11 @@ const PositionForm = () => {
                     >
 
                       <TextField
+                      	FormHelperTextProps={{
+                          classes:{
+                            root:helperTextStyles2.root
+                          }
+                      }}
                         id="outlined-required"
                         label="Notic Period"
                         onChange={(e) => {
@@ -626,6 +662,8 @@ const PositionForm = () => {
                           shrink: true,
                         }}
                         style={{ width: "250px" }}
+                        inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
+                        helperText={`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`}
                       />
                     </FormControl>
                   </Grid>
@@ -639,7 +677,7 @@ const PositionForm = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography fontWeight={700}>
-                      3. Questions <p style={{fontSize:"10px",marginTop: '0px', marginLeft: '10px',}}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4"}} /></p>
+                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4" }} /></p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -719,7 +757,7 @@ const PositionForm = () => {
                                 <TextField
                                   type="text"
                                   // id="outlined-required"
-                                  disabled={!item.SelectedToBeOpenQuestion ? disabled:!disabled}
+                                  disabled={!item.SelectedToBeOpenQuestion ? disabled : !disabled}
                                   label=" Expected Answer"
                                   value={item.value}
                                   inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
@@ -741,7 +779,7 @@ const PositionForm = () => {
                                     select
                                     value={item.value}
                                     //     onChange={handleChange}
-                                    disabled={!item.SelectedToBeOpenQuestion ? disabled:!disabled}
+                                    disabled={!item.SelectedToBeOpenQuestion ? disabled : !disabled}
                                     id={i}
                                     label="importance"
                                     defaultValue="EUR"
@@ -767,7 +805,7 @@ const PositionForm = () => {
                                       removeFormFields(item.id)
                                     } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
                                     {!item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }}/>
+                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     }
                                   </Grid> : null
                               }

@@ -39,6 +39,10 @@ function Question_screen(props) {
   const [QUESTIONS, setQUESTIONS] = useState([{}])
   const [InterviewedCandidates, setInterviewedCandidates] = useState(0)
   const [FinisHALFhInterview, setFinisHALFhInterview] = useState(false)
+  const [FinishInterview, setFinishInterview] = useState(false)
+  const [isRecording, setIsRecording] = useState(true); // set the initial state to true
+  const [IsBeingRecordTheFirstEnternce, setIsBeingRecordTheFirstEnternce] = useState(true); // set the initial state to true
+let count =0;
 
 
 
@@ -81,7 +85,14 @@ function Question_screen(props) {
 
             setCandidateName(item.Candidate_Name)
             //  setFinisHALFhInterview(item.IsStartingTheInterview)
-
+            if (item.RECORDS.length > 1) {
+              setFinishInterview(true)
+              setCloseTheTimer(true)
+            }else if(count===0){
+              handleStartRecording()
+              count+=2
+              setIsBeingRecordTheFirstEnternce(false)
+            }
           }
 
 
@@ -94,7 +105,7 @@ function Question_screen(props) {
     if (!Recruiter) {
       fetchPosition()
     }
-  }, [VacancyID, CandidateDocID, CandidateID])
+  }, [VacancyID, CandidateDocID, CandidateID,isRecording])
 
 
 
@@ -168,7 +179,6 @@ function Question_screen(props) {
   const [stream, setStream] = useState(null);
   const [recordedVideos, setRecordedVideos] = useState([]);
   const streamRef = useRef(null);
-  const [isRecording, setIsRecording] = useState(true); // set the initial state to true
   //const [recordingForFullInterview, setrecordingForFullInterview] = useState(false);
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
@@ -238,6 +248,12 @@ function Question_screen(props) {
   /////////
 
   const handleStartRecording = async () => {
+    console.log("Enter220000000000222222222000000000002222222222200000000222222")
+
+    if(props.activeStep === props.steps.length){
+      handleStopRecording()
+    }else{
+
     console.log(isRecording)
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -251,7 +267,7 @@ function Question_screen(props) {
       alert("Please grant permission to use the camera and microphone");
     }
 
-
+  }
   }
 
   // stop both mic and camera
@@ -331,8 +347,11 @@ function Question_screen(props) {
 
 
   const handleStopRecording = () => {
+    console.log("Enter11100000000001111110000000000011111110000000011111")
     if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current.getTracks().forEach(track => {
+        console.log(track)
+        track.stop()});
       setStream(null);
     }
 
@@ -386,32 +405,32 @@ function Question_screen(props) {
 
         console.log(QUESTIONS[index].id)
 
-         const formData = new FormData();
-         formData.append('CandidateInterview', videoBlob);
-         console.log("lllllllllllllllll")
-         console.log(videoBlob)
-         console.log("lllllllllllllllll")
-         //https://backend-pinnacle.herokuapp.com/
-         fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
-           method: 'POST',
-           body: formData
-         })
- 
-           .then(data => {
- 
-             console.log(data);
- 
-           })
-           .catch(error => {
-             console.error(error);
-           });
+        const formData = new FormData();
+        formData.append('CandidateInterview', videoBlob);
+        console.log("lllllllllllllllll")
+        console.log(videoBlob)
+        console.log("lllllllllllllllll")
+        //https://backend-pinnacle.herokuapp.com/
+        fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/InterviewVideo/' + CandidateDocID + '/' + CandidateID + '/' + QUESTIONS[index].id + '/' + VacancyID + '/' + InterviewedCandidates, {
+          method: 'POST',
+          body: formData
+        })
+
+          .then(data => {
+
+            console.log(data);
+
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
 
 
 
       recordedVideo.stop();
     })
-   handleIncremntNumber()
+    handleIncremntNumber()
     setRecordedVideos([]);
 
   }
@@ -429,9 +448,9 @@ function Question_screen(props) {
     }
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
 
-    if (props.activeStep !== props.steps.length) {
+    if (!FinishInterview) {
       console.log("111111111100000000--------")
       handleStartRecording()
 
@@ -441,7 +460,7 @@ function Question_screen(props) {
 
     // cleanup function
 
-  }, [/*isRecording*/props.activeStep])
+  }, [/*isRecording*///props.activeStep])
 
 
   useEffect(() => {
@@ -468,7 +487,7 @@ function Question_screen(props) {
 })} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  */}
           </box>
 
-        ) : /*FinisHALFhInterview ?*/
+        ) : !FinishInterview ?
 
           <>
             <Button variant="contained" sx={{ padding: "0.5rem 2rem", marginLeft: "840px", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
@@ -526,7 +545,17 @@ function Question_screen(props) {
 
             </Box>
           </>
+          :
+          
+          <box component="div" className="thanksScreen">
+            You Finish The Interview
+            Thank You For Your Time, {CandidateName}!
 
+            {/*    <box component="div" className="thanksScreen">
+  <Button variant="contained" onClick={()=>stream.getTracks().forEach(function(track) {
+track.stop();
+})} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  */}
+          </box>
 
         }
       </Container>

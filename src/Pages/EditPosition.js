@@ -31,6 +31,30 @@ import { useParams } from "react-router-dom";
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import FormControl from "@mui/material/FormControl";
 
+
+
+import { makeStyles } from '@mui/styles';
+//import {  makeStyles } from "@material-ui/styles";
+
+
+const useHelperTextStyles = makeStyles(() => ({
+	root: {
+		marginLeft: 240
+	}
+}));
+
+const useHelperTextStyles2 = makeStyles(() => ({
+	root: {
+		marginLeft: 210
+	}
+}));
+
+const useHelperTextStylesForQuestion = makeStyles(() => ({
+	root: {
+		marginLeft: 20
+	}
+}));
+
 const inputArr = [
   {
     type: "text",
@@ -77,6 +101,8 @@ const EditPosition = () => {
   const [ExpectedSalary, setExpectedSalary] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+  const CHARACTER_LIMIT_ForName = 120;
+  const CHARACTER_LIMIT_ForNoticPeriod = 120;
 
 
   const capitalizeWords = (str) => {
@@ -322,7 +348,8 @@ const EditPosition = () => {
     newFormValues[deleteTodoIndex].expectedAnswers = ""
     newFormValues[deleteTodoIndex].imprtanceOfQ = ""
   }
-
+	const helperTextStyles = useHelperTextStyles();
+  const helperTextStyles2 = useHelperTextStyles2()
   return (
     <>
       <form className="create" /*onSubmit={handleSubmit}*/>
@@ -363,6 +390,11 @@ const EditPosition = () => {
                     >
 
                       <TextField
+                       	FormHelperTextProps={{
+                          classes:{
+                            root:helperTextStyles.root
+                          }
+                      }}
                         id="outlined-required"
                         label="Position Name"
                         InputProps={{
@@ -383,6 +415,9 @@ const EditPosition = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
+                        
+                        helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
                       />
                     </FormControl>
                   </Grid>
@@ -504,6 +539,11 @@ const EditPosition = () => {
                     >
 
                       <TextField
+                      	FormHelperTextProps={{
+                          classes:{
+                            root:helperTextStyles2.root
+                          }
+                      }}
                         id="outlined-required"
                         label="Notic Period"
                         onChange={(e) => setnoticePeriod(e.target.value)}
@@ -523,6 +563,9 @@ const EditPosition = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
+
+                        helperText={`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`}
 
                       />
                     </FormControl>
