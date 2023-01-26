@@ -184,6 +184,15 @@ function Question_interview(props) {
     setSkipped(newSkipped);
 
     setquestionHeading(steps[activeStep + 1])
+
+    localStorage.removeItem('recordedVideos')
+    localStorage.removeItem('activeStep')
+    localStorage.removeItem('skipped')
+    localStorage.removeItem('questionHeading')
+
+   // localStorage.setItem("name", event.target.value );
+
+
   };
 
   const handleBack = () => {

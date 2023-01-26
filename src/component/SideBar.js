@@ -119,18 +119,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const Sidebar = ({ children }) => {
- 
+
 
     const { Recruiter } = useRecruiterContext()
-    let RECRUITERNAME=`${Recruiter.RecName}`
-   let  index = RECRUITERNAME.indexOf(' '); 
-   if(index<=0){
-    RECRUITERNAME=RECRUITERNAME
-   
-   }else{
-    RECRUITERNAME=RECRUITERNAME.substring(0,index)
-   }
- 
+    let RECRUITERNAME = `${Recruiter.RecName}`
+    let index = RECRUITERNAME.indexOf(' ');
+    if (index <= 0) {
+        RECRUITERNAME = RECRUITERNAME
+
+    } else {
+        RECRUITERNAME = RECRUITERNAME.substring(0, index)
+    }
+
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => { setOpen(true); };
@@ -194,7 +194,7 @@ const Sidebar = ({ children }) => {
                             alt={"header_img"}
                             loading="lazy"
                         />
-                        <Typography  style={{ margin: "1px" ,fontSize:"22px"}} fontWeight={700}>
+                        <Typography style={{ margin: "1px", fontSize: "22px" }} fontWeight={700}>
                             Pinnacle
                         </Typography>
                     </Box>
@@ -202,20 +202,20 @@ const Sidebar = ({ children }) => {
                 </DrawerHeader>
                 <Divider />
                 {/* ---name--- */}
-                <Typography textAlign="left" padding="20px 0 0 20px" overflow='hidden' textOverflow='ellipsis' style={{fontSize:"22px"}} fontWeight={700}>
+                <Typography textAlign="left" padding="20px 0 0 20px" overflow='hidden' textOverflow='ellipsis' style={{ fontSize: "22px" }} fontWeight={700}>
                     Hello, {RECRUITERNAME}
                 </Typography>
                 {/* ---- */}
                 <List>
                     {[{ name: 'Dashboard', urlLink: "/home" }, { name: 'Job Vacancies', subManu: subManu, subManuFun: subManuFun }, { name: 'Positions', urlLink: "/PositionList" }].map((text, index) => (
-                        <ListItem key={index} sx={{ display: 'block', overflow: "hidden" ,fontSize:"22px",fontWeight:"700"}} onClick={() => navigate(text.urlLink)} onMouseEnter={text.subManuFun} onMouseLeave={subManuFunHide} >
+                        <ListItem key={index} sx={{ display: 'block', overflow: "hidden", fontSize: "22px", fontWeight: "700" }} onClick={() => navigate(text.urlLink)} onMouseEnter={text.subManuFun} onMouseLeave={subManuFunHide} >
                             <ListItemButton
                                 sx={{
                                     minHeight: 38,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 1.5,
                                 }}
-                              
+
                             >
                                 <ListItemIcon
                                     sx={{
@@ -236,7 +236,7 @@ const Sidebar = ({ children }) => {
                 </List>
                 {open ? <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F" }} startIcon={<AddIcon />} onClick={() => navigate("/CreateJobbVacancy")}>New Job Vacancy</Button> : <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F", width: "50px", minWidth: "auto" }} startIcon={<AddIcon />}></Button>}
                 {/* --demo button for show interview screen-- */}
-               {/* <Button variant="contained" sx={{ margin: " 20px 10px", backgroundColor: "gray" }} onClick={() => navigate("/Interview_welcome_screen")}>Interview screen</Button>*/}
+                {/* <Button variant="contained" sx={{ margin: " 20px 10px", backgroundColor: "gray" }} onClick={() => navigate("/Interview_welcome_screen")}>Interview screen</Button>*/}
 
             </Drawer>
             {/* ---------//Sidebar------- */}

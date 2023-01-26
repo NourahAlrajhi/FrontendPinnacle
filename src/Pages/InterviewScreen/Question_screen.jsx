@@ -42,16 +42,18 @@ function Question_screen(props) {
   const [FinishInterview, setFinishInterview] = useState(false)
   const [isRecording, setIsRecording] = useState(true); // set the initial state to true
   const [IsBeingRecordTheFirstEnternce, setIsBeingRecordTheFirstEnternce] = useState(true); // set the initial state to true
-let count =0;
+  const [EnterIncremntOnce, setEnterIncremntOnce] = useState(true); // set the initial state to true
+
+  let count = 0;
 
 
 
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser)
-    window.addEventListener('unload', handleTabClosing)
+    //window.addEventListener('unload', handleTabClosing)
     return () => {
       window.removeEventListener('beforeunload', alertUser)
-      window.removeEventListener('unload', handleTabClosing)
+      // window.removeEventListener('unload', handleTabClosing)
       // handleTabClosing()
     }
   }, [])
@@ -82,15 +84,15 @@ let count =0;
           if (item.id == CandidateID) {
             console.log("enetr the condition of welcome page retriveing")
             console.log(item.Candidate_Name)
-
+            // setFinisHALFhInterview(item.IsStartingTheInterview)
             setCandidateName(item.Candidate_Name)
             //  setFinisHALFhInterview(item.IsStartingTheInterview)
             if (item.RECORDS.length > 1) {
               setFinishInterview(true)
               setCloseTheTimer(true)
-            }else if(count===0){
+            } else if (count === 0) {
               handleStartRecording()
-              count+=2
+              count += 2
               setIsBeingRecordTheFirstEnternce(false)
             }
           }
@@ -105,7 +107,7 @@ let count =0;
     if (!Recruiter) {
       fetchPosition()
     }
-  }, [VacancyID, CandidateDocID, CandidateID,isRecording])
+  }, [VacancyID, CandidateDocID, CandidateID, isRecording])
 
 
 
@@ -183,7 +185,7 @@ let count =0;
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
   const [seconds, setSeconds] = useState(10)
-  const [minutes, setMinutes] = useState(0)
+  const [minutes, setMinutes] = useState(55)
   const [CloseTheTimer, setCloseTheTimer] = useState(false);
 
   const mediaRecorderRef = useRef(null);
@@ -250,24 +252,26 @@ let count =0;
   const handleStartRecording = async () => {
     console.log("Enter220000000000222222222000000000002222222222200000000222222")
 
-    if(props.activeStep === props.steps.length){
+    if (props.activeStep === props.steps.length) {
       handleStopRecording()
-    }else{
+    } else {
 
-    console.log(isRecording)
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      setStream(stream);
-      streamRef.current = stream;
-      const recordedVideo = new MediaRecorder(stream);
-      recordedVideo.start();
-      setRecordedVideos([...recordedVideos, recordedVideo]);
-    } catch (error) {
-      console.error("Error: ", error);
-      alert("Please grant permission to use the camera and microphone");
+      console.log(isRecording)
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        setStream(stream);
+        streamRef.current = stream;
+        const recordedVideo = new MediaRecorder(stream);
+        recordedVideo.start();
+        setRecordedVideos([...recordedVideos, recordedVideo]);
+        //localStorage.setItem("recordedVideos", [...recordedVideos, recordedVideo] );
+
+      } catch (error) {
+        console.error("Error: ", error);
+        alert("Please grant permission to use the camera and microphone");
+      }
+
     }
-
-  }
   }
 
   // stop both mic and camera
@@ -351,7 +355,8 @@ let count =0;
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => {
         console.log(track)
-        track.stop()});
+        track.stop()
+      });
       setStream(null);
     }
 
@@ -430,13 +435,18 @@ let count =0;
 
       recordedVideo.stop();
     })
+
+
     handleIncremntNumber()
+
+
     setRecordedVideos([]);
 
   }
 
 
   const handleIncremntNumber = async (e) => {
+
     console.log("Enter beginingggggg handleIncremntNumber")
     //https://backend-pinnacle.herokuapp.com/
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/IncremntInterviewdCandidate/' + CandidateDocID + '/' + CandidateID + '/' + VacancyID + '/' + InterviewedCandidates, {
@@ -446,6 +456,8 @@ let count =0;
     if (response.ok) {
       console.log("Increment Sucessfully!!!!")
     }
+
+
   }
 
   /*useEffect(() => {
@@ -475,7 +487,7 @@ let count =0;
   return (
     <>
 
-      <Container maxWidth="lg" sx={{ overflow: "auto", marginTop: "1px" }}>
+      <Container maxWidth="lg" sx={{ overflow: "auto", marginTop: "0px" }}>
         {props.activeStep === props.steps.length ? (
           <box component="div" className="thanksScreen">
             All Done
@@ -490,7 +502,7 @@ let count =0;
         ) : !FinishInterview ?
 
           <>
-            <Button variant="contained" sx={{ padding: "0.5rem 2rem", marginLeft: "840px", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
+            <Button variant="contained" sx={{ padding: "0.5rem 2rem", marginLeft: "860px", position: "absolute", top: "20px", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}><p>
               timer: {minutes}:{seconds}
             </p></Button>
             <p className="question_heading" sx={{ overflow: "auto", marginTop: "1px" }}>{props.questionHeading}</p>
@@ -546,7 +558,7 @@ let count =0;
             </Box>
           </>
           :
-          
+
           <box component="div" className="thanksScreen">
             You Finish The Interview
             Thank You For Your Time, {CandidateName}!
