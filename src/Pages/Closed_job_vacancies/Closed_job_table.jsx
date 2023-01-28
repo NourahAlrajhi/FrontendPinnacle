@@ -278,13 +278,9 @@ export default function Closed_job_table() {
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                     }}>
-                      <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >YEAR</Button>
+                      <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >MONTH</Button>
                     </Box>
-                    {/* upDownBtns => add custom css */}
-                    <Box className='upDownBtns'>
-                      <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropUpIcon /></Button>
-                      <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropDownIcon /></Button>
-                    </Box>
+                
                   </Box>
 
 
@@ -302,13 +298,18 @@ export default function Closed_job_table() {
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                     }}>
-                      <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >MONTH</Button>
+                      <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }} >YEAR</Button>
                     </Box>
-                
+                    {/* upDownBtns => add custom css */}
+                    <Box className='upDownBtns'>
+                      <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropUpIcon /></Button>
+                      <Button variant="contained" sx={{ background: "transparent", color: "#222", boxShadow: "none", height: "5px", width: "5px", minWidth: "auto", "&:hover": { background: "transparent", color: "#222", boxShadow: "none" } }} onClick={() => sortByYear("year")}><ArrowDropDownIcon /></Button>
+                    </Box>
                   </Box>
 
 
                 </TableCell>
+             
                 <TableCell sx={{ border: 0,paddingLeft: "4%" }}>
                   <Option_common_button />
                 </TableCell>
@@ -336,11 +337,12 @@ export default function Closed_job_table() {
                       {row.CandidateList}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
-                    </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       { (new Date(row.createdAt).getMonth() + 1)}
                     </TableCell>
+                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
+                    </TableCell>
+                  
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>
@@ -371,11 +373,12 @@ export default function Closed_job_table() {
                     {row.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                    {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
-                  </TableCell>
-                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       { (new Date(row.createdAt).getMonth() + 1)}
                     </TableCell>
+                  <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                    {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
+                  </TableCell>
+                 
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                     <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
@@ -403,11 +406,12 @@ export default function Closed_job_table() {
                       {row.CandidateList}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" +*/ (new Date(row.createdAt).getFullYear())}
-                    </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       { (new Date(row.createdAt).getMonth() + 1)}
                     </TableCell>
+                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
+                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" +*/ (new Date(row.createdAt).getFullYear())}
+                    </TableCell>
+                  
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
                       <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>

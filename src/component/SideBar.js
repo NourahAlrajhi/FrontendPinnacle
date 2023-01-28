@@ -117,6 +117,24 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+const StyledList = styled(List)({
+    // selected and (selected + hover) states
+    '&& .Mui-selected, && .Mui-selected:hover': {
+        backgroundColor: ' rgb(233, 231, 231);',
+        '&, & .MuiListItemIcon-root': {
+            color: 'black',
+            border: '6px'
+        },
+    },
+    // hover states
+    '& .MuiListItemButton-root:hover': {
+        backgroundColor: ' rgb(233, 231, 231)',
+        '&, & .MuiListItemIcon-root': {
+            color: 'black',
+            border: ' 6px'
+        },
+    },
+});
 
 const Sidebar = ({ children }) => {
 
@@ -135,6 +153,11 @@ const Sidebar = ({ children }) => {
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => { setOpen(true); };
     const handleDrawerClose = () => { setOpen(false); };
+
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const handleListItemClick = (index: number) => {
+        setSelectedIndex(index);
+    };
     // --small screen in bydefault sidebar off--
     const windowWidth = window.innerWidth;
     React.useEffect(() => {
@@ -147,7 +170,7 @@ const Sidebar = ({ children }) => {
     // ---
     let navigate = useNavigate()
     // ----sidebar submenu hide show---
-    const [submenuopen, setsubmenuclose] = React.useState("submenuClose");
+    const [submenuopen, setsubmenuclose] = React.useState("submenuShow");
     const subManuFun = () => {
         if (submenuopen == "submenuClose") {
             setsubmenuclose("submenuShow")
@@ -155,7 +178,7 @@ const Sidebar = ({ children }) => {
     }
     const subManuFunHide = () => {
         if (submenuopen == "submenuShow") {
-            setsubmenuclose("submenuClose")
+            setsubmenuclose("submenuShow")
         }
     }
 
@@ -206,8 +229,8 @@ const Sidebar = ({ children }) => {
                     Hello, {RECRUITERNAME}
                 </Typography>
                 {/* ---- */}
-                <List>
-                    {[{ name: 'Dashboard', urlLink: "/home" }, { name: 'Job Vacancies', subManu: subManu, subManuFun: subManuFun }, { name: 'Positions', urlLink: "/PositionList" }].map((text, index) => (
+                <StyledList>
+                    {[/*{ name: 'Dashboard', urlLink: "/home" },*/ { name: 'Job Vacancies', subManu: subManu, subManuFun: subManuFun }, { name: 'Positions', urlLink: "/PositionList" }].map((text, index) => (
                         <ListItem key={index} sx={{ display: 'block', overflow: "hidden", fontSize: "22px", fontWeight: "700" }} onClick={() => navigate(text.urlLink)} onMouseEnter={text.subManuFun} onMouseLeave={subManuFunHide} >
                             <ListItemButton
                                 sx={{
@@ -215,25 +238,28 @@ const Sidebar = ({ children }) => {
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 1.5,
                                 }}
+                                selected={index === 0 ? selectedIndex === 0 : selectedIndex === 1}
+                                onClick={() => handleListItemClick(index === 0 ? 0 : 1)}
 
                             >
                                 <ListItemIcon
                                     sx={{
                                         minWidth: 0,
-                                        mr: open ? 0.5 : 'auto',
+                                        mr: open ? 0.9 : 'auto',
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index === 0 ? <ImHome /> : index === 1 ? <HiOutlineUserGroup /> : <ImProfile />}
+                                    {index === 0 ? <HiOutlineUserGroup /> : <ImProfile />}
                                 </ListItemIcon>
                                 <ListItemText primary={text.name} sx={{ opacity: open ? 5 : 0 }} />
                             </ListItemButton>
-                            <Box onMouseEnter={subManuFun} className={submenuopen}  >
+                            
+                            <Box onMouseEnter={subManuFun} className={submenuopen} sx={{ marginLeft: "20px" }} >
                                 {text.subManu}
                             </Box>
                         </ListItem>
                     ))}
-                </List>
+                </StyledList>
                 {open ? <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F" }} startIcon={<AddIcon />} onClick={() => navigate("/CreateJobbVacancy")}>New Job Vacancy</Button> : <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F", width: "50px", minWidth: "auto" }} startIcon={<AddIcon />}></Button>}
                 {/* --demo button for show interview screen-- */}
                 {/* <Button variant="contained" sx={{ margin: " 20px 10px", backgroundColor: "gray" }} onClick={() => navigate("/Interview_welcome_screen")}>Interview screen</Button>*/}

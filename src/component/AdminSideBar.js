@@ -119,6 +119,25 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 
+const StyledList = styled(List)({
+    // selected and (selected + hover) states
+    '&& .Mui-selected, && .Mui-selected:hover': {
+        backgroundColor: 'rgb(233, 231, 231)',
+        '&, & .MuiListItemIcon-root': {
+            color: 'black',
+            border: '6px'
+        },
+    },
+    // hover states
+    '& .MuiListItemButton-root:hover': {
+        backgroundColor: 'rgb(233, 231, 231)',
+        '&, & .MuiListItemIcon-root': {
+            color: 'black',
+            border: ' 6px'
+        },
+    },
+});
+
 const AdminSideBar = ({ children }) => {
    // const { Recruiter } = useRecruiterContext()
     const { Admin } = useAdminContext()
@@ -126,6 +145,11 @@ const AdminSideBar = ({ children }) => {
     const [open, setOpen] = React.useState(true);
     const handleDrawerOpen = () => { setOpen(true); };
     const handleDrawerClose = () => { setOpen(false); };
+
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const handleListItemClick = (index: number) => {
+        setSelectedIndex(index);
+    };
     // --small screen in bydefault sidebar off--
     const windowWidth = window.innerWidth;
     React.useEffect(() => {
@@ -198,7 +222,7 @@ const AdminSideBar = ({ children }) => {
                 </Typography>
                 {/* ---- */}
                 <List>
-                    {[{ name: 'Dashboard', urlLink: "/AdminHome" }, { name: 'Recruiters',urlLink: "/RecruiterList" }, { name: 'Upload Recruiters', urlLink: "/UploadRecruiter" }].map((text, index) => (
+                    {[/*{ name: 'Dashboard', urlLink: "/AdminHome" },*/ { name: 'Recruiters',urlLink: "/RecruiterList" }, { name: 'Upload Recruiters', urlLink: "/UploadRecruiter" }].map((text, index) => (
                         <ListItem key={index} sx={{ display: 'block', overflow: "hidden" ,fontSize:"22px",fontWeight:"700"}} onClick={() => navigate(text.urlLink)}  >
                             <ListItemButton
                                 sx={{
@@ -206,7 +230,8 @@ const AdminSideBar = ({ children }) => {
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 1.5,
                                 }}
-                              
+                                selected={index === 0 ? selectedIndex === 0 : selectedIndex === 1}
+                                onClick={() => handleListItemClick(index === 0 ? 0 : 1)}
                             >
                                 <ListItemIcon
                                     sx={{
@@ -215,7 +240,7 @@ const AdminSideBar = ({ children }) => {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index === 0 ? <ImHome /> : index === 1 ? <HiOutlineUserGroup /> : <ImProfile />}
+                                    {index === 0 ? <HiOutlineUserGroup />  : <ImProfile />}
                                 </ListItemIcon>
                                 <ListItemText primary={text.name} sx={{ opacity: open ? 5 : 0 }} />
                             </ListItemButton>

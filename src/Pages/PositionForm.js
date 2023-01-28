@@ -128,7 +128,7 @@ const PositionForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [OpenEndedAnswer, setOpenEndedAnswer] = useState('');
   const [OpenEndedImportnace, setOpenEndedImportnace] = useState('');
-  const CHARACTER_LIMIT_ForName = 20;
+  const CHARACTER_LIMIT_ForName = 30;
   const CHARACTER_LIMIT_ForNoticPeriod = 20;
 
 
