@@ -466,9 +466,9 @@ function Question_screen(props) {
     const json = await response.json()
     if (response.ok) {
       console.log("Increment Sucessfully!!!!")
-      
+
     }
-   // CallingTheModel()
+    // CallingTheModel()
 
   }
 
@@ -485,15 +485,16 @@ function Question_screen(props) {
     const json = await response.json()
     if (response.ok) {
       console.log("Enter welcome page retriveing")
-      json.Candidate_Info && json.Candidate_Info.map(async(item, i) => {
+      json.Candidate_Info && json.Candidate_Info.map(async (item, i) => {
         console.log(`${item.id}`)
 
         if (item.id == CandidateID) {
           console.log(item.RECORDS)
 
-          
+
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS }
-          const response = await fetch('/api/Recruiter/SendingDataToModel', {
+          //https://backend-pinnacle.herokuapp.com/
+          const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(MODEL)
@@ -506,7 +507,7 @@ function Question_screen(props) {
 
         }
       })
-    //  CallingTheModel()
+      //  CallingTheModel()
 
 
     }
@@ -515,59 +516,60 @@ function Question_screen(props) {
 
   const CallingTheModel = async (e) => {
     setCLICKSENDTOMODEL(true)
-    console.log("Enter beginingggggg CallingTheModel")
-    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
-    })
-    const json = await response.json()
-    if (response.ok) {
-      json.Position && json.Position.map((item, i) => {
-        var j = 0
-        item.arr && item.arr.map((itemmmms, x) => {
-          console.log(`${itemmmms.questions}`)
-          steps[j] = itemmmms.expectedAnswers
-          stepsForImportance[j] = itemmmms.imprtanceOfQ
-          setstepsForQuestionId[j]=itemmmms.id
-          j = x + 1
-        })
-        console.log("[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]")
-        console.log(steps)
-        console.log("[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]")
-        setsteps(steps)
-        setstepsForImportance(stepsForImportance)
-        console.log("[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]")
-        console.log(stepsForImportance)
-        console.log("[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]")
+    setTimeout(async () => {
+      console.log("Enter beginingggggg CallingTheModel")
+      const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
       })
+      const json = await response.json()
+      if (response.ok) {
+        json.Position && json.Position.map((item, i) => {
+          var j = 0
+          item.arr && item.arr.map((itemmmms, x) => {
+            console.log(`${itemmmms.questions}`)
+            steps[j] = itemmmms.expectedAnswers
+            stepsForImportance[j] = itemmmms.imprtanceOfQ
+            setstepsForQuestionId[j] = itemmmms.id
+            j = x + 1
+          })
+          console.log("[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]")
+          console.log(steps)
+          console.log("[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]")
+          setsteps(steps)
+          setstepsForImportance(stepsForImportance)
+          console.log("[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]")
+          console.log(stepsForImportance)
+          console.log("[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]")
+        })
 
-      RecrodsArrayForTheModel()
+        RecrodsArrayForTheModel()
 
-    }
-
+      }
+    }, 40000)
   }
 
   const PassingToTheModel = async (e) => {
     //https://backend-pinnacle.herokuapp.com/
 
 
-          const MODEL = { steps, stepsForImportance, RECORDLISTTT: RECORDLIST,stepsForQuestionId }
-          const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(MODEL)
-          })
-          const json = await response.json()
-          if (response.ok) {
-            console.log("Sent To The Model sucssfully")
-          }
-
-        
-      
-
-
-
+    const MODEL = { steps, stepsForImportance, RECORDLISTTT: RECORDLIST, stepsForQuestionId }
+    const response = await fetch('/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(MODEL)
+    })
+    const json = await response.json()
+    if (response.ok) {
+      console.log("Sent To The Model sucssfully")
     }
 
-  
+
+
+
+
+
+  }
+
+
   /*useEffect(() => {
 
     if (!FinishInterview) {
@@ -601,8 +603,8 @@ function Question_screen(props) {
             All Done
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
 
-           <box component="div" className="thanksScreen">
-              <Button variant="contained" onClick={CallingTheModel} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}>{"Click Here To Finish The Interview"}</Button>     </box>  
+            <box component="div" className="thanksScreen">
+              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box>
           </box>
 
         ) : !FinishInterview ?
@@ -670,7 +672,7 @@ function Question_screen(props) {
             Thank You For Your Time, {CandidateName}!
             {/* <box component="div" className="thanksScreen">
               <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}  >{"Click Here To Finish The Interview"}</Button>     </box>   */}
-          
+
           </box>
 
         }
