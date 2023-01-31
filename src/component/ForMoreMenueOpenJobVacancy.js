@@ -4,6 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Link, useNavigate } from 'react-router-dom';
+
 import { AiOutlinePlus, AiOutlineSearch } from "react-icons/ai";
 import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"
@@ -13,18 +14,18 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import parse from 'html-react-parser';
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useVacancyContext } from "../Hook/UseVacancy"
 
 const options = [
-    'View',
-    'Edit',
     'Delete',
 ]
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu({ Position }) {
+export default function ForMoreMenueOpenJobVacancy({ Vacancyy , VacancyyName}) {
     const { Recruiter } = useRecruiterContext()
     const { Positions, dispatch } = usePositionsContext()
+    const { Vacancy, dispatchhh } = useVacancyContext()
 
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -33,24 +34,19 @@ export default function LongMenu({ Position }) {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = (e) => {
-        if (e === "View") {
-            navigate(`/PositionDetails2/${Position}`);
-        }
-        else if (e === "Edit") {
-            navigate(`/EditPosition/${Position}`);
-        }else if(e=="Delete"){
+      if(e=="Delete"){
           
-                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this position?</h3>')
+                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Unsend Job Vacancy?</h3>')
                 confirmAlert({
                     message: msg,
                     buttons: [
                         {
                             label: 'Yes',
-                            onClick: () => handleClick22(Position)
+                            onClick: () => handleClick22(Vacancyy)
                         },
                         {
                             label: 'No',
-                            onClick: () => navigate("/PositionList")
+                            onClick: () => navigate("/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main")
                         }
         
                     ]
@@ -70,7 +66,7 @@ export default function LongMenu({ Position }) {
         if (!Recruiter) {
             return
         }
-        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + DeletdId, {
+        const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Candidate/' + DeletdId, {
             method: 'DELETE',
 
             headers: { 'Authorization': `Bearer ${Recruiter.token}` },
@@ -78,8 +74,8 @@ export default function LongMenu({ Position }) {
         })
         const json = await response.json()
         if (response.ok) {
-            dispatch({ type: 'DELETE_Position', payload: json })
-            navigate('/PositionList');
+            dispatchhh({ type: 'DELETE_Vacancy', payload: json })
+            navigate('/Dashboard/View_job_vacancy_main');
         }
     }
 

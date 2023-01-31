@@ -18,6 +18,7 @@ import InputBase from "@mui/material/InputBase";
 import { usePositionsContext } from "../../Hook/usePositionsContext"
 import { useRecruiterContext } from "../../Hook/UseRecruiterContext"
 import { useVacancyContext } from "../../Hook/UseVacancy"
+import ForMoreMenueOpenJobVacancy from "../../component/ForMoreMenueOpenJobVacancy"
 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -205,7 +206,7 @@ useEffect(() => {
                 <TableCell sx={{ border: 0 }}>
                   <Common_table_button btnText={"ALL CANDIDATES"} />
                 </TableCell>
-                <TableCell sx={{ border: 0 }}>
+                <TableCell sx={{ border: 0,paddingLeft: "6%" }}>
                   <Option_common_button />
                 </TableCell>
               </TableRow>
@@ -234,7 +235,7 @@ useEffect(() => {
                       {row.fat}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "9%", border: 0 }}>
-                      {row.protein}
+                    <ForMoreMenueOpenJobVacancy Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>
                   </TableRow>
                 )
@@ -261,7 +262,7 @@ useEffect(() => {
                     --
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "9%", border: 0 }}>
-                    --
+                    <ForMoreMenueOpenJobVacancy Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>
                   </TableRow>
                 ))}

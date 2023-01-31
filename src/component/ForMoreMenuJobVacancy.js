@@ -41,7 +41,7 @@ export default function LongMenu2({ Vacancyy , VacancyyName}) {
         
         }else if(e=="Delete"){
           
-                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delet this Job Vacancy?</h3>')
+                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Job Vacancy?</h3>')
                 confirmAlert({
                     message: msg,
                     buttons: [
