@@ -245,7 +245,7 @@ export default function StickyHeadTable() {
                       <TableCell component="th" scope="row">
                         {capitalizeWords(item.name)}
                       </TableCell>
-                      <TableCell align="right">Last Date : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+ 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
+                      <TableCell align="right"sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+ 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
                       <TableCell align="right">
                         {/* ---popover button---- */}
                         <LongMenu Position={item._id} />
@@ -266,7 +266,7 @@ export default function StickyHeadTable() {
                     <TableCell component="th" scope="row">
                       {capitalizeWords(item.name)}
                     </TableCell>
-                    <TableCell align="right" sx={{ color: "gray" }}>Last edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
+                    <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
                     <TableCell align="right">
                       {/* ---popover button---- */}
                       <LongMenu Position={item._id} />
