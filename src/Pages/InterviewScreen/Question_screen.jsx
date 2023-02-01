@@ -192,8 +192,8 @@ function Question_screen(props) {
   //const [recordingForFullInterview, setrecordingForFullInterview] = useState(false);
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
-  const [seconds, setSeconds] = useState(10)
-  const [minutes, setMinutes] = useState(55)
+  const [seconds, setSeconds] = useState(20)
+  const [minutes, setMinutes] = useState(8)
   const [CloseTheTimer, setCloseTheTimer] = useState(false);
 
   const mediaRecorderRef = useRef(null);
@@ -240,8 +240,8 @@ function Question_screen(props) {
   function updateTimeWhenClickNext() {
 
     //reset
-    setSeconds(10);
-    setMinutes(0);
+    setSeconds(20);
+    setMinutes(8);
 
 
   }
@@ -385,8 +385,8 @@ function Question_screen(props) {
         handleCutAndStartOver();
       /* handleCutAndStartOver()*/
     }
-    setSeconds(10);
-    setMinutes(0);
+    setSeconds(20);
+    setMinutes(8);
     //  handleStopRecording();
     //  handleStartRecording();
 
@@ -552,7 +552,7 @@ function Question_screen(props) {
 
 
     const MODEL = { steps, stepsForImportance, RECORDLISTTT: RECORDLIST, stepsForQuestionId }
-    const response = await fetch('/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(MODEL)
