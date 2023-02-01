@@ -478,7 +478,7 @@ function Question_screen(props) {
   // },30000)
 
   const RecrodsArrayForTheModel = async (e) => {
-
+//https://backend-pinnacle.herokuapp.com/
     setCLICKSENDTOMODEL(true)
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
     })
@@ -492,7 +492,7 @@ function Question_screen(props) {
           console.log(item.RECORDS)
 
 
-          const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS }
+          const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS , stepsForQuestionId}
           //https://backend-pinnacle.herokuapp.com/
           const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
             method: 'POST',
@@ -528,7 +528,7 @@ function Question_screen(props) {
             console.log(`${itemmmms.questions}`)
             steps[j] = itemmmms.expectedAnswers
             stepsForImportance[j] = itemmmms.imprtanceOfQ
-            setstepsForQuestionId[j] = itemmmms.id
+            stepsForQuestionId[j] = itemmmms.id
             j = x + 1
           })
           console.log("[FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF]")
