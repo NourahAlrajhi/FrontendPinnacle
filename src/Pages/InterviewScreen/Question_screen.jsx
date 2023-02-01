@@ -29,7 +29,7 @@ function Question_screen(props) {
 
 
   const navigate = useNavigate();
-
+  const cors = require('cors'); 
   const { VacancyID } = useParams();
   const { CandidateDocID } = useParams();
   const { CandidateID } = useParams();
@@ -494,9 +494,10 @@ function Question_screen(props) {
 
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS , stepsForQuestionId}
           //https://backend-pinnacle.herokuapp.com/
-          const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
+          const response = await fetch('/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' ,'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Methods':'POST,PATCH,OPTIONS'},
             body: JSON.stringify(MODEL)
           })
           const json = await response.json()
