@@ -29,7 +29,7 @@ function Question_screen(props) {
 
 
   const navigate = useNavigate();
-  const cors = require('cors'); 
+  //const cors = require('cors'); 
   const { VacancyID } = useParams();
   const { CandidateDocID } = useParams();
   const { CandidateID } = useParams();
