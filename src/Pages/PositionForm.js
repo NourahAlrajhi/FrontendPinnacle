@@ -219,10 +219,10 @@ const PositionForm = () => {
 
   const handleChange = e => {
     e.preventDefault();
-    setLengthCounter(LengthCounter+1)
+    setLengthCounter(LengthCounter + 1)
     console.log("Enterr handleChange")
     console.log("+++++++++++++++++++")
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setLengthCounter(0)
     }
     const index = e.target.id;
@@ -269,8 +269,8 @@ const PositionForm = () => {
 
 
 
-  const isLetters = (str) => /^[ A-Za-z]*$/.test(str)
-
+  const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
 
   const onInputChange = (e) => {
     const { value } = e.target;
@@ -283,14 +283,84 @@ const PositionForm = () => {
     }
   };
 
+  const onInputChange22 = (e) => {
+    const { value } = e.target;
+    if (isLetters2(value)) {
+      setdescription(e.target.value);
+      setIsDescription(true);
+      if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
+        setdisabled2(false)
+      }
+    }
+  };
+
+  const onInputChange33 = (e) => {
+    const { value } = e.target;
+    if (isLetters2(value)) {
+      setnoticePeriod(e.target.value);
+      setIsNoticPeriod(true);
+      if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
+        setdisabled2(false)
+      }
+    }
+  };
+
+  const onInputChangeForAnswers = (e) => {
+    const { value } = e.target;
+    if (isLetters2(value)) {
+      setLengthCounter(LengthCounter + 1)
+      const index = e.target.id;
+      console.log(index)
+      if (e.target.value == "") {
+        setLengthCounter(0)
+      }
+      setArr(s => {
+        const newArr = s.slice();
+        console.log("aaaaaaaaaaaaaaaaaaa")
+        if (e.target.dataset.fieldType === "questions") {
+          console.log("Enterr question")
+          //   setquestions(e.target.value)
+          newArr[index].questions = e.target.value;
+        } if (e.target.dataset.fieldType === "expectedAnswers") {
+          console.log("Enterr expectedAnswers")
+          //  setexpectedAnswers(e.target.value)
+          newArr[index].expectedAnswers = e.target.value;
+        } if (e.target.className === "imprtanceOfQ") {
+          //  setimprtanceOfQ(e.target.value)
+          newArr[index].imprtanceOfQ = e.target.value;
+        }
+
+        return newArr;
+      });
+
+      var indexx;
+      for (indexx = 0; indexx < arr.length; ++indexx) {
+        if (!arr[indexx].questions) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].expectedAnswers) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].imprtanceOfQ) {
+          setIsQuestions(true)
+        }
+      }
+
+
+      if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
+        setdisabled2(false)
+      }
+    }
+  };
+
 
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
-      setLengthCounter22(LengthCounter22+1)
+      setLengthCounter22(LengthCounter22 + 1)
       const index = e.target.id;
       console.log(index)
-      if(e.target.value == ""){
+      if (e.target.value == "") {
         setLengthCounter22(0)
       }
       setArr(s => {
@@ -456,8 +526,8 @@ const PositionForm = () => {
   const helperTextStyles = useHelperTextStyles();
   const helperTextStyles2 = useHelperTextStyles2()
   const helperTextStyles3 = useHelperTextStylesForDescription()
-  const helperTextStyles4 =  useHelperTextStylesForQuestion()
-  const helperTextStyles5 =  useHelperTextStylesForAnswers()
+  const helperTextStyles4 = useHelperTextStylesForQuestion()
+  const helperTextStyles5 = useHelperTextStylesForAnswers()
   return (
     <>
       <form className="create" /*onSubmit={handleSubmit}*/>
@@ -530,22 +600,16 @@ const PositionForm = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
-                        FormHelperTextProps={{
-                          classes: {
-                            root: helperTextStyles3.root
-                          }
-                        }}
+                      FormHelperTextProps={{
+                        classes: {
+                          root: helperTextStyles3.root
+                        }
+                      }}
                       id="outlined-multiline-static"
                       label="Job Description"
                       multiline
                       rows={4}
-                      onChange={(e) => {
-                        setdescription(e.target.value);
-                        setIsDescription(true);
-                        if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
-                          setdisabled2(false)
-                        }
-                      }}
+                      onChange={onInputChange22}
                       value={description}
                       placeholder="Enter Job Description"
                       sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
@@ -624,13 +688,7 @@ const PositionForm = () => {
                         }}
                         id="outlined-required"
                         label="Notic Period"
-                        onChange={(e) => {
-                          setnoticePeriod(e.target.value);
-                          setIsNoticPeriod(true);
-                          if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
-                            setdisabled2(false)
-                          }
-                        }}
+                        onChange={onInputChange33}
                         value={noticePeriod}
                         InputProps={{
                           startAdornment: (
@@ -697,16 +755,16 @@ const PositionForm = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
-                                    FormHelperTextProps={{
-                                      classes: {
-                                        root: helperTextStyles4.root
-                                      }
-                                    }}
+                                  FormHelperTextProps={{
+                                    classes: {
+                                      root: helperTextStyles4.root
+                                    }
+                                  }}
                                   type="text"
                                   //  id="outlined-required"
                                   label="Question"
                                   value={item.questions}
-                                  inputProps={{ "data-id": 0, "data-field-type": "questions",maxlength: CHARACTER_LIMIT_ForQuestion }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "questions", maxlength: CHARACTER_LIMIT_ForQuestion }}
                                   //  className='questions'
                                   onChange={onInputChangeForQuestion}
                                   id={i}
@@ -717,7 +775,7 @@ const PositionForm = () => {
                                   }}
                                   // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
 
-                                   helperText={`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`}
+                                  helperText={`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -745,19 +803,19 @@ const PositionForm = () => {
                               {/*This feild for the question parttttttt*/}
                               <Grid item xs={6} md={3}>
                                 <TextField
-                                    FormHelperTextProps={{
-                                      classes: {
-                                        root: helperTextStyles5.root
-                                      }
-                                    }}
+                                  FormHelperTextProps={{
+                                    classes: {
+                                      root: helperTextStyles5.root
+                                    }
+                                  }}
                                   type="text"
                                   // id="outlined-required"
                                   disabled={!item.SelectedToBeOpenQuestion ? disabled : !disabled}
                                   label=" Expected Answer"
-                                  value={item.value}
-                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" ,maxlength: CHARACTER_LIMIT_ForAnswers }}
+                                  value={item.expectedAnswers}
+                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers", maxlength: CHARACTER_LIMIT_ForAnswers }}
                                   // className='expectedAnswers'
-                                  onChange={handleChange}
+                                  onChange={onInputChangeForAnswers}
                                   id={i}
                                   placeholder="Enter Expected Answer"
                                   style={{ marginLeft: '88px', width: "200px" }}
@@ -766,7 +824,7 @@ const PositionForm = () => {
                                   }}
                                   // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
 
-                                helperText={`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`}
+                                  helperText={`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`}
                                 />
                               </Grid>
                               <Grid item xs={5} md={1}>

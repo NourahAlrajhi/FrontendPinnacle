@@ -375,8 +375,8 @@ const EditPosition = () => {
   const helperTextStyles4 =  useHelperTextStylesForQuestion()
   const helperTextStyles5 =  useHelperTextStylesForAnswers()
 
-  const isLetters = (str) => /^[ A-Za-z]*$/.test(str)
-
+  const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
 
 
   const onInputChange = (e) => {
@@ -387,6 +387,23 @@ const EditPosition = () => {
   };
 
 
+  const onInputChange22 = (e) => {
+    const { value } = e.target;
+    console.log(value)
+    if (isLetters2(value)) {
+      console.log("lllllllllllollllppppp")
+      setdescription(e.target.value)
+    }
+  };
+
+
+  const onInputChange33 = (e) => {
+    const { value } = e.target;
+    if (isLetters2(value)) {
+      setnoticePeriod(e.target.value)
+    }
+  };
+
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
@@ -394,6 +411,31 @@ const EditPosition = () => {
       const index = e.target.id;
       if(e.target.value == ""){
         setLengthCounter22(0)
+      }
+      getConsumer(s => {
+        const newArr = s.slice();
+        if (e.target.dataset.fieldType === "questions") {
+          console.log("Enterr question")
+          newArr[index].questions = e.target.value;
+        } if (e.target.dataset.fieldType === "expectedAnswers") {
+          console.log("Enterr expectedAnswers")
+          newArr[index].expectedAnswers = e.target.value;
+        } if (e.target.className === "imprtanceOfQ") {
+          newArr[index].imprtanceOfQ = e.target.value;
+        }
+
+        return newArr;
+      });
+    }
+  };
+
+  const onInputChangeForAnswers = (e) => {
+    const { value } = e.target;
+    if (isLetters2(value)) {
+      setLengthCounter(LengthCounter+1)
+      const index = e.target.id;
+      if(e.target.value == ""){
+        setLengthCounter(0)
       }
       getConsumer(s => {
         const newArr = s.slice();
@@ -495,9 +537,10 @@ const EditPosition = () => {
                       id="outlined-multiline-static"
                       label="Job Description"
                       multiline
+                      onChange={onInputChange22}
                       rows={4}
                       disabled={disabled}
-                      onChange={(e) => setdescription(e.target.value)}
+                   
                       value={description}
                       placeholder="Enter Job Description"
                       sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
@@ -571,7 +614,7 @@ const EditPosition = () => {
                         }}
                         id="outlined-required"
                         label="Notic Period"
-                        onChange={(e) => setnoticePeriod(e.target.value)}
+                        onChange={onInputChange33 }
                         value={capitalizeWords(noticePeriod)}
                         InputProps={{
                           startAdornment: (
@@ -703,7 +746,7 @@ const EditPosition = () => {
                                   value={arr.expectedAnswers}
                                   inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers",maxlength: CHARACTER_LIMIT_ForAnswers }}
                                   // className='expectedAnswers'
-                                  onChange={handleChange}
+                                  onChange={onInputChangeForAnswers}
                                   id={i}
                                   placeholder="Enter Expected Answer"
                                   style={{ marginLeft: '88px', width: "200px" }}
