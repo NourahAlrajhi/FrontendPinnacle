@@ -604,7 +604,7 @@ function Question_screen(props) {
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
 
             <box component="div" className="thanksScreen">
-              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "#14359F" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box>
+              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box>
           </box>
 
         ) : !FinishInterview ?
