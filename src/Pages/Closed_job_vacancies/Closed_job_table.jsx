@@ -226,7 +226,7 @@ export default function Closed_job_table() {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
-                {/* Active Jop Vacancies */}
+              Closed Jop Vacancies 
                 {console.log(Date.now())}
               </Typography>
               <Search>

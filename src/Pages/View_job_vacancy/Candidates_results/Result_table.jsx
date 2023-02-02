@@ -254,8 +254,8 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                         <PersonIcon />
                         {item.Candidate_Name}
                       </TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}> {item.Candidate_Phone__Number}</TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "8%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                      <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}> {item.Candidate_Phone__Number}</TableCell>
+                      <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
                         <RxDotFilled />    {item.Result}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
@@ -287,8 +287,8 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                       <PersonIcon />
                       {item.Candidate_Name}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "8%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                    <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
+                    <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
                       <RxDotFilled />    {item.Result}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {

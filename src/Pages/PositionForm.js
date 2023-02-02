@@ -37,21 +37,33 @@ import { makeStyles } from '@mui/styles';
 
 
 const useHelperTextStyles = makeStyles(() => ({
-	root: {
-		marginLeft: 240
-	}
+  root: {
+    marginLeft: 240
+  }
 }));
 
 const useHelperTextStyles2 = makeStyles(() => ({
-	root: {
-		marginLeft: 210
-	}
+  root: {
+    marginLeft: 210
+  }
+}));
+
+const useHelperTextStylesForDescription = makeStyles(() => ({
+  root: {
+    marginLeft: 510
+  }
 }));
 
 const useHelperTextStylesForQuestion = makeStyles(() => ({
-	root: {
-		marginLeft: 20
-	}
+  root: {
+    marginLeft: 170
+  }
+}));
+
+const useHelperTextStylesForAnswers = makeStyles(() => ({
+  root: {
+    marginLeft: 170
+  }
 }));
 // ----modal css----
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -128,27 +140,16 @@ const PositionForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [OpenEndedAnswer, setOpenEndedAnswer] = useState('');
   const [OpenEndedImportnace, setOpenEndedImportnace] = useState('');
+  const [LengthCounter, setLengthCounter] = useState(0);
+  const [LengthCounter22, setLengthCounter22] = useState(0);
   const CHARACTER_LIMIT_ForName = 30;
-  const CHARACTER_LIMIT_ForNoticPeriod = 20;
-
-
-  /*const triggerQuestion = (VALUE, ID) => {
-    // setImportance(VALUE)
-    console.log("----------------");
-    console.log(VALUE);
-    // const index = e.target.id;
-    console.log(ID);
-    console.log("----------------");
-    setArr(s => {
-      const newArr = s.slice();
-      console.log("aaaaaaaaaaaaaaaaaaa222222222")
-      newArr[ID].questions = VALUE;
-      return newArr;
-    });
-  }*/
-
-
-
+  const CHARACTER_LIMIT_ForNoticPeriod = 30;
+  const CHARACTER_LIMIT_ForDescription = 300;
+  const CHARACTER_LIMIT_ForQuestion = 60;
+  const CHARACTER_LIMIT_ForAnswers = 60;
+  const [valuEE, setvaluEE] = useState(0);
+  const min = 0;
+  const max = 25000;
 
   const triggerImportance = (VALUE, ID) => {
     setImportance(VALUE)
@@ -167,23 +168,7 @@ const PositionForm = () => {
 
 
 
-  /* useEffect(() => {
-     console.log("formRows11: ", arr);
-     console.log("formRows: ", Questionnnn);
-     const fetchPosition = async () => {
-       const response = await fetch('/api/Question', {
-         headers: { 'Authorization': `Bearer ${Recruiter.token}` },
-       })
-       const json = await response.json()
-       if (response.ok) {
-         console.log("responce works fine for questionnnn")
-         dispatchhhhh({ type: 'SET_Question', payload: json })
-       }
-     }
-     if (Recruiter) {
-       fetchPosition()
-     }
-   }, [dispatch, Recruiter, arr])*/
+
 
 
   useEffect(() => {
@@ -234,8 +219,12 @@ const PositionForm = () => {
 
   const handleChange = e => {
     e.preventDefault();
+    setLengthCounter(LengthCounter+1)
     console.log("Enterr handleChange")
     console.log("+++++++++++++++++++")
+    if(e.target.value == ""){
+      setLengthCounter(0)
+    }
     const index = e.target.id;
     console.log(index)
 
@@ -278,21 +267,70 @@ const PositionForm = () => {
 
   };
 
-  /*const handleChangeForImportance = e => {
-    e.preventDefault();
-    console.log("Enterr handleChangeForImportance")
-    const index = e.target.id;
-    console.log("+++++++++++++++++++2222222222")
-    console.log(e.target.value)
-    console.log("+++++++++++++++++++2222222222")
-    setArr(s => {
-      const newArr = s.slice();
-      newArr[index].imprtanceOfQ = e.target.value;
 
-      return newArr;
-    });
-  };*/
 
+  const isLetters = (str) => /^[ A-Za-z]*$/.test(str)
+
+
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    if (isLetters(value)) {
+      setname(e.target.value);
+      setIsName(true);
+      if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
+        setdisabled2(false)
+      }
+    }
+  };
+
+
+  const onInputChangeForQuestion = (e) => {
+    const { value } = e.target;
+    if (isLetters(value)) {
+      setLengthCounter22(LengthCounter22+1)
+      const index = e.target.id;
+      console.log(index)
+      if(e.target.value == ""){
+        setLengthCounter22(0)
+      }
+      setArr(s => {
+        const newArr = s.slice();
+        console.log("aaaaaaaaaaaaaaaaaaa")
+        if (e.target.dataset.fieldType === "questions") {
+          console.log("Enterr question")
+          //   setquestions(e.target.value)
+          newArr[index].questions = e.target.value;
+        } if (e.target.dataset.fieldType === "expectedAnswers") {
+          console.log("Enterr expectedAnswers")
+          //  setexpectedAnswers(e.target.value)
+          newArr[index].expectedAnswers = e.target.value;
+        } if (e.target.className === "imprtanceOfQ") {
+          //  setimprtanceOfQ(e.target.value)
+          newArr[index].imprtanceOfQ = e.target.value;
+        }
+
+        return newArr;
+      });
+
+      var indexx;
+      for (indexx = 0; indexx < arr.length; ++indexx) {
+        if (!arr[indexx].questions) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].expectedAnswers) {
+          setIsQuestions(true)
+        }
+        if (!arr[indexx].imprtanceOfQ) {
+          setIsQuestions(true)
+        }
+      }
+
+
+      if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
+        setdisabled2(false)
+      }
+    }
+  };
 
   const showAlertSuccess22 = (e) => {
     e.preventDefault();
@@ -415,28 +453,15 @@ const PositionForm = () => {
     newFormValues[deleteTodoIndex].expectedAnswers = ""
     newFormValues[deleteTodoIndex].imprtanceOfQ = ""
   }
-	const helperTextStyles = useHelperTextStyles();
+  const helperTextStyles = useHelperTextStyles();
   const helperTextStyles2 = useHelperTextStyles2()
+  const helperTextStyles3 = useHelperTextStylesForDescription()
+  const helperTextStyles4 =  useHelperTextStylesForQuestion()
+  const helperTextStyles5 =  useHelperTextStylesForAnswers()
   return (
     <>
       <form className="create" /*onSubmit={handleSubmit}*/>
         <Grid
-          /*container
-          spacing={2}
-          style={{
-              padding: { xs: "20px", md: "20px" },
-              marginBottom: { xs: "70px", md: "70px" },
-              width: '76%',
-              height: '71%', overflow: 'scroll', 
-              boxShadow: "0px 0px 5px lightgray",
-              borderRadius: "20px",
-              padding: "10px",
-              backgroundColor: "white",
-              position: "absolute",
-              top:"90px",
-              left: "98px",
-          }}*/
-
           container
           spacing={2}
           sx={{
@@ -472,11 +497,11 @@ const PositionForm = () => {
                     >
 
                       <TextField
-                      	FormHelperTextProps={{
-                          classes:{
-                            root:helperTextStyles.root
+                        FormHelperTextProps={{
+                          classes: {
+                            root: helperTextStyles.root
                           }
-                      }}
+                        }}
                         id="outlined-required"
                         label="Position Name"
                         InputProps={{
@@ -487,13 +512,7 @@ const PositionForm = () => {
                           ),
 
                         }}
-                        onChange={(e) => {
-                          setname(e.target.value);
-                          setIsName(true);
-                          if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
-                            setdisabled2(false)
-                          }
-                        }
+                        onChange={onInputChange
                         }
                         value={name}
                         placeholder="Enter Position Name"
@@ -502,7 +521,7 @@ const PositionForm = () => {
                           shrink: true,
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
-                        
+
                         helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
 
                       />
@@ -511,6 +530,11 @@ const PositionForm = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
+                        FormHelperTextProps={{
+                          classes: {
+                            root: helperTextStyles3.root
+                          }
+                        }}
                       id="outlined-multiline-static"
                       label="Job Description"
                       multiline
@@ -528,60 +552,14 @@ const PositionForm = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
+
+                      helperText={`${description.length}/${CHARACTER_LIMIT_ForDescription}`}
                     />
                   </Grid>
                 </Grid>
               </Grid>
               {/* ----//Position Description---- */}
-
-              {/*   <div className="Section1">
-                <h3 style={{
-                  width: "250px", position: "absolute",
-                  left: "90px",
-                  top: "30px"
-                }}>1. Position Description</h3>
-                <TextField
-                  id="outlined-required"
-                  label="Position Name"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <ImProfile />
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={(e) => setname(e.target.value)}
-                  value={name}
-                  placeholder="Enter Position Name"
-                  style={{
-                    width: "250px", position: "absolute",
-                    left: "90px",
-                    top: "80px"
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Job Description"
-                  multiline
-                  rows={4}
-                  onChange={(e) => setdescription(e.target.value)}
-                  value={description}
-                  placeholder="Enter Job Description"
-                  style={{
-                    width: "250px", position: "absolute",
-                    left: "90px",
-                    top: "160px"
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                </div>*/}
-
-
 
               {/* ----Position Information---- */}
               <Grid item xs={12} marginTop={4}>
@@ -605,7 +583,10 @@ const PositionForm = () => {
                         type="number"
 
                         onChange={(e) => {
-                          setExpectedSalary(e.target.value);
+                          var value = parseInt(e.target.value, 10);
+                          if (value > max) value = max;
+                          if (value < min) value = min;
+                          setExpectedSalary(value);
                           setIsSalary(true);
                           if (IsName && IsDescription && !IsSalary && IsNoticPeriod && IsQuestions) {
                             setdisabled2(false)
@@ -621,7 +602,9 @@ const PositionForm = () => {
                               <FaRegMoneyBillAlt />
                             </InputAdornment>
                           ),
+
                         }}
+                        inputProps={{ min, max }}
                         style={{ width: "250px" }}
                       />
                     </FormControl>
@@ -634,11 +617,11 @@ const PositionForm = () => {
                     >
 
                       <TextField
-                      	FormHelperTextProps={{
-                          classes:{
-                            root:helperTextStyles2.root
+                        FormHelperTextProps={{
+                          classes: {
+                            root: helperTextStyles2.root
                           }
-                      }}
+                        }}
                         id="outlined-required"
                         label="Notic Period"
                         onChange={(e) => {
@@ -714,20 +697,27 @@ const PositionForm = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
+                                    FormHelperTextProps={{
+                                      classes: {
+                                        root: helperTextStyles4.root
+                                      }
+                                    }}
                                   type="text"
                                   //  id="outlined-required"
                                   label="Question"
-                                  value={item.value}
-                                  inputProps={{ "data-id": 0, "data-field-type": "questions" }}
+                                  value={item.questions}
+                                  inputProps={{ "data-id": 0, "data-field-type": "questions",maxlength: CHARACTER_LIMIT_ForQuestion }}
                                   //  className='questions'
-                                  onChange={handleChange}
+                                  onChange={onInputChangeForQuestion}
                                   id={i}
                                   placeholder="Enter Question"
                                   style={{ width: "200px" }}
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
+                                  // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
 
+                                   helperText={`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -755,12 +745,17 @@ const PositionForm = () => {
                               {/*This feild for the question parttttttt*/}
                               <Grid item xs={6} md={3}>
                                 <TextField
+                                    FormHelperTextProps={{
+                                      classes: {
+                                        root: helperTextStyles5.root
+                                      }
+                                    }}
                                   type="text"
                                   // id="outlined-required"
                                   disabled={!item.SelectedToBeOpenQuestion ? disabled : !disabled}
                                   label=" Expected Answer"
                                   value={item.value}
-                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" ,maxlength: CHARACTER_LIMIT_ForAnswers }}
                                   // className='expectedAnswers'
                                   onChange={handleChange}
                                   id={i}
@@ -769,7 +764,9 @@ const PositionForm = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
+                                  // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
 
+                                helperText={`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`}
                                 />
                               </Grid>
                               <Grid item xs={5} md={1}>
@@ -824,196 +821,6 @@ const PositionForm = () => {
                 </Grid>
               </Grid>
               {/* ---//3. Questions--- */}
-
-
-
-
-              {/*     <div className="Section1" style={{
-                width: "250px", position: "absolute",
-                left: "10px",
-                top: "300px"
-              }}>
-                <h3 style={{
-                  width: "250px", position: "absolute",
-                  left: "90px",
-                  top: "30px"
-                }}>2. Position Information</h3>
-                <TextField
-                  id="outlined-number"
-                  label="Expected Salary"
-                  placeholder="Enter Expected Salary"
-                  type="number"
-
-                  onChange={(e) => setExpectedSalary(e.target.value)}
-                  value={ExpectedSalary}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <FaRegMoneyBillAlt />
-                      </InputAdornment>
-                    ),
-                  }}
-                  style={{
-                    width: "250px", position: "absolute",
-                    left: "90px",
-                    top: "80px"
-                  }}
-                />
-                <TextField
-                  id="outlined-required"
-                  label="Notic Period"
-                  onChange={(e) => setnoticePeriod(e.target.value)}
-                  value={noticePeriod}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdPersonOutline />
-                      </InputAdornment>
-                    ),
-                  }}
-                  placeholder="Enter Notic Period"
-                  style={{
-                    width: "250px", position: "absolute",
-                    left: "420px",
-                    top: "80px"
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-
-                />
-                </div>*/}
-
-
-
-              {/*   <div className="Section1" style={{
-                width: "250px", position: "absolute",
-                left: "10px",
-                top: "460px",
-                zIndex: "0"
-              }}>
-                <h3 style={{
-                  width: "250px", position: "absolute",
-                  left: "90px",
-                  top: "30px"
-                }}>3. Questions</h3>
-
-
-                <Grid elevation={3} style={{
-                  zIndex: '10', width: '330%', height: '239px', overflow: 'scroll', position: "absolute", top: "73px", left: "78px", radius: "20px", boxShadow: "0px 0px 5px lightgray",
-                  borderRadius: "20px",
-                  padding: "10px",
-                  backgroundColor: "white"
-                }} className="box">
-                  <AiOutlinePlus style={{
-                    width: "250px", position: "absolute",
-                    left: "-100px",
-                    top: "20px",
-                    color: "#7024C4", cursor: "pointer"
-                  }} onClick={() => addInput()} />
-
-                  {arr.map((item, i) => {
-                    console.log(i)
-                    return (
-
-                      <div key={arr[i].id} style={{ display: 'block', flexDirection: 'raw', marginBottom: "20px", margin: "20px " }}>
-
-
-                        <TextField
-                          type="text"
-                          //  id="outlined-required"
-                          label="Question"
-                          value={item.value}
-                          inputProps={{ "data-id": 0, "data-field-type": "questions" }}
-                          //  className='questions'
-                          onChange={handleChange}
-                          id={i}
-                          placeholder="Enter Question"
-
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-
-                        />*/}
-
-              {/*This feild for the question parttttttt*/}
-
-              {/* <TextField
-                      id="outlined-select-currency"
-                      select
-                      value={arr[i].questions}
-                      //     onChange={handleChange}
-                      id={i}
-                      label="Questions"
-                     // defaultValue="EUR"
-                      className='Questions'
-                      style={{
-                        marginLeft: '25px',
-                        width: "200px"
-                      }}
-                    >
-                      {Questionnnn&&Questionnnn.map((option) => (
-                        <MenuItem key={option.Question} value={option.Question} id={i} onClick={() => triggerQuestion(option.Question, i)}>
-                          {option.Question}
-                        </MenuItem>
-                      ))}
-                    </TextField>*/}
-              {/*This feild for the question parttttttt*/}
-
-              {/*       <TextField
-                          type="text"
-                          // id="outlined-required"
-                          label=" Expected Answer"
-                          value={item.value}
-                          inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
-                          // className='expectedAnswers'
-                          onChange={handleChange}
-                          id={i}
-                          placeholder="Enter Expected Answer"
-                          style={{ marginLeft: '20px' }}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-
-                        />
-                        <TextField
-                          id="outlined-select-currency"
-                          select
-                          value={item.value}
-                          //     onChange={handleChange}
-                          id={i}
-                          label="importance"
-                          defaultValue="EUR"
-                          className='imprtanceOfQ'
-                          style={{
-                            marginLeft: '25px',
-                            width: "200px"
-                          }}
-                        >
-                          {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value} id={i} onClick={() => triggerImportance(option.value, i)}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                        {
-                          i ?
-                            <BiTrash onClick={() =>
-                              removeFormFields(item.id)
-                            } style={{ margin: "20px", color: "#7024C4", cursor: "pointer" }} /> : null
-                        }
-                      </div>
-                    );
-                  }
-                  )
-                  }
-
-
-                </Grid>
-                </div>*/}
 
               {/* --- submit Button--- */}
               <Grid

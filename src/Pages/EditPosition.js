@@ -5,7 +5,7 @@ import { usePositionsContext } from "../Hook/usePositionsContext"
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"
 import { useEffect, useState } from 'react'
 import { Button, Divider, Grid, Typography } from "@mui/material";
-import{CiLock,CiUnlock}  from "react-icons/ci";
+import { CiLock, CiUnlock } from "react-icons/ci";
 import InputAdornment from '@mui/material/InputAdornment';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import Paper from '@mui/material/Paper';
@@ -38,21 +38,33 @@ import { makeStyles } from '@mui/styles';
 
 
 const useHelperTextStyles = makeStyles(() => ({
-	root: {
-		marginLeft: 240
-	}
+  root: {
+    marginLeft: 240
+  }
 }));
 
 const useHelperTextStyles2 = makeStyles(() => ({
-	root: {
-		marginLeft: 210
-	}
+  root: {
+    marginLeft: 210
+  }
+}));
+
+const useHelperTextStylesForDescription = makeStyles(() => ({
+  root: {
+    marginLeft: 510
+  }
 }));
 
 const useHelperTextStylesForQuestion = makeStyles(() => ({
-	root: {
-		marginLeft: 20
-	}
+  root: {
+    marginLeft: 170
+  }
+}));
+
+const useHelperTextStylesForAnswers = makeStyles(() => ({
+  root: {
+    marginLeft: 170
+  }
 }));
 
 const inputArr = [
@@ -103,8 +115,13 @@ const EditPosition = () => {
   const [emptyFields, setEmptyFields] = useState([])
   const CHARACTER_LIMIT_ForName = 120;
   const CHARACTER_LIMIT_ForNoticPeriod = 120;
-
-
+  const CHARACTER_LIMIT_ForDescription = 300;
+  const CHARACTER_LIMIT_ForQuestion = 60;
+  const CHARACTER_LIMIT_ForAnswers = 60;
+  const min = 0;
+  const max = 25000;
+  const [LengthCounter, setLengthCounter] = useState(0);
+  const [LengthCounter22, setLengthCounter22] = useState(0);
   const capitalizeWords = (str) => {
     return str
       .toLowerCase()
@@ -126,25 +143,25 @@ const EditPosition = () => {
   }
 
   const addInput = () => {
-    if(consumer.length != 10){
-    console.log("Enterr addInput")
-    getConsumer(s => {
-      return [
-        ...s,
-        {
-          type: "text",
-          id: v4(),
-          questions: "",
-          expectedAnswers: "",
-          imprtanceOfQ: "",
-          SelectedToBeOpenQuestion: false
-        }
-      ];
-    });
-  }
-  else{
-    alert('You Reach The Limit Of The Question')
-  }
+    if (consumer.length != 10) {
+      console.log("Enterr addInput")
+      getConsumer(s => {
+        return [
+          ...s,
+          {
+            type: "text",
+            id: v4(),
+            questions: "",
+            expectedAnswers: "",
+            imprtanceOfQ: "",
+            SelectedToBeOpenQuestion: false
+          }
+        ];
+      });
+    }
+    else {
+      alert('You Reach The Limit Of The Question')
+    }
   };
 
   const handleGameClick = (event) => {
@@ -214,7 +231,11 @@ const EditPosition = () => {
 
   const handleChange = e => {
     e.preventDefault();
+    setLengthCounter(LengthCounter+1)
     console.log("Enterr handleChangeediiittttt")
+    if(e.target.value == ""){
+      setLengthCounter(0)
+    }
     const index = e.target.id;
     getConsumer(s => {
       const newArr = s.slice();
@@ -328,7 +349,7 @@ const EditPosition = () => {
   }
 
   const HandelOpenEndQuestion = (removeIndex) => {
-   
+
     const index = removeIndex;
     console.log(index)
 
@@ -339,7 +360,7 @@ const EditPosition = () => {
   }
 
   const HandelOpenEndQuestion2 = (removeIndex) => {
- 
+
     const index = removeIndex;
     console.log(index)
 
@@ -348,8 +369,50 @@ const EditPosition = () => {
     newFormValues[deleteTodoIndex].expectedAnswers = ""
     newFormValues[deleteTodoIndex].imprtanceOfQ = ""
   }
-	const helperTextStyles = useHelperTextStyles();
+  const helperTextStyles = useHelperTextStyles();
   const helperTextStyles2 = useHelperTextStyles2()
+  const helperTextStyles3 = useHelperTextStylesForDescription()
+  const helperTextStyles4 =  useHelperTextStylesForQuestion()
+  const helperTextStyles5 =  useHelperTextStylesForAnswers()
+
+  const isLetters = (str) => /^[ A-Za-z]*$/.test(str)
+
+
+
+  const onInputChange = (e) => {
+    const { value } = e.target;
+    if (isLetters(value)) {
+      setname(e.target.value)
+    }
+  };
+
+
+  const onInputChangeForQuestion = (e) => {
+    const { value } = e.target;
+    if (isLetters(value)) {
+      setLengthCounter22(LengthCounter22+1)
+      const index = e.target.id;
+      if(e.target.value == ""){
+        setLengthCounter22(0)
+      }
+      getConsumer(s => {
+        const newArr = s.slice();
+        if (e.target.dataset.fieldType === "questions") {
+          console.log("Enterr question")
+          newArr[index].questions = e.target.value;
+        } if (e.target.dataset.fieldType === "expectedAnswers") {
+          console.log("Enterr expectedAnswers")
+          newArr[index].expectedAnswers = e.target.value;
+        } if (e.target.className === "imprtanceOfQ") {
+          newArr[index].imprtanceOfQ = e.target.value;
+        }
+
+        return newArr;
+      });
+    }
+  };
+
+
   return (
     <>
       <form className="create" /*onSubmit={handleSubmit}*/>
@@ -378,7 +441,7 @@ const EditPosition = () => {
               <Grid item xs={12}>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Typography  fontWeight={700}>
+                    <Typography fontWeight={700}>
                       1. Position Description
                     </Typography>
                   </Grid>
@@ -390,11 +453,11 @@ const EditPosition = () => {
                     >
 
                       <TextField
-                       	FormHelperTextProps={{
-                          classes:{
-                            root:helperTextStyles.root
+                        FormHelperTextProps={{
+                          classes: {
+                            root: helperTextStyles.root
                           }
-                      }}
+                        }}
                         id="outlined-required"
                         label="Position Name"
                         InputProps={{
@@ -404,7 +467,7 @@ const EditPosition = () => {
                             </InputAdornment>
                           ),
                         }}
-                        onChange={(e) => setname(e.target.value)}
+                        onChange={onInputChange}
                         value={capitalizeWords(name)}
                         disabled={disabled}
                         placeholder="Enter Position Name"
@@ -416,7 +479,7 @@ const EditPosition = () => {
                           shrink: true,
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
-                        
+
                         helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
                       />
                     </FormControl>
@@ -424,6 +487,11 @@ const EditPosition = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
+                      FormHelperTextProps={{
+                        classes: {
+                          root: helperTextStyles3.root
+                        }
+                      }}
                       id="outlined-multiline-static"
                       label="Job Description"
                       multiline
@@ -436,67 +504,19 @@ const EditPosition = () => {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
+
+                      helperText={`${description.length}/${CHARACTER_LIMIT_ForDescription}`}
                     />
                   </Grid>
                 </Grid>
               </Grid>
 
-              {/*  <div className="Section1">
-            <h3 style={{
-              width: "250px", position: "absolute",
-              left: "90px",
-              top: "30px"
-            }}>1. Position Description</h3>
-            <TextField
-              id="outlined-required"
-              label="Position Name"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <ImProfile />
-                  </InputAdornment>
-                ),
-              }}
-              onChange={(e) => setname(e.target.value)}
-              value={capitalizeWords(name)}
-              disabled={disabled}
-              placeholder="Enter Position Name"
-              style={{
-                width: "250px", position: "absolute",
-                left: "90px",
-                top: "80px"
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            <TextField
-              id="outlined-multiline-static"
-              label="Job Description"
-              multiline
-              rows={4}
-              disabled={disabled}
-              onChange={(e) => setdescription(e.target.value)}
-              value={description}
-              placeholder="Enter Job Description"
-              style={{
-                width: "250px", position: "absolute",
-                left: "90px",
-                top: "160px"
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-            </div>*/}
-
-
-
               {/* ----Position Information---- */}
               <Grid item xs={12} marginTop={4}>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Typography  fontWeight={700}>
+                    <Typography fontWeight={700}>
                       2. Position Information
                     </Typography>
                   </Grid>
@@ -513,7 +533,12 @@ const EditPosition = () => {
                         placeholder="Enter Expected Salary"
                         type="number"
                         disabled={disabled}
-                        onChange={(e) => setExpectedSalary(e.target.value)}
+                        onChange={(e) => {
+                          var value = parseInt(e.target.value, 10);
+                          if (value > max) value = max;
+                          if (value < min) value = min;
+                          setExpectedSalary(value)
+                        }}
                         value={ExpectedSalary}
                         InputLabelProps={{
                           shrink: true,
@@ -539,11 +564,11 @@ const EditPosition = () => {
                     >
 
                       <TextField
-                      	FormHelperTextProps={{
-                          classes:{
-                            root:helperTextStyles2.root
+                        FormHelperTextProps={{
+                          classes: {
+                            root: helperTextStyles2.root
                           }
-                      }}
+                        }}
                         id="outlined-required"
                         label="Notic Period"
                         onChange={(e) => setnoticePeriod(e.target.value)}
@@ -574,74 +599,12 @@ const EditPosition = () => {
               </Grid>
               {/* ----// Position Information---- */}
 
-
-              {/* <div className="Section1" style={{
-            width: "250px", position: "absolute",
-            left: "10px",
-            top: "300px"
-          }}>
-            <h3 style={{
-              width: "250px", position: "absolute",
-              left: "90px",
-              top: "30px"
-            }}>2. Position Information</h3>
-            <TextField
-              id="outlined-number"
-              label="Expected Salary"
-              placeholder="Enter Expected Salary"
-              type="number"
-              disabled={disabled}
-              onChange={(e) => setExpectedSalary(e.target.value)}
-              value={ExpectedSalary}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <FaRegMoneyBillAlt />
-                  </InputAdornment>
-                ),
-              }}
-              style={{
-                width: "250px", position: "absolute",
-                left: "90px",
-                top: "80px"
-              }}
-            />
-            <TextField
-              id="outlined-required"
-              label="Notic Period"
-              onChange={(e) => setnoticePeriod(e.target.value)}
-              value={capitalizeWords(noticePeriod)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <MdPersonOutline />
-                  </InputAdornment>
-                ),
-              }}
-              disabled={disabled}
-              placeholder="Enter Notic Period"
-              style={{
-                width: "250px", position: "absolute",
-                left: "420px",
-                top: "80px"
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-
-            />
-            </div>*/}
-
-
               {/* ----3. Questions---- */}
               <Grid item xs={12} marginTop={4}>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Typography  fontWeight={700}>
-                    3. Questions <p style={{fontSize:"10px",marginTop: '0px', marginLeft: '10px',}}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4"}} /></p>
+                    <Typography fontWeight={700}>
+                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4" }} /></p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -666,7 +629,7 @@ const EditPosition = () => {
 
                           color: "#7024C4", cursor: "pointer"
                         }} onClick={() => addInput()} />
-                        )} 
+                        )}
                       </Grid>
                       {/* ----rows---- */}
 
@@ -680,13 +643,18 @@ const EditPosition = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
+                                   FormHelperTextProps={{
+                                    classes: {
+                                      root: helperTextStyles4.root
+                                    }
+                                  }}
                                   type="text"
                                   //  id="outlined-required"
                                   label="Question"
                                   value={arr.questions}
-                                  inputProps={{ "data-id": 0, "data-field-type": "questions" }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "questions",maxlength: CHARACTER_LIMIT_ForQuestion  }}
                                   //  className='questions'
-                                  onChange={handleChange}
+                                  onChange={onInputChangeForQuestion}
                                   id={i}
                                   placeholder="Enter Question"
                                   disabled={disabled}
@@ -694,6 +662,7 @@ const EditPosition = () => {
                                     shrink: true,
                                   }}
                                   style={{ width: "200px" }}
+                                  // helperText={`${arr.questions.length}/${CHARACTER_LIMIT_ForQuestion}`}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -719,14 +688,20 @@ const EditPosition = () => {
                       ))}
                     </TextField>*/}
                               {/*This feild for the question parttttttt*/}
+
                               <Grid item xs={6} md={3}>
                                 <TextField
+                                     FormHelperTextProps={{
+                                      classes: {
+                                        root: helperTextStyles5.root
+                                      }
+                                    }}
                                   type="text"
-                                  disabled={!arr.SelectedToBeOpenQuestion ? disabled:!disabled}
+                                  disabled={!arr.SelectedToBeOpenQuestion ? disabled : !disabled}
                                   // id="outlined-required"
                                   label=" Expected Answer"
                                   value={arr.expectedAnswers}
-                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers",maxlength: CHARACTER_LIMIT_ForAnswers }}
                                   // className='expectedAnswers'
                                   onChange={handleChange}
                                   id={i}
@@ -736,7 +711,7 @@ const EditPosition = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-
+                                  // helperText={`${arr.expectedAnswers.length}/${CHARACTER_LIMIT_ForAnswers}`}
                                 />
 
                               </Grid>
@@ -748,7 +723,7 @@ const EditPosition = () => {
                                     value={arr.imprtanceOfQ}
                                     //     onChange={handleChange}
                                     id={i}
-                                    disabled={!arr.SelectedToBeOpenQuestion ? disabled:!disabled}
+                                    disabled={!arr.SelectedToBeOpenQuestion ? disabled : !disabled}
                                     label="importance"
                                     defaultValue="EUR"
                                     className='imprtanceOfQ'
@@ -769,14 +744,14 @@ const EditPosition = () => {
 
                               {
                                 i && isShown ?
-                                <Grid item xs={1}>
-                                <BiTrash onClick={() =>
-                                  removeFormFieldsss(arr.id)
-                                } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
-                                {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
-                                  : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }}/>
-                                }
-                              </Grid> : null
+                                  <Grid item xs={1}>
+                                    <BiTrash onClick={() =>
+                                      removeFormFieldsss(arr.id)
+                                    } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
+                                    {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
+                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                    }
+                                  </Grid> : null
                               }
                             </Grid>
                           </Grid>
@@ -794,122 +769,6 @@ const EditPosition = () => {
               </Grid>
               {/* ---//3. Questions--- */}
 
-
-              {/*   <div className="Section1" style={{
-            width: "250px", position: "absolute",
-            left: "10px",
-            top: "460px",
-            zIndex: "0"
-          }}>
-            <h3 style={{
-              width: "250px", position: "absolute",
-              left: "90px",
-              top: "30px"
-            }}>3. Questions</h3>
-
-
-            <Grid elevation={3} style={{
-              zIndex: '10', width: '330%', height: '239px', overflow: 'scroll', position: "absolute", top: "73px", left: "78px", radius: "20px", boxShadow: "0px 0px 5px lightgray",
-              borderRadius: "20px",
-              padding: "10px",
-              backgroundColor: "white"
-            }} className="box">
-              {isShown && (<AiOutlinePlus style={{
-                width: "250px", position: "absolute",
-                left: "-100px",
-                top: "20px",
-                color: "#7024C4", cursor: "pointer"
-              }} onClick={() => addInput()} />
-              )}
-              {consumer && consumer.map((arr, i) => {
-                console.log(i)
-                return (
-
-                  <div key={consumer[i].id} style={{ display: 'block', flexDirection: 'raw', marginBottom: "20px", margin: "20px " }}>
-
-
-                    <TextField
-                      type="text"
-                      //  id="outlined-required"
-                      label="Question"
-                      value={arr.questions}
-                      inputProps={{ "data-id": 0, "data-field-type": "questions" }}
-                      //  className='questions'
-                      onChange={handleChange}
-                      id={i}
-                      placeholder="Enter Question"
-                      disabled={disabled}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-
-                    />
-                    <TextField
-                      type="text"
-                      disabled={disabled}
-                      // id="outlined-required"
-                      label=" Expected Answer"
-                      value={arr.expectedAnswers}
-                      inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers" }}
-                      // className='expectedAnswers'
-                      onChange={handleChange}
-                      id={i}
-                      placeholder="Enter Expected Answer"
-                      style={{ marginLeft: '20px' }}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-
-                    />
-
-
-
-                    <TextField
-                      id="outlined-select-currency"
-                      select
-                      value={arr.imprtanceOfQ}
-                      //     onChange={handleChange}
-                      id={i}
-                      disabled={disabled}
-                      label="importance"
-                      defaultValue="EUR"
-                      className='imprtanceOfQ'
-                      style={{
-                        marginLeft: '25px',
-                        width: "200px"
-                      }}
-                    >
-                      {currencies.map((option) => (
-                        <MenuItem key={option.value} value={option.value} id={i} onClick={() => triggerImportance(option.value, i)}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-
-
-                 
-
-
-
-
-
-
-
-                    {
-                      i && isShown ?
-                        <BiTrash onClick={() =>
-                          removeFormFieldsss(arr.id)
-                        } style={{ margin: "20px", color: "#7024C4", cursor: "pointer" }} /> : null
-                    }
-                  </div>
-                );
-              }
-              )
-              }
-
-
-            </Grid>
-            </div>*/}
               {/* --- submit Button--- */}
               <Grid
                 item
@@ -934,8 +793,8 @@ const EditPosition = () => {
 
                 {isShown && (
                   <div>
-                    <button className="CancelAddPosition" style={{ cursor: "pointer", borderRadius: "5px",color: "14359F", backgroundColor: "#F7F9FB",border: "none",width:"110px",height:"30px",borderColor:"#14359F",margin:"20px"}} onClick={showAlertSuccess22}> Cancel </button>
-                    <button className="AddPosition" style={{ cursor: "pointer" , borderRadius: "5px",color: "white", backgroundColor: "#14359F",border: "none",width:"110px",height:"30px"}} onClick={handleUpdate}> Save </button>
+                    <button className="CancelAddPosition" style={{ cursor: "pointer", borderRadius: "5px", color: "14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F", margin: "20px" }} onClick={showAlertSuccess22}> Cancel </button>
+                    <button className="AddPosition" style={{ cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" }} onClick={handleUpdate}> Save </button>
 
 
                   </div>

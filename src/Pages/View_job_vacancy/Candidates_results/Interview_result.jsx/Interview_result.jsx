@@ -208,7 +208,7 @@ export default function Interview_result() {
         <Box mt={5} sx={{ position: "absolute"}}>
 
           <Stack direction="row" marginLeft="700px" alignItems="center" gap="5px" mt={2}>
-            <Typography>Contexts Similarities </Typography>
+            <Typography>Answers Similarities </Typography>
             <Box component="span" sx={{ background: "#A8C5DA", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}> {ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
           </Stack>
           <Stack direction="row" marginLeft="760px" alignItems="center" gap="5px" mt={2} >

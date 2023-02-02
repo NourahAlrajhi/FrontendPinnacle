@@ -285,8 +285,8 @@ export default function Active_vacancy_table(props) {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
-                {props.barText}
-                {/* Active Jop Vacancies */}
+                {/* {props.barText} */}
+           Active Jop Vacancies 
               </Typography>
               <Search>
                 <SearchIconWrapper>
