@@ -23,11 +23,11 @@ describe('Test Case#3', () => {
     cy.LoginToPosition("Nourah2001", "Nourah@999")
     cy.viewport('macbook-11')
     cy.contains('Go To Job Vacancy').click({force: true})
-    cy.fixture('Candidates.xlsx').then(fileContent => {
+    cy.fixture('PinnacleLogo.png').then(fileContent => {
       cy.get('input[type=file]').attachFile({
           fileContent: fileContent.toString(),
-          fileName: 'Candidates.xlsx',
-          mimeType:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          fileName: 'PinnacleLogo.png',
+          mimeType:'image/png'
       });
       // const datePickerValue = '2021-01-03';
       // cy.chooseDatePicker('[data-testid="my-datepicker"]', datePickerValue);
