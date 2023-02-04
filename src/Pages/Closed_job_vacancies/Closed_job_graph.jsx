@@ -162,9 +162,9 @@ export default function Closed_job_graph({DATA1,DATA2,DATA2FORACTUAL}) {
             <Typography variant='h6' sx={{ marginTop: "-4px" }}>
               Total Interviews
             </Typography>
-            <Typography variant='body1' sx={{ fontSize: "1rem", fontWeight: "600", color: "gray" }}>
+            {/* <Typography variant='body1' sx={{ fontSize: "1rem", fontWeight: "600", color: "gray" }}>
               Total Vacancies
-            </Typography>
+            </Typography> */}
             <Divider orientation="vertical" flexItem />
             <Typography >
               <Badge variant='dot' sx={{ margin: "-2px 10px 0 0" }} color="secondary" >
