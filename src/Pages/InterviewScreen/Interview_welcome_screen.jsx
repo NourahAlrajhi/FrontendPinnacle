@@ -185,7 +185,7 @@ function Interview_welcome_screen() {
                             {/* ---inputs--- */}
                             <div className='content'>
                                 <p className='heading'> Welcome {CandidateName}!</p>
-                                {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <p className='pera'>Make Sure Your Microphone and Camera Before Sarting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link is Expired</p> : FinishInterview ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Finish The Interview</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Entered The interview Before and did not complete it!</p>}
+                                {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <p className='pera'>Make Sure Your Microphone and Camera are Working Before Sarting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link is Expired</p> : FinishInterview ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Finish The Interview</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Entered The interview Before and did not complete it!</p>}
                                 {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <div className='filds'>
                                     {/* ----camra div----- */}
 

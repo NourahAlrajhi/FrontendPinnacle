@@ -494,7 +494,7 @@ function Question_screen(props) {
 
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS , stepsForQuestionId}
           //https://backend-pinnacle.herokuapp.com/
-          const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
+          const response = await fetch('/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(MODEL)

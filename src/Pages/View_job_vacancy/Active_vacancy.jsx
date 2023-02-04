@@ -8,7 +8,7 @@ import Calandar_event_graph from "./Calandar_event_graph";
 import { usePositionsContext } from "../../Hook/usePositionsContext"
 import { useRecruiterContext } from "../../Hook/UseRecruiterContext"
 import { useVacancyContext } from "../../Hook/UseVacancy"
-
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect,useState } from 'react'
 
 const backgroundColor=[
@@ -45,7 +45,7 @@ const backgroundColor=[
 ]
 
 function Active_vacancy() {
-
+  const navigate = useNavigate();
 
  let data ={}
   const { Vacancy, dispatchhh } = useVacancyContext()
@@ -134,7 +134,8 @@ function Active_vacancy() {
           xs={12}
           lg={6}
         >
-          <Applicants_vacancy_graph DATA1={BarCharVacancyName} DATA2={BarCharVacancyCandidatEnterviwed}/>
+          <button onClick={()=>navigate("/PositionList")}       data-testid="PositionList">Go To Position List</button>
+          <Applicants_vacancy_graph DATA1={BarCharVacancyName} DATA2={BarCharVacancyCandidatEnterviwed} />
         </Grid>
         <Grid xs={12} >
           <Active_vacancy_table />
