@@ -981,6 +981,7 @@ const CreateJobbVacancy = () => {
                                                 <LocalizationProvider dateAdapter={AdapterDayjs} >
 
                                                     <DesktopDatePicker
+                                                    id="DatePicker"
                                                         label="Date "
                                                         inputFormat="MM/DD/YYYY"
                                                         value={value}
@@ -990,6 +991,7 @@ const CreateJobbVacancy = () => {
                                                     />
                                                     {" "}
                                                     <TimePicker
+                                                        id="TimePicker"
                                                         label="Time"
                                                         value={value}
                                                         onChange={handleChange}
