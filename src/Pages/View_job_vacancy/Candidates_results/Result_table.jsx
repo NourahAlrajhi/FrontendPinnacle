@@ -192,7 +192,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
-                {/* Active Jop Vacancies */}
+              Candidates
               </Typography>
               <Search>
                 <SearchIconWrapper>
