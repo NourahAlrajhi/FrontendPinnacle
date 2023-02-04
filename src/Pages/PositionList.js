@@ -99,7 +99,7 @@ const PositionList = () => {
   return (
     <section>
    
-   <button onClick={()=>navigate("/EditPosition/639e427afe569ac184e62fe9")}   id="PositionList">Go To Edit Position </button>
+   {/* <button onClick={()=>navigate("/EditPosition/639e427afe569ac184e62fe9")}   id="PositionList">Go To Edit Position </button> */}
 
      <StickyHeadTable/>
 

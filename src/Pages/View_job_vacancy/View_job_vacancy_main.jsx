@@ -19,7 +19,7 @@ function View_job_vacancy_main() {
                     {/* <Active_vacancy/> */}
                     {/* <Candidates_results_main/> */}
                     {/* <Interview_result/> */}
-                    <button onClick={()=>navigate("/PositionList")}   id="NewVacancyPage">Go To Position List</button>
+                    <button onClick={()=>navigate("/CreateJobbVacancy")}   id="NewVacancyPage">Go To Job Vacancy</button>
                 </Box>
             </Container>
 
