@@ -134,7 +134,7 @@ function Active_vacancy() {
           xs={12}
           lg={6}
         >
-          <button onClick={()=>navigate("/PositionList")}       data-testid="PositionList">Go To Position List</button>
+          <button onClick={()=>navigate("/PositionList")}   data-testid="PositionList">Go To Position List</button>
           <Applicants_vacancy_graph DATA1={BarCharVacancyName} DATA2={BarCharVacancyCandidatEnterviwed} />
         </Grid>
         <Grid xs={12} >

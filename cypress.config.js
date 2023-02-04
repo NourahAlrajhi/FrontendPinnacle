@@ -13,9 +13,8 @@ module.exports = defineConfig({
   //   auth0_client_secret: process.env.AUTH0_CLIENT_SECRET,
   // },
   e2e: {
-    baseUrl: 'http://localhost:4000',
-    // setupNodeEvents(on, config) {
-    //   // implement node event listeners here
-    // },
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
   },
 });

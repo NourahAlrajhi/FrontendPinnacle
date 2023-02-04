@@ -8,8 +8,9 @@ import Closed_jop_vacancies_main from '../Closed_job_vacancies/Closed_jop_vacanc
 import Open_jop_vacancies_main from '../Open_jop_vacancies/Open_jop_vacancies_main'
 // import Interview_result from './Candidates_results/Interview_result.jsx/Interview_result'
 import './View_job_vacancy_main.css'
-
+import { Link, useNavigate } from 'react-router-dom';
 function View_job_vacancy_main() {
+    const navigate = useNavigate();
     return (
         <>
             <Container maxWidth="xl" className="contianer_main">
@@ -18,6 +19,7 @@ function View_job_vacancy_main() {
                     {/* <Active_vacancy/> */}
                     {/* <Candidates_results_main/> */}
                     {/* <Interview_result/> */}
+                    <button onClick={()=>navigate("/PositionList")}   id="PositionList">Go To Position List</button>
                 </Box>
             </Container>
 
