@@ -502,7 +502,7 @@ const EditPosition = () => {
                             root: helperTextStyles.root
                           }
                         }}
-                        id="outlined-required"
+                        id="outlined-required1"
                         label="Position Name"
                         InputProps={{
                           startAdornment: (
@@ -531,6 +531,7 @@ const EditPosition = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
+                     data-testid="PositionDescription"
                       FormHelperTextProps={{
                         classes: {
                           root: helperTextStyles3.root
@@ -573,6 +574,7 @@ const EditPosition = () => {
                     >
 
                       <TextField
+                        data-testid="PositionSalary"
                         id="outlined-number"
                         label="Expected Salary"
                         placeholder="Enter Expected Salary"
@@ -609,12 +611,13 @@ const EditPosition = () => {
                     >
 
                       <TextField
+                                   data-testid="PositionNoticePeriod"
                         FormHelperTextProps={{
                           classes: {
                             root: helperTextStyles2.root
                           }
                         }}
-                        id="outlined-required"
+                        id="outlined-required3"
                         label="Notic Period"
                         onChange={onInputChange33 }
                         value={capitalizeWords(noticePeriod)}
@@ -688,6 +691,7 @@ const EditPosition = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
+                                          data-testid="PositionQuestion"
                                    FormHelperTextProps={{
                                     classes: {
                                       root: helperTextStyles4.root
@@ -736,6 +740,7 @@ const EditPosition = () => {
 
                               <Grid item xs={6} md={3}>
                                 <TextField
+                                data-testid="PositionExpectedAmswer"
                                      FormHelperTextProps={{
                                       classes: {
                                         root: helperTextStyles5.root

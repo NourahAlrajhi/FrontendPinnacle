@@ -95,10 +95,11 @@ const PositionList = () => {
 
 
   }*/
-
+  const navigate = useNavigate();
   return (
     <section>
    
+   <button onClick={()=>navigate("/EditPosition/639e427afe569ac184e62fe9")}   id="PositionList">Go To Edit Position </button>
 
      <StickyHeadTable/>
 
