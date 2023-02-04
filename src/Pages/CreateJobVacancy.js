@@ -357,7 +357,7 @@ const CreateJobbVacancy = () => {
 
         console.log("No file have been uploaded");
         const Vacancy = { Positionnn: PositioArray, titleee: PositionChoosen, Esubjecttt: EmailSubject, Ebodyyy: EmailBody, linkExpDateee: value, linkExpTimeee: value, statusss: "Open" }
-
+//https://backend-pinnacle.herokuapp.com
         const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
