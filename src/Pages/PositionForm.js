@@ -142,14 +142,14 @@ const PositionForm = () => {
   const [OpenEndedImportnace, setOpenEndedImportnace] = useState('');
   const [LengthCounter, setLengthCounter] = useState(0);
   const [LengthCounter22, setLengthCounter22] = useState(0);
-  const CHARACTER_LIMIT_ForName = 30;
-  const CHARACTER_LIMIT_ForNoticPeriod = 30;
-  const CHARACTER_LIMIT_ForDescription = 300;
-  const CHARACTER_LIMIT_ForQuestion = 60;
-  const CHARACTER_LIMIT_ForAnswers = 60;
+  const CHARACTER_LIMIT_ForName = 100;
+  const CHARACTER_LIMIT_ForNoticPeriod = 40;
+  const CHARACTER_LIMIT_ForDescription = 500;
+  const CHARACTER_LIMIT_ForQuestion = 150;
+  const CHARACTER_LIMIT_ForAnswers = 150;
   const [valuEE, setvaluEE] = useState(0);
   const min = 0;
-  const max = 25000;
+  const max = 273000;
 
   const triggerImportance = (VALUE, ID) => {
     setImportance(VALUE)

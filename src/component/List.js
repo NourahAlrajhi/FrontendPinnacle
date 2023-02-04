@@ -199,7 +199,12 @@ export default function StickyHeadTable() {
               <TableHead>
                 <TableRow>
                   <TableCell width="70%">
-                  <Typography  style={{ fontSize:"22px"}} fontWeight={700}>
+                  <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              >
                   Positions 
                         </Typography>
        

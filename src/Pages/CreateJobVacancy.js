@@ -88,7 +88,7 @@ const CreateJobbVacancy = () => {
     const [CandidatEmails, setCandidatEmails] = useState([''])
     const [disabled, setDisabled] = useState(true);
     const [isShownCancelButton, setShownCancelButton] = useState(false);
-  
+
     const [disabled2, setdisabled2] = useState(true);
 
     const handleChange = (newValue) => {
@@ -393,9 +393,9 @@ const CreateJobbVacancy = () => {
     function disablePrevDates(startDate) {
         const startSeconds = Date.parse(startDate);
         return (date) => {
-          return Date.parse(date) < startSeconds;
+            return Date.parse(date) < startSeconds;
         }
-      }
+    }
 
 
 
@@ -660,7 +660,7 @@ const CreateJobbVacancy = () => {
                                         width: "330px",
                                         height: "70px",
                                         color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
-                                    }} onClick={()=>navigate(`/PositionForm`)}>Add Position</a></Grid>
+                                    }} onClick={() => navigate(`/PositionForm`)}>Add Position</a></Grid>
 
                             </Grid>
                         </Grid>
@@ -981,12 +981,12 @@ const CreateJobbVacancy = () => {
                                                 <LocalizationProvider dateAdapter={AdapterDayjs} >
 
                                                     <DesktopDatePicker
-                                                    id="DatePicker"
+                                                        id="DatePicker"
                                                         label="Date "
                                                         inputFormat="MM/DD/YYYY"
                                                         value={value}
                                                         onChange={handleChange}
-                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 }}error={false} />}
+                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} error={false} />}
                                                         shouldDisableDate={disablePrevDates(startDate)}
                                                     />
                                                     {" "}
