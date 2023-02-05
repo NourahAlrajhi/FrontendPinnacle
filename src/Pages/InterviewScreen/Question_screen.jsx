@@ -18,7 +18,10 @@ import Webcam from "react-webcam";
 import { useRef } from "react";
 import { useCallback } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import Paper from '@mui/material/Paper';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import parse from 'html-react-parser';
 
 function Question_screen(props) {
 
@@ -202,6 +205,8 @@ function Question_screen(props) {
   let [ArrayOfBlob, setArrayOfBlob] = useState([])
   let [j, setj] = useState(0)
   const [CLICKSENDTOMODEL, setCLICKSENDTOMODEL] = useState(false);
+  const [ButtonAppearnce, setButtonAppearnce] = useState(false);
+
 
 
   console.log(webRef.current)
@@ -478,8 +483,9 @@ function Question_screen(props) {
   // },30000)
 
   const RecrodsArrayForTheModel = async (e) => {
-//https://backend-pinnacle.herokuapp.com/
+    //https://backend-pinnacle.herokuapp.com/
     setCLICKSENDTOMODEL(true)
+    setButtonAppearnce(true)
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/WelcomeInterviewPageForeCandidate/' + CandidateDocID, {
     })
     const json = await response.json()
@@ -492,11 +498,11 @@ function Question_screen(props) {
           console.log(item.RECORDS)
 
 
-          const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS , stepsForQuestionId}
+          const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
           //https://backend-pinnacle.herokuapp.com/
-          const response = await fetch('/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
+          const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(MODEL)
           })
           const json = await response.json()
@@ -514,8 +520,18 @@ function Question_screen(props) {
   }
 
 
+  const showAlertSuccess = () => {
+    var msg = parse('<h3 style="text-align: center">The interview ended successfully</h3>')
+    confirmAlert({
+      message: msg,
+      buttons: []
+    })
+  }
+
   const CallingTheModel = async (e) => {
     setCLICKSENDTOMODEL(true)
+    setButtonAppearnce(true)
+    showAlertSuccess()
     setTimeout(async () => {
       console.log("Enter beginingggggg CallingTheModel")
       const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/EnetrVacancyInfoForeQuestion/' + VacancyID, {
@@ -589,7 +605,7 @@ function Question_screen(props) {
     if (props.activeStep === props.steps.length) {
       //  handleStopRecording()
       setIsRecording(false); // change the state to stop the recording
-      alert('Thank you for visiting our website, your Interview has been recorded')
+      // alert('Thank you for visiting our website, your Interview has been recorded')
 
     }
   }, [props.activeStep])
@@ -599,12 +615,13 @@ function Question_screen(props) {
 
       <Container maxWidth="lg" sx={{ overflow: "auto", marginTop: "0px" }}>
         {props.activeStep === props.steps.length ? (
+          
           <box component="div" className="thanksScreen">
             All Done
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+            {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
+              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
 
-            <box component="div" className="thanksScreen">
-              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box>
           </box>
 
         ) : !FinishInterview ?
