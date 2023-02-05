@@ -617,8 +617,12 @@ function Question_screen(props) {
         {props.activeStep === props.steps.length ? (
           
           <box component="div" className="thanksScreen">
+            {ButtonAppearnce?     <box component="div" className="thanksScreen">
             All Done
             Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+            </box> :null}
+           
+
             {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
               <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
 
