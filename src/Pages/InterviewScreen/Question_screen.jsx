@@ -51,7 +51,8 @@ function Question_screen(props) {
   const [stepsForImportance, setstepsForImportance] = useState([''])
   const [stepsForQuestionId, setstepsForQuestionId] = useState([''])
   const [stepsForRecords, setstepsForRecords] = useState([{}])
-
+const [SubmitTheinterview,setSubmitTheinterview]=useState(false)
+const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
 
 
 
@@ -61,7 +62,10 @@ function Question_screen(props) {
 
   useEffect(() => {
     window.addEventListener('beforeunload', alertUser)
-    //window.addEventListener('unload', handleTabClosing)
+    window.onpopstate = () => {
+      handleStopRecording();
+    }
+    // window.addEventListener('unload', handleTabClosing)
     return () => {
       window.removeEventListener('beforeunload', alertUser)
       // window.removeEventListener('unload', handleTabClosing)
@@ -70,7 +74,8 @@ function Question_screen(props) {
   }, [])
 
   const handleTabClosing = () => {
-    handleSendVideos()
+   // handleSendVideos()
+   handleStopRecording()
   }
 
   const alertUser = (event: any) => {
@@ -89,6 +94,7 @@ function Question_screen(props) {
       const json = await response.json()
       if (response.ok) {
         console.log("Enter welcome page retriveing")
+        setSetCandidateINFOOO(json.Candidate_Info)
         json.Candidate_Info && json.Candidate_Info.map((item, i) => {
           console.log(`${item.id}`)
 
@@ -96,7 +102,10 @@ function Question_screen(props) {
             console.log("enetr the condition of welcome page retriveing")
             console.log(item.Candidate_Name)
             // setFinisHALFhInterview(item.IsStartingTheInterview)
+           
             setCandidateName(item.Candidate_Name)
+            setCandidateName(item.Candidate_Name)
+            setSubmitTheinterview(item.SubmitTheinterview)
             //  setFinisHALFhInterview(item.IsStartingTheInterview)
             if (item.RECORDS.length > 1) {
               setFinishInterview(true)
@@ -207,6 +216,13 @@ function Question_screen(props) {
   const [CLICKSENDTOMODEL, setCLICKSENDTOMODEL] = useState(false);
   const [ButtonAppearnce, setButtonAppearnce] = useState(false);
 
+
+  function handleTests2(index) {
+    let updateData = SetCandidateINFOOO.map((item, i) => {
+      return item.id == CandidateID ? { ...item, SubmitTheinterview: !item.SubmitTheinterview } : item;
+    });
+    setSetCandidateINFOOO(updateData);
+  }
 
 
   console.log(webRef.current)
@@ -557,6 +573,7 @@ function Question_screen(props) {
           console.log("[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]")
         })
 
+
         RecrodsArrayForTheModel()
 
       }
@@ -564,24 +581,13 @@ function Question_screen(props) {
   }
 
   const PassingToTheModel = async (e) => {
-    //https://backend-pinnacle.herokuapp.com/
+   
+ //https://backend-pinnacle.herokuapp.com
+ const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SetIsSubmitEnterview/' + CandidateDocID + '/' + CandidateID, {
+})
 
 
-    const MODEL = { steps, stepsForImportance, RECORDLISTTT: RECORDLIST, stepsForQuestionId }
-    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(MODEL)
-    })
-    const json = await response.json()
-    if (response.ok) {
-      console.log("Sent To The Model sucssfully")
-    }
-
-
-
-
-
+CallingTheModel()
 
   }
 
@@ -624,7 +630,7 @@ function Question_screen(props) {
            
 
             {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
-              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
+              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
 
           </box>
 
@@ -686,6 +692,18 @@ function Question_screen(props) {
 
             </Box>
           </>
+          : !SubmitTheinterview?
+          <box component="div" className="thanksScreen">
+          {ButtonAppearnce?     <box component="div" className="thanksScreen">
+          All Done
+          Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+          </box> :null}
+         
+
+          {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
+            <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
+
+        </box>
           :
 
           <box component="div" className="thanksScreen">
