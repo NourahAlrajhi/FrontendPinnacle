@@ -136,6 +136,20 @@ const PositionForm = () => {
   const [IsNoticPeriod, setIsNoticPeriod] = useState(false);
   const [IsQuestions, setIsQuestions] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [VALIDINPUTFEILDS, setVALIDINPUTFEILDS] = useState(false);
+
+  const [errorMessageDescription, seterrorMessageDescription] = useState("");
+  const [VALIDINPUTFEILDSDescription, setVALIDINPUTFEILDSDescription] = useState(false);
+
+  const [errorMessageNoticePeriod, seterrorMessageNoticePeriod] = useState("");
+  const [VALIDINPUTFEILDSNoticePeriod,setVALIDINPUTFEILDSNoticePeriod] = useState(false);
+
+  const [errorMessageQuestion, seterrorMessageQuestion] = useState("");
+  const [VALIDINPUTFEILDSQuestion, setVALIDINPUTFEILDSQuestion] = useState(false);
+
+  const [errorMessageExpectedAnswer, seterrorMessageExpectedAnswer] = useState("");
+  const [VALIDINPUTFEILDSExpectedAnswer, setVALIDINPUTFEILDSExpectedAnswer] = useState(false);
 
   const [disabled, setDisabled] = useState(false);
   const [OpenEndedAnswer, setOpenEndedAnswer] = useState('');
@@ -269,45 +283,71 @@ const PositionForm = () => {
 
 
 
+  
+
+ 
+
+ 
+
+  
+
+
   const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
   const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
 
   const onInputChange = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
+      setVALIDINPUTFEILDS(false)
+      setErrorMessage("")
       setname(e.target.value);
       setIsName(true);
       if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
+    }else{
+      setVALIDINPUTFEILDS(true)
+      setErrorMessage("Invalid character")
     }
   };
 
   const onInputChange22 = (e) => {
     const { value } = e.target;
     if (isLetters2(value)) {
+      setVALIDINPUTFEILDSDescription(false)
+      seterrorMessageDescription("")
       setdescription(e.target.value);
       setIsDescription(true);
       if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
+    }else{
+      setVALIDINPUTFEILDSDescription(true)
+      seterrorMessageDescription("Invalid character")
     }
   };
 
   const onInputChange33 = (e) => {
     const { value } = e.target;
     if (isLetters2(value)) {
+      setVALIDINPUTFEILDSNoticePeriod(false)
+      seterrorMessageNoticePeriod("")
       setnoticePeriod(e.target.value);
       setIsNoticPeriod(true);
       if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
+    }else{
+      setVALIDINPUTFEILDSNoticePeriod(true)
+      seterrorMessageNoticePeriod("Invalid character")
     }
   };
 
   const onInputChangeForAnswers = (e) => {
     const { value } = e.target;
     if (isLetters2(value)) {
+      setVALIDINPUTFEILDSExpectedAnswer(false)
+      seterrorMessageExpectedAnswer("")
       setLengthCounter(LengthCounter + 1)
       const index = e.target.id;
       console.log(index)
@@ -350,6 +390,9 @@ const PositionForm = () => {
       if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
         setdisabled2(false)
       }
+    }else{
+      setVALIDINPUTFEILDSExpectedAnswer(true)
+      seterrorMessageExpectedAnswer("Invalid character")
     }
   };
 
@@ -357,6 +400,8 @@ const PositionForm = () => {
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
+      setVALIDINPUTFEILDSQuestion(false)
+      seterrorMessageQuestion("")
       setLengthCounter22(LengthCounter22 + 1)
       const index = e.target.id;
       console.log(index)
@@ -399,6 +444,9 @@ const PositionForm = () => {
       if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
         setdisabled2(false)
       }
+    }else{
+      setVALIDINPUTFEILDSQuestion(true)
+      seterrorMessageQuestion("Invalid character")
     }
   };
 
@@ -592,14 +640,15 @@ const PositionForm = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
 
-                        helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
-
+                        helperText={ !VALIDINPUTFEILDS?`${name.length}/${CHARACTER_LIMIT_ForName}`:errorMessage}
+                        error={VALIDINPUTFEILDS}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
+                     error={VALIDINPUTFEILDSDescription}
                       FormHelperTextProps={{
                         classes: {
                           root: helperTextStyles3.root
@@ -618,7 +667,7 @@ const PositionForm = () => {
                       }}
                       inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
 
-                      helperText={`${description.length}/${CHARACTER_LIMIT_ForDescription}`}
+                      helperText={!VALIDINPUTFEILDSDescription?`${description.length}/${CHARACTER_LIMIT_ForDescription}`:errorMessageDescription}
                     />
                   </Grid>
                 </Grid>
@@ -681,6 +730,7 @@ const PositionForm = () => {
                     >
 
                       <TextField
+                         error={VALIDINPUTFEILDSNoticePeriod}
                         FormHelperTextProps={{
                           classes: {
                             root: helperTextStyles2.root
@@ -704,7 +754,7 @@ const PositionForm = () => {
                         }}
                         style={{ width: "250px" }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
-                        helperText={`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`}
+                        helperText={!VALIDINPUTFEILDSNoticePeriod?`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`:errorMessageNoticePeriod}
                       />
                     </FormControl>
                   </Grid>
@@ -755,6 +805,7 @@ const PositionForm = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
+                                    //  error={VALIDINPUTFEILDSQuestion}
                                   FormHelperTextProps={{
                                     classes: {
                                       root: helperTextStyles4.root
@@ -775,7 +826,7 @@ const PositionForm = () => {
                                   }}
                                   // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
 
-                                  helperText={`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`}
+                                  // helperText={/*!VALIDINPUTFEILDSQuestion?`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`:*/errorMessageQuestion}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -803,6 +854,7 @@ const PositionForm = () => {
                               {/*This feild for the question parttttttt*/}
                               <Grid item xs={6} md={3}>
                                 <TextField
+                                  // error={VALIDINPUTFEILDSExpectedAnswer}
                                   FormHelperTextProps={{
                                     classes: {
                                       root: helperTextStyles5.root
@@ -824,7 +876,7 @@ const PositionForm = () => {
                                   }}
                                   // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
 
-                                  helperText={`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`}
+                                  // helperText={/*!VALIDINPUTFEILDSExpectedAnswer?`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`:*/errorMessageExpectedAnswer}
                                 />
                               </Grid>
                               <Grid item xs={5} md={1}>

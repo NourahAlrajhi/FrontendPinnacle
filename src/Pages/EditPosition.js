@@ -122,6 +122,17 @@ const EditPosition = () => {
   const max = 273000;
   const [LengthCounter, setLengthCounter] = useState(0);
   const [LengthCounter22, setLengthCounter22] = useState(0);
+
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const [VALIDINPUTFEILDS, setVALIDINPUTFEILDS] = useState(false);
+
+  const [errorMessageDescription, seterrorMessageDescription] = useState("");
+  const [VALIDINPUTFEILDSDescription, setVALIDINPUTFEILDSDescription] = useState(false);
+
+  const [errorMessageNoticePeriod, seterrorMessageNoticePeriod] = useState("");
+  const [VALIDINPUTFEILDSNoticePeriod,setVALIDINPUTFEILDSNoticePeriod] = useState(false);
+
   const capitalizeWords = (str) => {
     return str
       .toLowerCase()
@@ -382,7 +393,12 @@ const EditPosition = () => {
   const onInputChange = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
+      setVALIDINPUTFEILDS(false)
+      setErrorMessage("")
       setname(e.target.value)
+    }else{
+      setVALIDINPUTFEILDS(true)
+      setErrorMessage("Invalid character")
     }
   };
 
@@ -391,8 +407,13 @@ const EditPosition = () => {
     const { value } = e.target;
     console.log(value)
     if (isLetters2(value)) {
+      setVALIDINPUTFEILDSDescription(false)
+      seterrorMessageDescription("")
       console.log("lllllllllllollllppppp")
       setdescription(e.target.value)
+    }else{
+      setVALIDINPUTFEILDSDescription(true)
+      seterrorMessageDescription("Invalid character")
     }
   };
 
@@ -400,7 +421,12 @@ const EditPosition = () => {
   const onInputChange33 = (e) => {
     const { value } = e.target;
     if (isLetters2(value)) {
+      setVALIDINPUTFEILDSNoticePeriod(false)
+      seterrorMessageNoticePeriod("")
       setnoticePeriod(e.target.value)
+    }else{
+      setVALIDINPUTFEILDSNoticePeriod(true)
+      seterrorMessageNoticePeriod("Invalid character")
     }
   };
 
@@ -524,13 +550,15 @@ const EditPosition = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
 
-                        helperText={`${name.length}/${CHARACTER_LIMIT_ForName}`}
+                        helperText={ !VALIDINPUTFEILDS?`${name.length}/${CHARACTER_LIMIT_ForName}`:errorMessage}
+                        error={VALIDINPUTFEILDS}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
+                         error={VALIDINPUTFEILDSDescription}
                      data-testid="PositionDescription"
                       FormHelperTextProps={{
                         classes: {
@@ -552,7 +580,7 @@ const EditPosition = () => {
                       }}
                       inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
 
-                      helperText={`${description.length}/${CHARACTER_LIMIT_ForDescription}`}
+                      helperText={!VALIDINPUTFEILDSDescription?`${description.length}/${CHARACTER_LIMIT_ForDescription}`:errorMessageDescription}
                     />
                   </Grid>
                 </Grid>
@@ -611,6 +639,8 @@ const EditPosition = () => {
                     >
 
                       <TextField
+                                               error={VALIDINPUTFEILDSNoticePeriod}
+
                                    data-testid="PositionNoticePeriod"
                         FormHelperTextProps={{
                           classes: {
@@ -638,7 +668,7 @@ const EditPosition = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
 
-                        helperText={`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`}
+                        helperText={!VALIDINPUTFEILDSNoticePeriod?`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`:errorMessageNoticePeriod}
 
                       />
                     </FormControl>
