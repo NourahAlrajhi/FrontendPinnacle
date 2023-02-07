@@ -8,7 +8,7 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import parse from 'html-react-parser';
 import { DataGrid } from '@mui/x-data-grid';
-import  StickyHeadTable  from '../component/List';
+import StickyHeadTable from '../component/List';
 
 const PositionList = () => {
   /*const [searchInput, setSearchInput] = useState("");
@@ -98,17 +98,14 @@ const PositionList = () => {
   const navigate = useNavigate();
   return (
     <section>
-   
-   {/* <button onClick={()=>navigate("/EditPosition/639e427afe569ac184e62fe9")}   id="PositionList">Go To Edit Position </button> */}
 
-     <StickyHeadTable/>
+      {/* <button onClick={()=>navigate("/EditPosition/639e427afe569ac184e62fe9")}   id="PositionList">Go To Edit Position </button> */}
+
+
+      <StickyHeadTable />
 
     </section>
   )
 }
 
 export default PositionList
-
-
-
-

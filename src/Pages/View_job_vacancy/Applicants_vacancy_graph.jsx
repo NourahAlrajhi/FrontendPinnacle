@@ -69,7 +69,7 @@ export const data = {
   }]
 };
 
-export default function Applicants_vacancy_graph({DATA1,DATA2}) {
+export default function Applicants_vacancy_graph({ DATA1, DATA2 }) {
   console.log("=============00000000000")
   console.log(DATA1)
   console.log("=============00000000000")
@@ -93,7 +93,7 @@ export default function Applicants_vacancy_graph({DATA1,DATA2}) {
       barPercentage: 0.3,
     }]
   };
-  
+
   return (
     <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }} className="calendar_graph_box">
       <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Calendar</Typography>

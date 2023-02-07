@@ -11,7 +11,16 @@ import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import { AdvancedVideo } from '@cloudinary/react';
 import { Cloudinary } from "@cloudinary/url-gen";
-
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 // Import required actions and qualifiers.
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
@@ -23,9 +32,85 @@ import FormControl from "@mui/material/FormControl";
 import { Button, Divider, Grid } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import Rating_chart from './Rating_chart';
+import FilterWord_graph from './FilterWord_graph';
+
+export const options = {
+
+  responsive: true,
+  plugins: {
+      legend: {
+          display: false,
+          position: 'bottom',
+      },
+
+      title: {
+          display: false,
+          text: 'Chart.js Bar Chart',
+      },
+      layout: {
+          padding: 50
+      },
+
+
+  },
+  scales: {
+      x: {
+          beginAtZero: true,
+          grid: {
+              color: 'transparent',
+
+          }
+      },
+      y: {
+          border: {
+              display: false
+          },
+      }
+  }
+
+};
+const labels = ['Filter Words'];
+
+
+export const options2 = {
+  responsive: true,
+  plugins: {
+      legend: {
+          display: false,
+          position: 'top',
+      },
+      title: {
+          display: false,
+          text: 'Chart.js Bar Chart',
+      },
+      layout: {
+          padding: 50
+      },
+
+  },
+  scales: {
+      x: {
+          beginAtZero: true,
+          grid: {
+              color: 'transparent',
+
+          }
+      },
+      y: {
+          border: {
+              display: false
+          },
+
+      }
+  }
+
+};
+const labels2 = ['Answers Similarity'];
 
 export default function Interview_result() {
   const { Recruiter } = useRecruiterContext()
+
 
   const { id2 } = useParams();
   const { id3 } = useParams();
@@ -45,6 +130,34 @@ export default function Interview_result() {
 
   const [ChooseOneQuestion, setChooseOneQuestion] = useState(true)
 
+  const data1 = {
+    labels: labels,
+
+    datasets: [{
+        label: 'Applicants per Open Vacancy',
+        data: [CandidateChoosenPercentage],
+        backgroundColor: [
+            '#ae6fe1',
+        ],
+        borderRadius: 10,
+        barPercentage: 0.1,
+    }],
+
+};
+
+
+const dat2 = {
+  labels: labels2,
+  datasets: [{
+      label: 'Applicants per Open Vacancy',
+      data: [CandidateChoosenPercentage],
+      backgroundColor: [
+          '#b1e2fe',
+      ],
+      borderRadius: 10,
+      barPercentage: 0.1,
+  }]
+};
 
   // Create and configure your Cloudinary instance.
   /* cloudinary.config({
@@ -140,7 +253,7 @@ export default function Interview_result() {
       {/* ----Interview_result_box---- */}
       <Box className="Interview_result_box">
         {/* -user card- */}
-        <Box className='user_card' sx={{ width: "100%", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "20vh" }}>
+        {/* <Box className='user_card' sx={{ width: "100%", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "20vh" }}>
           <Card sx={{ width: "min(300px , 100%)", background: "#F7F9FB", border: "2px solid #1C1C1C", borderRadius: "16px" }}>
             <CardContent sx={{ display: "flex" }}>
               <Stack direction="row" alignItems="center" spacing={2}>
@@ -158,24 +271,49 @@ export default function Interview_result() {
               </Stack>
             </CardContent>
           </Card>
+        </Box> */}
+
+        {/* ----change---- */}
+        <Box className='user_card' sx={{ width: { xs: "100%", lg: "90%" }, margin: "auto", padding: "10px", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "20vh" }} >
+          <Grid container>
+            <Grid item xs={12} sm={6} lg={2} mt={2} sx={{ display: "flex", justifyContent: { xs: 'start', lg: "center" }, alignItems: "center" }}>
+              {/* <img style={{ width: "100px", height: "100px", borderRadius: "50%", margin: "-1rem 0 0 0" }} src="https://picsum.photos/200/300" alt="img" /> */}
+              <AccountCircleIcon sx={{ height: "100px", width: "100px", color: "gray", margin: "-1.5rem 0 0 0" }} />
+            </Grid>
+            <Grid item xs={12} sm={6} lg={3} mt={2}>
+              <Typography sx={{ background: "#EFF0F6", marginBottom: "10px", padding: "5px 1rem", borderRadius: "10px", display: "inline-block", fontWeight: "600" }}>Candidate Name</Typography>
+              <Typography variant='subtitle2' sx={{ fontSize: "1.3rem", fontWeight: "600" }}>{CandidateName}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} lg={3} mt={2}>
+              <Typography sx={{ background: "#EFF0F6", marginBottom: "10px", padding: "5px 1rem", borderRadius: "10px", display: "inline-block", fontWeight: "600" }}>Phone Number</Typography>
+              <Typography variant='subtitle2' sx={{ fontSize: "1.3rem", fontWeight: "600" }}>{CandidatePhoneNumber}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} lg={3} mt={2}>
+              <Typography sx={{ background: "#EFF0F6", marginBottom: "10px", padding: "5px 1rem", borderRadius: "10px", display: "inline-block", fontWeight: "600" }}>Final Decision</Typography> <br />
+              {/* <Typography variant='subtitle2' sx={{ fontSize: "1.3rem", fontWeight: "600" }}>{CandidateName}</Typography> */}
+              <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: CandidateResultr == "Passed" ? "#DEF8EE" : "red", fontWeight: "600", color: CandidateResultr == "Passed" ? "#4AA785" : "white", borderRadius: "10px" }}>{CandidateResultr} {CandidatePercentageResult}%</Box>
+            </Grid>
+
+          </Grid>
         </Box>
+        {/* ----//chaage---- */}
 
         {/* --- Final Decision ---*/}
-        <Box>
-          <Typography variant='h6' >Final Decision</Typography>
-          {/* passed */}
-          <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: CandidateResultr == "Passed" ? "#DEF8EE" : "red", fontWeight: "600", color: CandidateResultr == "Passed" ? "#4AA785" : "white", borderRadius: "10px" }}>{CandidateResultr} {CandidatePercentageResult}%</Box>
-          {/* Not Attended */}
-          {/* <Box component="span" sx={{display:"inline-block" ,margin:"10px 0", padding:"5px 15px" , background:"#DEF8EE"  , fontWeight:"600", color:"#4AA785" , borderRadius:"10px"}}>Not Attended </Box> */}
-          {/* Failed */}
-          {/* <Box component="span" sx={{display:"inline-block" ,margin:"10px 0", padding:"5px 15px" , background:"#DEF8EE"  , fontWeight:"600", color:"#4AA785" , borderRadius:"10px"}}>Failed</Box> */}
-        </Box>
+        {/* <Box> */}
+        {/* <Typography variant='h6' >Final Decision</Typography> */}
+        {/* passed */}
+        {/* <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: CandidateResultr == "Passed" ? "#DEF8EE" : "red", fontWeight: "600", color: CandidateResultr == "Passed" ? "#4AA785" : "white", borderRadius: "10px" }}>{CandidateResultr} {CandidatePercentageResult}%</Box> */}
+        {/* Not Attended */}
+        {/* <Box component="span" sx={{display:"inline-block" ,margin:"10px 0", padding:"5px 15px" , background:"#DEF8EE"  , fontWeight:"600", color:"#4AA785" , borderRadius:"10px"}}>Not Attended </Box> */}
+        {/* Failed */}
+        {/* <Box component="span" sx={{display:"inline-block" ,margin:"10px 0", padding:"5px 15px" , background:"#DEF8EE"  , fontWeight:"600", color:"#4AA785" , borderRadius:"10px"}}>Failed</Box> */}
+        {/* </Box> */}
 
         {/* ---Detailed Analysis--- */}
-        <Box mt={5}>
+        {/* <Box mt={5}>
           <Typography variant='h6' mt={2}>Detailed Analysis</Typography>
           <Grid item xs={12}>
-            {/* input 1 */}
+
             <FormControl
               sx={{ mt: 3, ml: 3, width: "min(100% , 279px)" }}
               variant="outlined"
@@ -203,25 +341,84 @@ export default function Interview_result() {
             </FormControl>
           </Grid>
 
+        </Box> */}
+
+        {/* ----change---- */}
+        <Box className='Detailed' sx={{ width: { xs: "100%", md: "80%" }, margin: "auto" }}>
+        <Grid item xs={12}>
+
+<FormControl
+  sx={{ mt: 3, ml: 3, width: "min(100% , 279px)" ,marginLeft:"1px"}}
+  variant="outlined"
+>
+
+  <TextField
+    id="outlined-select-currency"
+    select
+    // value={item.value}
+    //     onChange={handleChange}
+    //  id={i}
+    label="Select A Question To View The Details"
+    //defaultValue="EUR"
+    className='imprtanceOfQ'
+    style={{
+      width: "940px"
+    }}
+  >
+    {QUESTIONS && QUESTIONS.map((option, index) => (
+      <MenuItem key={option.id} value={option.id} onClick={() => OnChoosenQuestion(option.id, index)}>
+        {option.questions}
+      </MenuItem>
+    ))}
+  </TextField>
+</FormControl>
+</Grid>
+          <Typography variant='h6' my={2}>Detailed Analysis</Typography>
+         
+          <Grid container spacing={3}>
+            {/* ---graph 1--- */}
+            <Grid item xs={12} md={6} lg={5} sx={{ margin: "auto" }}>
+              {/* <Rating_chart DATA={CandidateChoosenPercentage}/> */}
+              <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }}>
+                <Bar options={options2} data={dat2} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
+            </Box>
+              <Stack direction="row" alignItems="center" justifyContent="center" gap="5px" mt={2}>
+                <Typography>Answers Similarity</Typography>
+                <Box component="span" sx={{ background: "#b1e2fe", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}> {ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
+              </Stack>
+            </Grid>
+            {/* ---//graph 1--- */}
+            {/* ---graph 2--- */}
+            <Grid item xs={12} md={6} lg={5} sx={{ margin: "auto" }}>
+            <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }}>
+                <Bar options={options} data={data1} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
+            </Box>
+              {/* <FilterWord_graph DATA={CandidateChoosenPercentage}/> */}
+              <Stack direction="row" alignItems="center" justifyContent="center" gap="5px" mt={2} >
+                <Typography>Filler Words</Typography>
+                <Box component="span" sx={{ background: "#ae6fe1", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
+              </Stack>
+            </Grid>
+            {/* ---//graph 2--- */}
+          </Grid>
         </Box>
+        {/* ----//change---- */}
+        {/* ------------- */}
 
-        <Box mt={5} sx={{ position: "absolute"}}>
+        {/* <Box mt={5} sx={{ position: "absolute" }}>
 
-          <Stack direction="row" marginLeft="700px" alignItems="center" gap="5px" mt={2}>
-            <Typography>Answers Similarities </Typography>
-            <Box component="span" sx={{ background: "#A8C5DA", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}> {ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
-          </Stack>
           <Stack direction="row" marginLeft="760px" alignItems="center" gap="5px" mt={2} >
             <Typography>Filler Words</Typography>
             <Box component="span" sx={{ background: "#95A4FC", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
           </Stack>
-        </Box>
+        </Box> */}
 
-        <Box sx={{ display: "flex", marginTop: "1px", margin: "2rem", overflow: "scroll" }}>
+        <Box sx={{ width: { xs: "100%", md: "80%" }, margin: "2rem auto" }}>
 
-
-          <AdvancedVideo style={{ width: "min(600px , 98%)", marginLeft: "50px", aspactRatio: "16 / 12", borderRadius: "10px" }} cldVid={SelectedRecord} controls />
-
+          <Typography variant='h6' my={2} sx={{ textAlign: "left" }}>Interview Recording</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <AdvancedVideo style={{ width: "min(600px , 98%)", aspactRatio: "16 / 12", borderRadius: "10px" }} cldVid={SelectedRecord} controls />
+          </Box>
 
 
           {/* <video style={{ width: "min(500px , 98%)", margin: "auto", aspactRatio: "16 / 12", borderRadius: "10px" }} controls>

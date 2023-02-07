@@ -44,6 +44,7 @@ import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import IosShareIcon from '@mui/icons-material/IosShare';
 
 function createData(name, calories, fat) {
   return { name, calories, fat };
@@ -178,6 +179,10 @@ export default function Result_table({ exportBtnId, VacancyID }) {
   // ----//popover function------
 
   let navigate = useNavigate()
+
+
+
+
   return (
     <>
       {/* table_main_container => add custom css */}
@@ -259,16 +264,16 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                         <RxDotFilled />    {item.Result}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
-                      {
-                        item.Result === "Not Attended" ?
-                          showAlertSuccess()
-                          :
-                          navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
+                        {
+                          item.Result === "Not Attended" ?
+                            showAlertSuccess()
+                            :
+                            navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 
-                      }
-                    }}>
-                      <GrShare size={20} />
-                    </TableCell>
+                        }
+                      }}>
+                        <IosShareIcon size={20} style={{ transform: "rotate(90deg)", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} />
+                      </TableCell>
                     </TableRow>
                   )
                   )
@@ -291,7 +296,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                     <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
                       <RxDotFilled />    {item.Result}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
+                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : [item.Result == "Passed" ? "#14359F" : "gray"] }} onClick={() => {
                       {
                         item.Result === "Not Attended" ?
                           showAlertSuccess()
@@ -300,7 +305,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
 
                       }
                     }}>
-                      <GrShare size={20} />
+                      <IosShareIcon size={20} style={{ transform: "rotate(90deg)", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} />
                     </TableCell>
 
 

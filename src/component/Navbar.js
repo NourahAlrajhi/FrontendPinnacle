@@ -36,22 +36,22 @@ const Navbar = (props) => {
   let { Name } = useParams();
   console.log(id)
   console.log(Name)
-  if(Name!= null){
-    myString='';
-   myString = Name;
-  myString = myString.replace(/\s+/g, '%20');
+  if (Name != null) {
+    myString = '';
+    myString = Name;
+    myString = myString.replace(/\s+/g, '%20');
 
-  Name=Name
+    Name = Name
       .toLowerCase()
       .split(' ')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
- 
 
-  console.log(myString);
+
+    console.log(myString);
   }
   /* const JobVacancyName = async () => {
- 
+
        const response = await fetch('/api/Candidate/VacancyName/'+ id, {
            headers: { 'Authorization': `Bearer ${Recruiter.token}` },
        })
@@ -61,11 +61,11 @@ const Navbar = (props) => {
            console.log("===========")
            console.log(VacancyName)
            console.log("===========")
-          
+
  return VacancyName
        }
-   
- 
+
+
    }
    if (Recruiter) {
      JobVacancyName()

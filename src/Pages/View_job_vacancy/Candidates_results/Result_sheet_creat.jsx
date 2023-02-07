@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import { useRecruiterContext } from "../../../Hook/UseRecruiterContext"
 import { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx';
-import {OutTable, ExcelRenderer} from 'react-excel-renderer';
+import { OutTable, ExcelRenderer } from 'react-excel-renderer';
+import img_png from "./../../../images/Featured Icon pinncle.png"
 
 
 function Result_sheet_creat({ exportBtnId, VacancyID }) {
@@ -22,17 +23,17 @@ function Result_sheet_creat({ exportBtnId, VacancyID }) {
     let fileObj = event.target.files[0];
     //just pass the fileObj as parameter
     ExcelRenderer(fileObj, (err, resp) => {
-      if(err){
-        console.log(err);            
+      if (err) {
+        console.log(err);
       }
-      else{
+      else {
         this.setState({
           cols: resp.cols,
           rows: resp.rows
         });
       }
-    });               
-  } 
+    });
+  }
 
   const downloadExcel = (data) => {
     let CandidateALLINFO = [{}]
@@ -41,9 +42,9 @@ function Result_sheet_creat({ exportBtnId, VacancyID }) {
       CandidateALLINFO[j] = {
         Candidate_Name: item.Candidate_Name,
         Candidate_Email: item.Candidate_Email,
-        Candidate_Phone__Number:item.Candidate_Phone__Number,
-        Result:item.Result
-    }
+        Candidate_Phone__Number: item.Candidate_Phone__Number,
+        Result: item.Result
+      }
 
       j = i + 1
     })
@@ -109,19 +110,26 @@ function Result_sheet_creat({ exportBtnId, VacancyID }) {
       {/* btn css in custom css */}
       <Button
         className="download-table-xls-button"
-        style={{ background: "#14359F",  border: "1px  rgba(0, 0, 0, 0.1)",
-        borderRadius:"8px",
-        color:"white",
-        padding: "0.8rem 1.5rem ",
-        cursor: "pointer",
-        
-         }}
+        style={{
+          color: "#14359F",
+          border: "1px  solid rgba(0, 0, 0, 0.1)",
+          borderRadius: "8px",
+          padding: "0.8rem 1rem ",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          gap: "5px",
+          fontWeight: 600,
+
+
+        }}
         //  table={exportBtnId}
         //  filename={VACANCYNAME+'Result'}
         //  sheet="tablexls"
         //   buttonText="Export"
-        onClick={() => {downloadExcel(CandidatInfo);setisClicked(true)}}
-      ><p style={{fontWeight: 600}}>Export</p></Button>
+        onClick={() => { downloadExcel(CandidatInfo); setisClicked(true) }}
+      > <img src={img_png} alt="img" style={{ width: "30px" }} /><p style={{ color: "inherit" }}>Export Results Sheet</p></Button>
+
     </Box>
   )
 }

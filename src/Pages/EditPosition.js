@@ -131,7 +131,7 @@ const EditPosition = () => {
   const [VALIDINPUTFEILDSDescription, setVALIDINPUTFEILDSDescription] = useState(false);
 
   const [errorMessageNoticePeriod, seterrorMessageNoticePeriod] = useState("");
-  const [VALIDINPUTFEILDSNoticePeriod,setVALIDINPUTFEILDSNoticePeriod] = useState(false);
+  const [VALIDINPUTFEILDSNoticePeriod, setVALIDINPUTFEILDSNoticePeriod] = useState(false);
 
   const capitalizeWords = (str) => {
     return str
@@ -201,21 +201,37 @@ const EditPosition = () => {
     event.preventDefault()
     console.log('enterrrrrrrrrrr cancel')
 
-    var msg = parse('<h3 style="text-align: center">Are you sure you want to Discard position changes?</h3>')
+    // var msg = parse('<h3 style="text-align: center">Are you sure you want to Discard position changes?</h3>')
     confirmAlert({
-      message: msg,
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => handleCancelClick(event),
+      // title: 'Confirm to submit',
+      // message: msg,
+      // buttons: [
+      //   {
+      //     label: 'Yes',
+      //     onClick: () => handleCancelClick(event),
 
-        },
-        {
-          label: 'No',
-          onClick: () => setAnchorEl(null)
-        }
+      //   },
+      //   {
+      //     label: 'No',
+      //     onClick: () => setAnchorEl(null)
+      //   }
 
-      ]
+      // ]
+      // ----change ui---
+      customUI: () => {
+        return (
+          <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+            <h3>Confirmation Message</h3>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Send Interview Invitations To Candidates?</p>
+
+            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+              <button onClick={() => setAnchorEl(null)} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+              <button onClick={() => handleCancelClick(event)} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+            </div>
+          </div>
+        )
+      }
+      // ----//change ui---
     })
 
   }
@@ -242,9 +258,9 @@ const EditPosition = () => {
 
   const handleChange = e => {
     e.preventDefault();
-    setLengthCounter(LengthCounter+1)
+    setLengthCounter(LengthCounter + 1)
     console.log("Enterr handleChangeediiittttt")
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setLengthCounter(0)
     }
     const index = e.target.id;
@@ -383,8 +399,8 @@ const EditPosition = () => {
   const helperTextStyles = useHelperTextStyles();
   const helperTextStyles2 = useHelperTextStyles2()
   const helperTextStyles3 = useHelperTextStylesForDescription()
-  const helperTextStyles4 =  useHelperTextStylesForQuestion()
-  const helperTextStyles5 =  useHelperTextStylesForAnswers()
+  const helperTextStyles4 = useHelperTextStylesForQuestion()
+  const helperTextStyles5 = useHelperTextStylesForAnswers()
 
   const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
   const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
@@ -396,7 +412,7 @@ const EditPosition = () => {
       setVALIDINPUTFEILDS(false)
       setErrorMessage("")
       setname(e.target.value)
-    }else{
+    } else {
       setVALIDINPUTFEILDS(true)
       setErrorMessage("Invalid character")
     }
@@ -411,7 +427,7 @@ const EditPosition = () => {
       seterrorMessageDescription("")
       console.log("lllllllllllollllppppp")
       setdescription(e.target.value)
-    }else{
+    } else {
       setVALIDINPUTFEILDSDescription(true)
       seterrorMessageDescription("Invalid character")
     }
@@ -424,7 +440,7 @@ const EditPosition = () => {
       setVALIDINPUTFEILDSNoticePeriod(false)
       seterrorMessageNoticePeriod("")
       setnoticePeriod(e.target.value)
-    }else{
+    } else {
       setVALIDINPUTFEILDSNoticePeriod(true)
       seterrorMessageNoticePeriod("Invalid character")
     }
@@ -433,9 +449,9 @@ const EditPosition = () => {
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
     if (isLetters(value)) {
-      setLengthCounter22(LengthCounter22+1)
+      setLengthCounter22(LengthCounter22 + 1)
       const index = e.target.id;
-      if(e.target.value == ""){
+      if (e.target.value == "") {
         setLengthCounter22(0)
       }
       getConsumer(s => {
@@ -458,9 +474,9 @@ const EditPosition = () => {
   const onInputChangeForAnswers = (e) => {
     const { value } = e.target;
     if (isLetters2(value)) {
-      setLengthCounter(LengthCounter+1)
+      setLengthCounter(LengthCounter + 1)
       const index = e.target.id;
-      if(e.target.value == ""){
+      if (e.target.value == "") {
         setLengthCounter(0)
       }
       getConsumer(s => {
@@ -521,8 +537,8 @@ const EditPosition = () => {
                     >
 
                       <TextField
-                      data-testid="PositionName"
-                      
+                        data-testid="PositionName"
+
                         FormHelperTextProps={{
                           classes: {
                             root: helperTextStyles.root
@@ -541,7 +557,6 @@ const EditPosition = () => {
                         value={capitalizeWords(name)}
                         disabled={disabled}
                         placeholder="Enter Position Name"
-                        placeholder="Enter Position Name"
                         style={{
                           width: "250px"
                         }}
@@ -550,7 +565,7 @@ const EditPosition = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
 
-                        helperText={ !VALIDINPUTFEILDS?`${name.length}/${CHARACTER_LIMIT_ForName}`:errorMessage}
+                        helperText={!VALIDINPUTFEILDS ? `${name.length}/${CHARACTER_LIMIT_ForName}` : errorMessage}
                         error={VALIDINPUTFEILDS}
                       />
                     </FormControl>
@@ -558,8 +573,8 @@ const EditPosition = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
-                         error={VALIDINPUTFEILDSDescription}
-                     data-testid="PositionDescription"
+                      error={VALIDINPUTFEILDSDescription}
+                      data-testid="PositionDescription"
                       FormHelperTextProps={{
                         classes: {
                           root: helperTextStyles3.root
@@ -571,7 +586,7 @@ const EditPosition = () => {
                       onChange={onInputChange22}
                       rows={4}
                       disabled={disabled}
-                   
+
                       value={description}
                       placeholder="Enter Job Description"
                       sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
@@ -580,7 +595,7 @@ const EditPosition = () => {
                       }}
                       inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
 
-                      helperText={!VALIDINPUTFEILDSDescription?`${description.length}/${CHARACTER_LIMIT_ForDescription}`:errorMessageDescription}
+                      helperText={!VALIDINPUTFEILDSDescription ? `${description.length}/${CHARACTER_LIMIT_ForDescription}` : errorMessageDescription}
                     />
                   </Grid>
                 </Grid>
@@ -639,9 +654,9 @@ const EditPosition = () => {
                     >
 
                       <TextField
-                                               error={VALIDINPUTFEILDSNoticePeriod}
+                        error={VALIDINPUTFEILDSNoticePeriod}
 
-                                   data-testid="PositionNoticePeriod"
+                        data-testid="PositionNoticePeriod"
                         FormHelperTextProps={{
                           classes: {
                             root: helperTextStyles2.root
@@ -649,7 +664,7 @@ const EditPosition = () => {
                         }}
                         id="outlined-required3"
                         label="Notic Period"
-                        onChange={onInputChange33 }
+                        onChange={onInputChange33}
                         value={capitalizeWords(noticePeriod)}
                         InputProps={{
                           startAdornment: (
@@ -668,7 +683,7 @@ const EditPosition = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
 
-                        helperText={!VALIDINPUTFEILDSNoticePeriod?`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`:errorMessageNoticePeriod}
+                        helperText={!VALIDINPUTFEILDSNoticePeriod ? `${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}` : errorMessageNoticePeriod}
 
                       />
                     </FormControl>
@@ -721,8 +736,8 @@ const EditPosition = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
-                                          data-testid="PositionQuestion"
-                                   FormHelperTextProps={{
+                                  data-testid="PositionQuestion"
+                                  FormHelperTextProps={{
                                     classes: {
                                       root: helperTextStyles4.root
                                     }
@@ -731,7 +746,7 @@ const EditPosition = () => {
                                   //  id="outlined-required"
                                   label="Question"
                                   value={arr.questions}
-                                  inputProps={{ "data-id": 0, "data-field-type": "questions",maxlength: CHARACTER_LIMIT_ForQuestion  }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "questions", maxlength: CHARACTER_LIMIT_ForQuestion }}
                                   //  className='questions'
                                   onChange={onInputChangeForQuestion}
                                   id={i}
@@ -741,7 +756,7 @@ const EditPosition = () => {
                                     shrink: true,
                                   }}
                                   style={{ width: "200px" }}
-                                  // helperText={`${arr.questions.length}/${CHARACTER_LIMIT_ForQuestion}`}
+                                // helperText={`${arr.questions.length}/${CHARACTER_LIMIT_ForQuestion}`}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -770,18 +785,18 @@ const EditPosition = () => {
 
                               <Grid item xs={6} md={3}>
                                 <TextField
-                                data-testid="PositionExpectedAmswer"
-                                     FormHelperTextProps={{
-                                      classes: {
-                                        root: helperTextStyles5.root
-                                      }
-                                    }}
+                                  data-testid="PositionExpectedAmswer"
+                                  FormHelperTextProps={{
+                                    classes: {
+                                      root: helperTextStyles5.root
+                                    }
+                                  }}
                                   type="text"
                                   disabled={!arr.SelectedToBeOpenQuestion ? disabled : !disabled}
                                   // id="outlined-required"
                                   label=" Expected Answer"
                                   value={arr.expectedAnswers}
-                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers",maxlength: CHARACTER_LIMIT_ForAnswers }}
+                                  inputProps={{ "data-id": 0, "data-field-type": "expectedAnswers", maxlength: CHARACTER_LIMIT_ForAnswers }}
                                   // className='expectedAnswers'
                                   onChange={onInputChangeForAnswers}
                                   id={i}
@@ -791,17 +806,17 @@ const EditPosition = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-                                  // helperText={`${arr.expectedAnswers.length}/${CHARACTER_LIMIT_ForAnswers}`}
+                                // helperText={`${arr.expectedAnswers.length}/${CHARACTER_LIMIT_ForAnswers}`}
                                 />
 
                               </Grid>
                               <Grid item xs={5} md={1}>
                                 <FormControl fullWidth>
                                   <TextField
-                                    id="outlined-select-currency"
+                                    // id="outlined-select-currency"
                                     select
                                     value={arr.imprtanceOfQ}
-                                    //     onChange={handleChange}
+                                    //onChange={handleChange}
                                     id={i}
                                     disabled={!arr.SelectedToBeOpenQuestion ? disabled : !disabled}
                                     label="importance"

@@ -23,7 +23,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function LongMenu2({ Vacancyy , VacancyyName}) {
+export default function LongMenu2({ Vacancyy, VacancyyName }) {
     const { Recruiter } = useRecruiterContext()
     const { Positions, dispatch } = usePositionsContext()
     const { Vacancy, dispatchhh } = useVacancyContext()
@@ -38,27 +38,27 @@ export default function LongMenu2({ Vacancyy , VacancyyName}) {
         if (e === "View") {
             console.log(Vacancyy)
             navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/${Vacancyy}/${VacancyyName}`)
-        
-        }else if(e=="Delete"){
-          
-                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Job Vacancy?</h3>')
-                confirmAlert({
-                    message: msg,
-                    buttons: [
-                        {
-                            label: 'Yes',
-                            onClick: () => handleClick22(Vacancyy)
-                        },
-                        {
-                            label: 'No',
-                            onClick: () => navigate("/Dashboard/View_job_vacancy_main")
-                        }
-        
-                    ]
-                })
-            
-        
-       
+
+        } else if (e == "Delete") {
+
+            var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Job Vacancy?</h3>')
+            confirmAlert({
+                message: msg,
+                buttons: [
+                    {
+                        label: 'Yes',
+                        onClick: () => handleClick22(Vacancyy)
+                    },
+                    {
+                        label: 'No',
+                        onClick: () => navigate("/Dashboard/View_job_vacancy_main")
+                    }
+
+                ]
+            })
+
+
+
         }
         else {
             setAnchorEl(null);
@@ -94,7 +94,7 @@ export default function LongMenu2({ Vacancyy , VacancyyName}) {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-                  <MoreHorizIcon sx={{ color: "gray" }} />
+                <MoreHorizIcon sx={{ color: "gray" }} />
             </IconButton>
             <Menu
                 id="long-menu"

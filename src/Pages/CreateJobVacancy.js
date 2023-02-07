@@ -558,7 +558,7 @@ const CreateJobbVacancy = () => {
                  const response = await fetch('/api/Candidate/sendEmail', {
                      method: 'POST',
                      body: JSON.stringify(Positionssss),
-                     headers: { 
+                     headers: {
                          'Content-Type': 'application/json',
                          'Authorization': `Bearer ${Recruiter.token}` },
                  }).then(response => {

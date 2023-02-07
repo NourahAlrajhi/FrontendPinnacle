@@ -57,7 +57,7 @@ interface Data {
     name: string;
   Last Edited: string;
 More: component;
-  
+
 }
 
 function createData(
@@ -178,7 +178,7 @@ export default function StickyHeadTable() {
         <Grid item xs={12} sx={{ textAlign: "end", marginTop: { xs: "10px", md: "auto" } }}>
           {/* ---upper bar button--- */}
           <Link to="/PositionForm">
-            <Button variant='contained' sx={{ backgroundColor: "#14359F" }} startIcon={<AddIcon />}>New Position</Button></Link>
+            <Button variant='contained' sx={{ backgroundColor: "#14359F" }} startIcon={<AddIcon />} className="hoverButton">New Position</Button></Link>
         </Grid>
         <Grid item xs={12}>
 
@@ -192,6 +192,7 @@ export default function StickyHeadTable() {
               maxHeight: { xs: "auto", md: "74vh" },
               width: "100%",
               overflow: "auto",
+              padding: { xs: "0 1rem", md: "0 2rem" },
             }}
             className="table_Positions"
           >
@@ -199,44 +200,44 @@ export default function StickyHeadTable() {
               <TableHead>
                 <TableRow>
                   <TableCell width="70%">
-                  <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-              >
-                  Positions 
-                        </Typography>
-       
+                    <Typography
+                      variant="h6"
+                      noWrap
+                      component="div"
+                      sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                    >
+                      Positions
+                    </Typography>
+
                   </TableCell>
                   <TableCell align="right"></TableCell>
                   <TableCell align="right">
                     <Box sx={{ position: "sticky", top: "-10px", background: "white", zIndex: "6" }}>
-                    <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>
-            <Toolbar>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-              >
-                {/* Active Jop Vacancies */}
-              </Typography>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  placeholder="Search…"
-                  inputProps={{ 'aria-label': 'search' }}
-                  onChange={(e) => search(e.target.value)}
+                      <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>
+                        <Toolbar>
+                          <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                          >
+                            {/* Active Jop Vacancies */}
+                          </Typography>
+                          <Search>
+                            <SearchIconWrapper>
+                              <SearchIcon />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                              placeholder="Search…"
+                              inputProps={{ 'aria-label': 'search' }}
+                              onChange={(e) => search(e.target.value)}
 
 
-                />
-              </Search>
-            </Toolbar>
-          </AppBar>   
-                              </Box>
+                            />
+                          </Search>
+                        </Toolbar>
+                      </AppBar>
+                    </Box>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -250,7 +251,7 @@ export default function StickyHeadTable() {
                       <TableCell component="th" scope="row">
                         {capitalizeWords(item.name)}
                       </TableCell>
-                      <TableCell align="right"sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+ 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
+                      <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth() + 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
                       <TableCell align="right">
                         {/* ---popover button---- */}
                         <LongMenu Position={item._id} />
@@ -271,7 +272,7 @@ export default function StickyHeadTable() {
                     <TableCell component="th" scope="row">
                       {capitalizeWords(item.name)}
                     </TableCell>
-                    <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth()+1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
+                    <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth() + 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
                     <TableCell align="right">
                       {/* ---popover button---- */}
                       <LongMenu Position={item._id} />
