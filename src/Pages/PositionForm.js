@@ -494,17 +494,17 @@ const PositionForm = () => {
 
   const handleSubmit = async (e) => {
     console.log("Enter beginingggggg")
-
+  
     e.preventDefault()
 
     if (!Recruiter) {
       setError('You must be logged in')
       return
     }
-    { error && showAlertSuccess33(error) }
+    
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
-
+//https://backend-pinnacle.herokuapp.com
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position', {
       method: 'POST',
       body: JSON.stringify(Positionssss),
@@ -517,8 +517,10 @@ const PositionForm = () => {
     console.log("Enter beginingggggg2")
 
     if (!response.ok) {
+      setError(null)
       setError(json.error)
       setEmptyFields(json.emptyFields)
+      { json.error && showAlertSuccess33(json.error) }
     }
     if (response.ok) {
       console.log("Enter beginingggggg3")

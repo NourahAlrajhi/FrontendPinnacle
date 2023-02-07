@@ -402,8 +402,8 @@ const EditPosition = () => {
   const helperTextStyles4 = useHelperTextStylesForQuestion()
   const helperTextStyles5 = useHelperTextStylesForAnswers()
 
-  const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
-  const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
+  const isLetters = (str) => /^[ A-Za-z?.,:'"]*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"]*$/.test(str)
 
 
   const onInputChange = (e) => {

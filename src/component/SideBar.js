@@ -271,7 +271,7 @@ const Sidebar = ({ children }) => {
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 1.5,
                                 }}
-                                selected={index === 0 ? selectedIndex === 0 : selectedIndex === 1}
+                                selected={index === 0 ? selectedIndex === null : selectedIndex === 1}
                                 onClick={() => {
                                     handleListItemClick(index === 0 ? 0 : 1)
                                     text.setVlaue_localA("")
@@ -302,6 +302,7 @@ const Sidebar = ({ children }) => {
                     navigate("/CreateJobbVacancy")
                     // ----set value localfun---
                     setVlaue_local('new_job_vancancy')
+                    setSelectedIndex(0)
 
                 }} className="hoverButton">New Job Vacancy</Button> : <Button variant="contained" sx={{ margin: " 0 10px", backgroundColor: "#14359F", width: "50px", minWidth: "auto" }} startIcon={<AddIcon />}></Button>]}
 
