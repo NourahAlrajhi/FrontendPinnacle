@@ -345,7 +345,7 @@ const dat2 = {
 
         {/* ----change---- */}
         <Box className='Detailed' sx={{ width: { xs: "100%", md: "80%" }, margin: "auto" }}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{marginLeft: "-55px"}}>
 
 <FormControl
   sx={{ mt: 3, ml: 3, width: "min(100% , 279px)" ,marginLeft:"1px"}}
@@ -377,7 +377,7 @@ const dat2 = {
          
           <Grid container spacing={3}>
             {/* ---graph 1--- */}
-            <Grid item xs={12} md={6} lg={5} sx={{ margin: "auto" }}>
+            <Grid item xs={12} md={6} lg={5} sx={{marginLeft: "-5px"}}>
               {/* <Rating_chart DATA={CandidateChoosenPercentage}/> */}
               <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }}>
                 <Bar options={options2} data={dat2} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
@@ -416,7 +416,7 @@ const dat2 = {
         <Box sx={{ width: { xs: "100%", md: "80%" }, margin: "2rem auto" }}>
 
           <Typography variant='h6' my={2} sx={{ textAlign: "left" }}>Interview Recording</Typography>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center" ,marginLeft: "-5px"}} >
             <AdvancedVideo style={{ width: "min(600px , 98%)", aspactRatio: "16 / 12", borderRadius: "10px" }} cldVid={SelectedRecord} controls />
           </Box>
 
