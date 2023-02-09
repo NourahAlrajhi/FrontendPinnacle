@@ -52,7 +52,7 @@ import * as XLSX from 'xlsx';
 const UploadRecruiterList = () => {
 
 
-  
+
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
@@ -69,9 +69,9 @@ const UploadRecruiterList = () => {
     const [isShownvalue, setisShownvalue] = useState(false);
 
     const [isShown, setIsShown] = useState(false);
-  
-const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
-  
+
+    const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
+
 
     const [selectedFile, setselectedFile] = useState();
     const [isShownselectedFile, setisShownselectedFile] = useState(false);
@@ -106,11 +106,11 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
             console.log("enterrr handleselectedFile");
             setselectedFileName(event.target.files[0].name);
             setIsShown(true);
-      
-                setdisabled2(false)
-            
 
-           
+            setdisabled2(false)
+
+
+
         }
     }
 
@@ -122,26 +122,50 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
 
         var msg = parse('<h3 style="text-align: center">A Sheet Is Already Uploaded Are You Sure You Want To Replace It?</h3>')
         confirmAlert({
-            message: msg,
-            buttons: [
-                {
-                    label: 'Confirm',
-                    onClick: () => setisShownselectedFile2222(false),
+            // message: msg,
+            // buttons: [
+            //     {
+            //         label: 'Confirm',
+            //         onClick: () => setisShownselectedFile2222(false),
 
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => setAnchorEl(null)
-                }
+            //     },
+            //     {
+            //         label: 'Cancel',
+            //         onClick: () => setAnchorEl(null)
+            //     }
 
-            ]
+            // ]
+
+            // ----change ui---
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+                        <h3>Confirmation Message</h3>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>A Sheet Is Already Uploaded Are You Sure You Want To Replace It?</p>
+
+                        <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                            <button onClick={() => {
+                                setAnchorEl(null)
+                                onClose()
+                            }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+                            <button onClick={() => {
+                                setisShownselectedFile2222(false)
+                                onClose()
+                            }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+                        </div>
+                    </div>
+                )
+            }
+            // ----//change ui---
+
+
         })
 
     }
 
 
     const downloadExcel = (data) => {
-        const worksheet = XLSX.utils.json_to_sheet([{ Employee_Name: '', Employee_ID: '', Employee_UserName: '',Employee_Password: '' }]);
+        const worksheet = XLSX.utils.json_to_sheet([{ Employee_Name: '', Employee_ID: '', Employee_UserName: '', Employee_Password: '' }]);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Employee");
         XLSX.writeFile(workbook, `ExcelFormat.xlsx`);
@@ -152,19 +176,39 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
 
         var msg = parse('<h3 style="text-align: center">Are You Sure You Want To Upload This Sheet?</h3>')
         confirmAlert({
-            message: msg,
-            buttons: [
-                {
-                    label: 'Confirm',
-                    onClick: () => handleSubmitxsxlSheet(event),
+            // message: msg,
+            // buttons: [
+            //     {
+            //         label: 'Confirm',
+            //         onClick: () => handleSubmitxsxlSheet(event),
 
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => setAnchorEl(null)
-                }
+            //     },
+            //     {
+            //         label: 'Cancel',
+            //         onClick: () => setAnchorEl(null)
+            //     }
 
-            ]
+            // ]
+
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+                        <h3>Confirmation Message</h3>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</p>
+
+                        <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                            <button onClick={() => {
+                               setAnchorEl(null)
+                                onClose()
+                            }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+                            <button onClick={() => {
+                                handleSubmitxsxlSheet(event)
+                                onClose()
+                            }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+                        </div>
+                    </div>
+                )
+            }
         })
 
     }
@@ -176,7 +220,7 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
 
         //https://backend-pinnacle.herokuapp.com/
 
-        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Admin/UPLOADMPLOYEE/'+EMPLOYEEID, {
+        const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Admin/UPLOADMPLOYEE/' + EMPLOYEEID, {
             method: 'POST',
             body: data,
             headers: {
@@ -188,7 +232,7 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
         const json = await responseee.json()
         if (responseee.ok) {
             showAlertSuccess()
-                   navigate(`/RecruiterList`);
+            navigate(`/RecruiterList`);
         }
 
 
@@ -204,36 +248,36 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
         })
     }
 
-    return(
-      
-            <>
-    
-                <Grid container
-                    spacing={2}
+    return (
+
+        <>
+
+            <Grid container
+                spacing={2}
+                sx={{
+                    padding: { xs: "20px", md: "20px" },
+                    marginBottom: { xs: "70px", md: "70px" },
+                }}>
+                <Grid
+                    item
+                    xs={12}
                     sx={{
-                        padding: { xs: "20px", md: "20px" },
-                        marginBottom: { xs: "70px", md: "70px" },
-                    }}>
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{
-                            boxShadow: "0px 0px 5px lightgray",
-                            borderRadius: "20px",
-                            padding: "10px",
-                        }}
-                    >
-                        {/* ----content---- */}
-                        <Grid container>
-    
-    
-    
-    
-                            {/* ----Position Choose---- */}
-                            <Grid item xs={12}>
-                               
-                          
-    
+                        boxShadow: "0px 0px 5px lightgray",
+                        borderRadius: "20px",
+                        padding: "10px",
+                    }}
+                >
+                    {/* ----content---- */}
+                    <Grid container>
+
+
+
+
+                        {/* ----Position Choose---- */}
+                        <Grid item xs={12}>
+
+
+
                             {/* ----File upload---- */}
                             <Grid item xs={12} marginTop={4}>
                                 <Grid container>
@@ -248,7 +292,7 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                             sx={{ mt: 3, ml: 3, width: "min(100% 279px)" }}
                                             variant="outlined"
                                         >
-    
+
                                             <Grid
                                                 item
                                                 xs={9}
@@ -270,14 +314,14 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                                         padding: "0px",
                                                         marginTop: "-1px",
                                                     }} />
-    
-    
+
+
                                                     {isShownselectedFile2222 ?
-    
-    
+
+
                                                         <a
-    
-    
+
+
                                                             //name="uploadfile"
                                                             id="file-upload"
                                                             onClick={showAlertConfirmationForSelectinFile}
@@ -310,8 +354,8 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                                         // accept=".xlsx"
                                                         />
                                                     }
-    
-    
+
+
                                                 </Grid>
                                             </Grid>
                                         </FormControl>
@@ -322,7 +366,7 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                             sx={{ mt: 2, ml: -30, width: "min(100% 279px)" }}
                                             variant="outlined"
                                         >
-    
+
                                             <Grid elevation={3} style={{
                                                 zIndex: '10', width: '2290%', height: '159px', overflow: 'scroll', radius: "20px", boxShadow: "0px 0px 5px lightgray",
                                                 borderRadius: "20px",
@@ -336,7 +380,7 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                                         position: "absolute",
                                                         left: "-70px",
                                                         top: "40px",
-    
+
                                                     }} />)}
                                                 <p style={{
                                                     width: "250px", position: "absolute",
@@ -346,13 +390,13 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                                 }}>{selectedFileName}</p>
                                             </Grid>
                                         </FormControl>
-    
+
                                     </Grid>
                                     <Grid elevation={3} style={{
                                         position: "absolute",
                                         left: "840px",
                                         paddingTop: "92px"
-    
+
                                     }}>
                                         <a style={{
                                             width: "330px",
@@ -362,49 +406,49 @@ const EMPLOYEEID = "63cc0103d75b12073f2a96fb"
                                 </Grid>
                             </Grid>
                             {/* ----// File upload---- */}
-    
-    
-                           
-    
-    
-                         
-                                {/* --- submit Button--- */}
-                                <Grid
-                                    item
-                                    xs={12}
-                                    margin={3}
-                                    sx={{
-                                        display: "flex",
-                                        gap: "10px",
-                                        justifyContent: "flex-end",
-                                    }}
-                                >
-    
-    
-                                 {/*   <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>*/}
-    
-                                    <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
-    
-                                </Grid>
-                                {/* --- submit Button--- */}
+
+
+
+
+
+
+                            {/* --- submit Button--- */}
+                            <Grid
+                                item
+                                xs={12}
+                                margin={3}
+                                sx={{
+                                    display: "flex",
+                                    gap: "10px",
+                                    justifyContent: "flex-end",
+                                }}
+                            >
+
+
+                                {/*   <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>*/}
+
+                                <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
+
                             </Grid>
-    
-    
-    
-    
-    
-    
-    
-    
+                            {/* --- submit Button--- */}
                         </Grid>
-    
-    
+
+
+
+
+
+
+
+
                     </Grid>
+
+
                 </Grid>
-            </>
-        
-    
+            </Grid>
+        </>
+
+
     )
-  }
-  
-  export default UploadRecruiterList
+}
+
+export default UploadRecruiterList

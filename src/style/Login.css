@@ -17,7 +17,7 @@
   right: 11%;
   width: 100%;
   height: 6%;
-  
+
 }
 
 .form_div .form {
@@ -28,8 +28,8 @@
   background-color: white;
   padding: 2rem;
   border-radius: 20px;
-  width: min(480px, 50%);
-  height: 1200%;
+  width: min(480px, 90%);
+  /* height: 1200%; */
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   margin: 2rem 0;
   background: rgba(266, 266, 266, 0.1);
@@ -69,7 +69,7 @@
 
 .form_div .form .pera {
   font-size: 1rem;
-  margin-bottom:-0.1em;
+  margin-bottom: -0.1em;
 }
 
 .form_div .form .input {
@@ -79,6 +79,7 @@
 .form_div .form .input div {
   margin-bottom: 0.3rem;
 }
+
 .form_div .form .input div label {
   display: block;
   margin-bottom: 5px;
@@ -95,6 +96,7 @@
 }
 
 @media only screen and (max-width: 900px) {
+
   html,
   body {
     font-size: 14px;
@@ -102,7 +104,7 @@
 
   .form_div .form {
     position: absolute;
-    top: 5%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -0%);
 
@@ -114,11 +116,33 @@
   }
 }
 
+
+@media only screen and (max-width: 700px) {
+
+  .form_div {
+    position: absolute;
+    top: 5%;
+    right: unset;
+    width: 100%;
+    /* height: 6%; */
+  }
+
+  .form_div .form {
+    position: relative;
+    right: 0;
+
+  }
+
+}
+
+
 @media only screen and (max-width: 600px) {
+
   html,
   body {
     font-size: 13px;
   }
+
 
   .form_div .form .inputs_filds {
     padding: 0rem 1rem;

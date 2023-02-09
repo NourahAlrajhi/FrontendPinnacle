@@ -174,76 +174,98 @@ export default function StickyHeadTable() {
 
   return (
     <>
-      <Grid container spacing={2} sx={{ marginBottom: { xs: "90px", md: "90px" } }}>
-        <Grid item xs={12} sx={{ textAlign: "end", marginTop: { xs: "10px", md: "auto" } }}>
-          {/* ---upper bar button--- */}
-          <Link to="/PositionForm">
-            <Button variant='contained' sx={{ backgroundColor: "#14359F" }} startIcon={<AddIcon />} className="hoverButton">New Position</Button></Link>
-        </Grid>
-        <Grid item xs={12}>
+      <Box className="contianer_dashboard_main">
+        <Grid container className="" spacing={2} sx={{ marginBottom: { xs: "90px", md: "90px" } }}>
+          <Grid item xs={12} sx={{ textAlign: "end", marginTop: { xs: "10px", md: "auto" } }}>
+            {/* ---upper bar button--- */}
+            <Link to="/PositionForm">
+              <Button variant='contained' sx={{ backgroundColor: "#14359F" }} startIcon={<AddIcon />} className="hoverButton">New Position</Button></Link>
+          </Grid>
+          <Grid item xs={12}>
 
-          <TableContainer
+            <TableContainer
 
-            sx={{
-              boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
-              borderRadius: "10px",
-              padding: "-2px",
-              marginTop: { xs: "5px", md: "20px" },
-              maxHeight: { xs: "auto", md: "74vh" },
-              width: "100%",
-              overflow: "auto",
-              padding: { xs: "0 1rem", md: "0 2rem" },
-            }}
-            className="table_Positions"
-          >
-            <Table sx={{ width: "max(400px ,100%)", }} size="full" aria-label="a dense table">
-              <TableHead>
-                <TableRow>
-                  <TableCell width="70%">
-                    <Typography
-                      variant="h6"
-                      noWrap
-                      component="div"
-                      sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                    >
-                      Positions
-                    </Typography>
+              sx={{
+                boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
+                borderRadius: "10px",
+                padding: "-2px",
+                marginTop: { xs: "5px", md: "20px" },
+                maxHeight: { xs: "auto", md: "74vh" },
+                width: "100%",
+                overflow: "auto",
+                padding: { xs: "0 1rem", md: "0 2rem" },
+              }}
+              className="table_Positions"
+            >
+              <Table sx={{ width: "max(400px ,100%)", }} size="full" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell width="70%">
+                      <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                      >
+                        Positions
+                      </Typography>
 
-                  </TableCell>
-                  <TableCell align="right"></TableCell>
-                  <TableCell align="right">
-                    <Box sx={{ position: "sticky", top: "-10px", background: "white", zIndex: "6" }}>
-                      <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>
-                        <Toolbar>
-                          <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                          >
-                            {/* Active Jop Vacancies */}
-                          </Typography>
-                          <Search>
-                            <SearchIconWrapper>
-                              <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                              placeholder="Search…"
-                              inputProps={{ 'aria-label': 'search' }}
-                              onChange={(e) => search(e.target.value)}
+                    </TableCell>
+                    <TableCell align="right"></TableCell>
+                    <TableCell align="right">
+                      <Box sx={{ position: "sticky", top: "-10px", background: "white", zIndex: "6" }}>
+                        <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>
+                          <Toolbar>
+                            <Typography
+                              variant="h6"
+                              noWrap
+                              component="div"
+                              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                            >
+                              {/* Active Jop Vacancies */}
+                            </Typography>
+                            <Search>
+                              <SearchIconWrapper>
+                                <SearchIcon />
+                              </SearchIconWrapper>
+                              <StyledInputBase
+                                placeholder="Search…"
+                                inputProps={{ 'aria-label': 'search' }}
+                                onChange={(e) => search(e.target.value)}
 
 
-                            />
-                          </Search>
-                        </Toolbar>
-                      </AppBar>
-                    </Box>
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody sx={{ padding: "20px" }}>
-                {searchInput ? (
-                  filteredProducts && filteredProducts.map((item, i) => (
+                              />
+                            </Search>
+                          </Toolbar>
+                        </AppBar>
+                      </Box>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody sx={{ padding: "20px" }}>
+                  {searchInput ? (
+                    filteredProducts && filteredProducts.map((item, i) => (
+                      <TableRow
+                        key={item.name}
+                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {capitalizeWords(item.name)}
+                        </TableCell>
+                        <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth() + 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
+                        <TableCell align="right">
+                          {/* ---popover button---- */}
+                          <LongMenu Position={item._id} />
+
+
+
+                          {/* ---popover button---- */}
+                        </TableCell>
+                      </TableRow>
+                    )
+                    )
+                    // loop over filtered products, so only searched products are shown
+                  ) : Positions && Positions.map((item, i) => (
                     <TableRow
                       key={item.name}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -257,40 +279,20 @@ export default function StickyHeadTable() {
                         <LongMenu Position={item._id} />
 
 
-
                         {/* ---popover button---- */}
                       </TableCell>
                     </TableRow>
                   )
                   )
-                  // loop over filtered products, so only searched products are shown
-                ) : Positions && Positions.map((item, i) => (
-                  <TableRow
-                    key={item.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {capitalizeWords(item.name)}
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "gray" }}>Last Edited : {(new Date(item.updatedAt).getDate()) + "/" + (new Date(item.updatedAt).getMonth() + 1) + "/" + (new Date(item.updatedAt).getFullYear())}</TableCell>
-                    <TableCell align="right">
-                      {/* ---popover button---- */}
-                      <LongMenu Position={item._id} />
+                  }
 
 
-                      {/* ---popover button---- */}
-                    </TableCell>
-                  </TableRow>
-                )
-                )
-                }
-
-
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </>
   );
 }

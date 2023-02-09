@@ -218,15 +218,21 @@ const EditPosition = () => {
 
       // ]
       // ----change ui---
-      customUI: () => {
+      customUI: ({ onClose }) => {
         return (
           <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
             <h3>Confirmation Message</h3>
             <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Send Interview Invitations To Candidates?</p>
 
             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
-              <button onClick={() => setAnchorEl(null)} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
-              <button onClick={() => handleCancelClick(event)} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+              <button onClick={() => {
+                setAnchorEl(null)
+                onClose()
+              }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>No</button>
+              <button onClick={() => {
+                handleCancelClick(event)
+                onClose()
+              }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Yes</button>
             </div>
           </div>
         )

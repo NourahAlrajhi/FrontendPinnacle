@@ -14,15 +14,13 @@ import Webcam from "react-webcam";
 import { useRef } from "react";
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import PinnaclLogo from '../../images/PinnacleLogo.png'
+import PinnaclLogo from '../../images/pinnacle_new_logo.png'
 import { useParams } from "react-router-dom";
 
 import './Interview.css'
 
 
-
-
-
+// ---
 function Interview_welcome_screen() {
 
     const [VacancyTime, setVacancyTime] = useState('')
@@ -76,10 +74,10 @@ function Interview_welcome_screen() {
                                  setQUESTIONS(item2.arr)
                                  if (item2.arr.length != item.RECORDS.length) {
                                      setFinisHALFhInterview(true)
- 
+
                                      //Delet The Record For This Interview Here
                                  }
- 
+
                              })
                          }*/
 
@@ -124,8 +122,8 @@ function Interview_welcome_screen() {
                  console.log(json.Position)
                  json.Position && json.Position.map((item, i) => {
                      setQUESTIONS(item.arr)
-                     if (item.arr.length !=) 
-       
+                     if (item.arr.length !=)
+
                })
              }
          }*/
@@ -179,7 +177,7 @@ function Interview_welcome_screen() {
                             {/* heading */}
                             <div className='name_heading'>
                                 <img src={PinnaclLogo} alt="#" />
-                                <p className='from_heading'>Pinnacle</p>
+                                {/* <p className='from_heading'>Pinnacle</p> */}
                             </div>
 
                             {/* ---inputs--- */}
@@ -208,7 +206,7 @@ function Interview_welcome_screen() {
                                         <p >All Set Up</p>
                                     </Box>
                                     {/* -----//setUpLine---- */}
-                                </div> : FinishDuration ? <h2 style={{ padding: "40px", textAlign: "center" }}>See you next Time , and be carfull with your appointment!</h2> : FinishInterview ? <h2 style={{ padding: "40px", textAlign: "center" }}>Wait For your Result</h2> : <h2 style={{ padding: "40px", textAlign: "center" }}>Please contact with our help desk team to fix your problem</h2>}
+                                </div> : FinishDuration ? <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>See you next Time , and be carfull with your appointment!</h3> : FinishInterview ? <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>Wait For your Result</h3> : <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>Please contact with our help desk team to fix your problem</h3>}
                             </div>
                             {/* ---//inputs--- */}
                         </div>

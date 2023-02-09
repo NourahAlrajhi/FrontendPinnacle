@@ -185,54 +185,102 @@ const RecruiterList = () => {
 
 
 
-  const showAlertConfirmationForAuthorize = (Employee_Name, Employee_UserName, Employee_Password, Employee_ID,index) => {
+  const showAlertConfirmationForAuthorize = (Employee_Name, Employee_UserName, Employee_Password, Employee_ID, index) => {
 
     console.log('enterrrrrrrrrrr cancel')
 
     var msg = parse('<h3 style="text-align: center">Are you sure you want to give authorization to this Recruiter?</h3>')
     confirmAlert({
-      message: msg,
-      buttons: [
-        {
-          label: 'Confirm',
-          onClick: () => {GiveAuthorize(Employee_Name, Employee_UserName, Employee_Password, Employee_ID,index); handleTests2(index)},
+      // message: msg,
+      // buttons: [
+      //   {
+      //     label: 'Confirm',
+      //     onClick: () => {GiveAuthorize(Employee_Name, Employee_UserName, Employee_Password, Employee_ID,index); handleTests2(index)},
 
-        },
-        {
-          label: 'Cancel',
-          onClick: () => setAnchorEl(null)
-        }
+      //   },
+      //   {
+      //     label: 'Cancel',
+      //     onClick: () => setAnchorEl(null)
+      //   }
 
-      ]
+      // ]
+
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+            <h3>Confirmation Message</h3>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to give authorization to this Recruiter?</p>
+
+            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+              <button onClick={() => {
+                setAnchorEl(null)
+                onClose()
+              }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+              <button onClick={() => {
+                GiveAuthorize(Employee_Name, Employee_UserName, Employee_Password, Employee_ID, index); handleTests2(index)
+                onClose()
+              }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+            </div>
+          </div>
+        )
+      }
+      // ----//change ui---
+
+
     })
 
   }
 
 
-  const showAlertConfirmationForUnAuthorize = (Employee_ID,index) => {
+  const showAlertConfirmationForUnAuthorize = (Employee_ID, index) => {
     console.log('enterrrrrrrrrrr cancel')
 
     var msg = parse('<h3 style="text-align: center">Are you sure you want to restrict access on this Recruiter?</h3>')
     confirmAlert({
-      message: msg,
-      buttons: [
-        {
-          label: 'Confirm',
-          onClick: () => {GiveUnAuthorize(Employee_ID,index);   handleTests2(index)},
+      // message: msg,
+      // buttons: [
+      //   {
+      //     label: 'Confirm',
+      //     onClick: () => { GiveUnAuthorize(Employee_ID, index); handleTests2(index) },
 
-        },
-        {
-          label: 'Cancel',
-          onClick: () => setAnchorEl(null)
-        }
+      //   },
+      //   {
+      //     label: 'Cancel',
+      //     onClick: () => setAnchorEl(null)
+      //   }
 
-      ]
+      // ]
+
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+            <h3>Confirmation Message</h3>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to restrict access on this Recruiter?</p>
+
+            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+              <button onClick={() => {
+                setAnchorEl(null)
+                onClose()
+              }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+              <button onClick={() => {
+                GiveUnAuthorize(Employee_ID, index); handleTests2(index)
+                onClose()
+              }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+            </div>
+          </div>
+        )
+      }
+      // ----//change ui---
+
+
     })
 
   }
 
 
-  const GiveAuthorize = async (Employee_Name, Employee_UserName, Employee_Password, Employee_ID,index) => {
+  const GiveAuthorize = async (Employee_Name, Employee_UserName, Employee_Password, Employee_ID, index) => {
     console.log(Employee_Name)
     console.log(Employee_UserName)
     console.log(Employee_Password)
@@ -299,12 +347,12 @@ const RecruiterList = () => {
   }
 
 
-  const GiveUnAuthorize = async (Employee_ID,index) => {
+  const GiveUnAuthorize = async (Employee_ID, index) => {
     console.log(Employee_ID)
     //https://backend-pinnacle.herokuapp.com/
-   
+
     const responseee = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/RemoveRecruiter/' + Employee_ID, {
-  
+
     })
 
     const json = await responseee.json()
@@ -312,7 +360,7 @@ const RecruiterList = () => {
       showAlertSuccess22()
       // navigate(`/RecruiterList`);
       console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    //  console.log(json.IDCompany)
+      //  console.log(json.IDCompany)
       console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH")
 
       EmployeeResult && EmployeeResult.map(async (item, i) => {
@@ -331,8 +379,8 @@ const RecruiterList = () => {
             console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH22222")
             console.log("Status Updated")
             console.log("HHHHHHHHHHHHHHHHHHHHHHHHHHH222222")
-          //  setISAUTHRAIZE(true)
-         // handleTests2(index);
+            //  setISAUTHRAIZE(true)
+            // handleTests2(index);
           }
 
         }
@@ -383,9 +431,9 @@ const RecruiterList = () => {
             color: "#222",
             width: "99%", margin: "1rem auto", overflow: "auto", boxShadow: "none"
           }}
-          
+
         >
-          <Table aria-label="simple table" sx={{ width: "max(800px ,100%)" }} overflow= "scroll">
+          <Table aria-label="simple table" sx={{ width: "max(800px ,100%)" }} overflow="scroll">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ border: 0 }}>
@@ -417,14 +465,14 @@ const RecruiterList = () => {
                     }}
                   >
                     <TableCell align="left" sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "10%", border: 0 }}>
-                    <PersonIcon />
+                      <PersonIcon />
                       {row.Employee_Name}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
                       {row.Employee_ID}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
-                    {!row.IsAuth ?
+                      {!row.IsAuth ?
                         <Button
                           className="download-table-xls-button"
                           style={{
@@ -440,7 +488,7 @@ const RecruiterList = () => {
 
 
                             showAlertConfirmationForAuthorize(row.Employee_Name, row.Employee_UserName, row.Employee_Password, row.Employee_ID);
-                           // handleTests2(index)
+                            // handleTests2(index)
 
 
 
@@ -461,7 +509,7 @@ const RecruiterList = () => {
 
 
                             showAlertConfirmationForUnAuthorize(row.Employee_ID);
-                          //  handleTests2(index)
+                            //  handleTests2(index)
                           }}
 
                         ><p style={{ fontWeight: 600 }}> UnAuthorize</p></Button>
@@ -488,7 +536,7 @@ const RecruiterList = () => {
                     }}
                   >
                     <TableCell align="left" sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "10%", border: 0 }}>
-                    <PersonIcon />
+                      <PersonIcon />
                       {row.Employee_Name}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
@@ -510,8 +558,8 @@ const RecruiterList = () => {
 
 
 
-                            showAlertConfirmationForAuthorize(row.Employee_Name, row.Employee_UserName, row.Employee_Password, row.Employee_ID,index);
-                          //  handleTests2(index);
+                            showAlertConfirmationForAuthorize(row.Employee_Name, row.Employee_UserName, row.Employee_Password, row.Employee_ID, index);
+                            //  handleTests2(index);
 
 
 
@@ -531,8 +579,8 @@ const RecruiterList = () => {
                           onClick={() => {
 
 
-                            showAlertConfirmationForUnAuthorize(row.Employee_ID,index);
-                         //   handleTests2(index);
+                            showAlertConfirmationForUnAuthorize(row.Employee_ID, index);
+                            //   handleTests2(index);
 
                           }}
 

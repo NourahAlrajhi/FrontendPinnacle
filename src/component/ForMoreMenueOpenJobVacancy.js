@@ -22,7 +22,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function ForMoreMenueOpenJobVacancy({ Vacancyy , VacancyyName}) {
+export default function ForMoreMenueOpenJobVacancy({ Vacancyy, VacancyyName }) {
     const { Recruiter } = useRecruiterContext()
     const { Positions, dispatch } = usePositionsContext()
     const { Vacancy, dispatchhh } = useVacancyContext()
@@ -34,26 +34,49 @@ export default function ForMoreMenueOpenJobVacancy({ Vacancyy , VacancyyName}) {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = (e) => {
-      if(e=="Delete"){
-          
-                var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Unsend Job Vacancy?</h3>')
-                confirmAlert({
-                    message: msg,
-                    buttons: [
-                        {
-                            label: 'Yes',
-                            onClick: () => handleClick22(Vacancyy)
-                        },
-                        {
-                            label: 'No',
-                            onClick: () => navigate("/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main")
-                        }
-        
-                    ]
-                })
-            
-        
-       
+        if (e == "Delete") {
+
+            // var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Unsend Job Vacancy?</h3>')
+            confirmAlert({
+                // message: msg,
+                // buttons: [
+                //     {
+                //         label: 'Yes',
+                //         onClick: () => handleClick22(Vacancyy)
+                //     },
+                //     {
+                //         label: 'No',
+                //         onClick: () => navigate("/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main")
+                //     }
+
+                // ]
+
+                // ----change ui---
+                customUI: ({ onClose }) => {
+                    return (
+                        <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+                            <h3>Confirmation Message</h3>
+                            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to Delete this Unsend Job Vacancy?</p>
+
+                            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                                <button onClick={() => {
+                                    navigate("/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main")
+                                    onClose()
+                                }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>No</button>
+                                <button onClick={() => {
+                                    handleClick22(Vacancyy)
+                                    onClose()
+                                }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Yes</button>
+                            </div>
+                        </div>
+                    )
+                }
+                // ----//change ui---
+
+            })
+
+
+
         }
         else {
             setAnchorEl(null);
@@ -75,7 +98,7 @@ export default function ForMoreMenueOpenJobVacancy({ Vacancyy , VacancyyName}) {
         const json = await response.json()
         if (response.ok) {
             dispatchhh({ type: 'DELETE_Vacancy', payload: json })
-            navigate('/Dashboard/View_job_vacancy_main');
+            navigate('/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main');
         }
     }
 
@@ -89,7 +112,7 @@ export default function ForMoreMenueOpenJobVacancy({ Vacancyy , VacancyyName}) {
                 aria-haspopup="true"
                 onClick={handleClick}
             >
-                  <MoreHorizIcon sx={{ color: "gray" }} />
+                <MoreHorizIcon sx={{ color: "gray" }} />
             </IconButton>
             <Menu
                 id="long-menu"

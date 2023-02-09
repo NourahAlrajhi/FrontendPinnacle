@@ -16,6 +16,8 @@ import { useEffect, useState } from 'react'
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import LongMenu2 from '../../component/ForMoreMenuJobVacancy'
+import LongMenu3 from '../../component/ForMoreMenueClosed'
+
 
 import Button from '@mui/material/Button';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -344,7 +346,7 @@ export default function Closed_job_table() {
                     </TableCell>
                   
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
+                      <LongMenu3 Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>
                   </TableRow>
                 )
@@ -380,7 +382,7 @@ export default function Closed_job_table() {
                   </TableCell>
                  
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                    <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
+                    <LongMenu3 Vacancyy={row._id} VacancyyName={row.title} />
                   </TableCell>
                 </TableRow>
               )) :
@@ -413,7 +415,7 @@ export default function Closed_job_table() {
                     </TableCell>
                   
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      <LongMenu2 Vacancyy={row._id} VacancyyName={row.title} />
+                      <LongMenu3 Vacancyy={row._id} VacancyyName={row.title} />
                     </TableCell>
                   </TableRow>
                 ))

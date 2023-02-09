@@ -7,7 +7,7 @@ function Dashboard_footer(props) {
     console.log(props.width)
     return (
         <>
-            <Box sx={{ flexGrow: 1, position: 'fixed', bottom: '0%', right: "0%", width: `calc(99.8% - ${props.width}px)`, backgroundColor: 'white', borderTop: '1px solid lightgray', padding: '5px', zIndex: "20" }}>
+            <Box sx={{ flexGrow: 1, position: 'absolute', bottom: '0%', right: "0%", width: `calc(100% - ${props.width}px)`, backgroundColor: 'white', borderTop: '1px solid lightgray', padding: '5px', zIndex: "20" }}>
                 <Grid container>
                     <Grid item xs={12} sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", }}>
                         <Typography sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", color: "#14359F" }}>

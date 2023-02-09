@@ -43,18 +43,42 @@ export default function LongMenu2({ Vacancyy, VacancyyName }) {
 
             var msg = parse('<h3 style="text-align: center">Are you sure you want to Delete this Job Vacancy?</h3>')
             confirmAlert({
-                message: msg,
-                buttons: [
-                    {
-                        label: 'Yes',
-                        onClick: () => handleClick22(Vacancyy)
-                    },
-                    {
-                        label: 'No',
-                        onClick: () => navigate("/Dashboard/View_job_vacancy_main")
-                    }
+                // message: msg,
+                // buttons: [
+                //     {
+                //         label: 'Yes',
+                //         onClick: () => handleClick22(Vacancyy)
+                //     },
+                //     {
+                //         label: 'No',
+                //         onClick: () => navigate("/Dashboard/View_job_vacancy_main")
+                //     }
 
-                ]
+                // ]
+
+                // ----change ui---
+                customUI: ({ onClose }) => {
+                    return (
+                        <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+                            <h3>Confirmation Message</h3>
+                            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to Delete this Job Vacancy?</p>
+
+                            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                                <button onClick={() => {
+                                    navigate("/Dashboard/View_job_vacancy_main")
+                                    onClose()
+                                }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>No</button>
+                                <button onClick={() => {
+                                    handleClick22(Vacancyy)
+                                    onClose()
+                                }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Yes</button>
+                            </div>
+                        </div>
+                    )
+                }
+                // ----//change ui---
+
+
             })
 
 

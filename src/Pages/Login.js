@@ -44,7 +44,7 @@ const Login = () => {
                   <img src={PinnaclLogo} alt="#" />
                   <p className="from_heading">Pinnacle</p>
                 </div>
- 
+
                 <div className="inputs_filds">
                   <p className="heading"> Log in </p>
                   <p className="pera">
@@ -106,7 +106,7 @@ const Login = () => {
 
                       <FormGroup>
                         <FormControlLabel
-                          control={<Checkbox  />}
+                          control={<Checkbox />}
                           label="Remember me"
                         />
                       </FormGroup>
@@ -124,7 +124,7 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-             
+
               </form>
             </div>
           </div>

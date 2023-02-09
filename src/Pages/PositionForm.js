@@ -143,7 +143,7 @@ const PositionForm = () => {
   const [VALIDINPUTFEILDSDescription, setVALIDINPUTFEILDSDescription] = useState(false);
 
   const [errorMessageNoticePeriod, seterrorMessageNoticePeriod] = useState("");
-  const [VALIDINPUTFEILDSNoticePeriod,setVALIDINPUTFEILDSNoticePeriod] = useState(false);
+  const [VALIDINPUTFEILDSNoticePeriod, setVALIDINPUTFEILDSNoticePeriod] = useState(false);
 
   const [errorMessageQuestion, seterrorMessageQuestion] = useState("");
   const [VALIDINPUTFEILDSQuestion, setVALIDINPUTFEILDSQuestion] = useState(false);
@@ -283,13 +283,13 @@ const PositionForm = () => {
 
 
 
-  
 
- 
 
- 
 
-  
+
+
+
+
 
 
   const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
@@ -305,7 +305,7 @@ const PositionForm = () => {
       if (!IsName && IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
-    }else{
+    } else {
       setVALIDINPUTFEILDS(true)
       setErrorMessage("Invalid character")
     }
@@ -321,7 +321,7 @@ const PositionForm = () => {
       if (IsName && !IsDescription && IsSalary && IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
-    }else{
+    } else {
       setVALIDINPUTFEILDSDescription(true)
       seterrorMessageDescription("Invalid character")
     }
@@ -337,7 +337,7 @@ const PositionForm = () => {
       if (IsName && IsDescription && IsSalary && !IsNoticPeriod && IsQuestions) {
         setdisabled2(false)
       }
-    }else{
+    } else {
       setVALIDINPUTFEILDSNoticePeriod(true)
       seterrorMessageNoticePeriod("Invalid character")
     }
@@ -390,7 +390,7 @@ const PositionForm = () => {
       if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
         setdisabled2(false)
       }
-    }else{
+    } else {
       setVALIDINPUTFEILDSExpectedAnswer(true)
       seterrorMessageExpectedAnswer("Invalid character")
     }
@@ -444,7 +444,7 @@ const PositionForm = () => {
       if (IsName && IsDescription && IsSalary && IsNoticPeriod && !IsQuestions) {
         setdisabled2(false)
       }
-    }else{
+    } else {
       setVALIDINPUTFEILDSQuestion(true)
       seterrorMessageQuestion("Invalid character")
     }
@@ -458,18 +458,39 @@ const PositionForm = () => {
     } else {
       var msg = parse('<h3 style="text-align: center">Are you sure you do not want to add this position?</h3>')
       confirmAlert({
-        message: msg,
-        buttons: [
-          {
-            label: 'Yes',
-            onClick: () => navigate("/PositionList")
-          },
-          {
-            label: 'No',
-            onClick: () => setAnchorEl(null)
-          }
+        // message: msg,
+        // buttons: [
+        //   {
+        //     label: 'Yes',
+        //     onClick: () => navigate("/PositionList")
+        //   },
+        //   {
+        //     label: 'No',
+        //     onClick: () => setAnchorEl(null)
+        //   }
 
-        ]
+        // ]
+        // ----change ui---
+        customUI: ({ onClose }) => {
+          return (
+            <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+              <h3>Confirmation Message</h3>
+              <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you do not want to add this position?</p>
+
+              <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                <button onClick={() => {
+                  setAnchorEl(null)
+                  onClose()
+                }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>No</button>
+                <button onClick={() => {
+                  navigate("/PositionList")
+                  onClose()
+                }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Yes</button>
+              </div>
+            </div>
+          )
+        }
+        // ----//change ui---
       })
     }
   }
@@ -494,17 +515,17 @@ const PositionForm = () => {
 
   const handleSubmit = async (e) => {
     console.log("Enter beginingggggg")
-  
+
     e.preventDefault()
 
     if (!Recruiter) {
       setError('You must be logged in')
       return
     }
-    
+
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
-//https://backend-pinnacle.herokuapp.com
+    //https://backend-pinnacle.herokuapp.com
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position', {
       method: 'POST',
       body: JSON.stringify(Positionssss),
@@ -642,7 +663,7 @@ const PositionForm = () => {
                         }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForName }}
 
-                        helperText={ !VALIDINPUTFEILDS?`${name.length}/${CHARACTER_LIMIT_ForName}`:errorMessage}
+                        helperText={!VALIDINPUTFEILDS ? `${name.length}/${CHARACTER_LIMIT_ForName}` : errorMessage}
                         error={VALIDINPUTFEILDS}
                       />
                     </FormControl>
@@ -650,7 +671,7 @@ const PositionForm = () => {
                   <Grid item xs={12}>
                     {/* ----input 2---- */}
                     <TextField
-                     error={VALIDINPUTFEILDSDescription}
+                      error={VALIDINPUTFEILDSDescription}
                       FormHelperTextProps={{
                         classes: {
                           root: helperTextStyles3.root
@@ -669,7 +690,7 @@ const PositionForm = () => {
                       }}
                       inputProps={{ maxlength: CHARACTER_LIMIT_ForDescription }}
 
-                      helperText={!VALIDINPUTFEILDSDescription?`${description.length}/${CHARACTER_LIMIT_ForDescription}`:errorMessageDescription}
+                      helperText={!VALIDINPUTFEILDSDescription ? `${description.length}/${CHARACTER_LIMIT_ForDescription}` : errorMessageDescription}
                     />
                   </Grid>
                 </Grid>
@@ -732,7 +753,7 @@ const PositionForm = () => {
                     >
 
                       <TextField
-                         error={VALIDINPUTFEILDSNoticePeriod}
+                        error={VALIDINPUTFEILDSNoticePeriod}
                         FormHelperTextProps={{
                           classes: {
                             root: helperTextStyles2.root
@@ -756,7 +777,7 @@ const PositionForm = () => {
                         }}
                         style={{ width: "250px" }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
-                        helperText={!VALIDINPUTFEILDSNoticePeriod?`${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}`:errorMessageNoticePeriod}
+                        helperText={!VALIDINPUTFEILDSNoticePeriod ? `${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}` : errorMessageNoticePeriod}
                       />
                     </FormControl>
                   </Grid>
@@ -807,7 +828,7 @@ const PositionForm = () => {
                               <Grid item xs={9} md={2} >
 
                                 <TextField
-                                    //  error={VALIDINPUTFEILDSQuestion}
+                                  //  error={VALIDINPUTFEILDSQuestion}
                                   FormHelperTextProps={{
                                     classes: {
                                       root: helperTextStyles4.root
@@ -826,9 +847,9 @@ const PositionForm = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-                                  // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
+                                // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
 
-                                  // helperText={/*!VALIDINPUTFEILDSQuestion?`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`:*/errorMessageQuestion}
+                                // helperText={/*!VALIDINPUTFEILDSQuestion?`${LengthCounter22}/${CHARACTER_LIMIT_ForQuestion}`:*/errorMessageQuestion}
                                 />
                               </Grid>
                               {/*This feild for the question parttttttt*/}
@@ -876,9 +897,9 @@ const PositionForm = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-                                  // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
+                                // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
 
-                                  // helperText={/*!VALIDINPUTFEILDSExpectedAnswer?`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`:*/errorMessageExpectedAnswer}
+                                // helperText={/*!VALIDINPUTFEILDSExpectedAnswer?`${LengthCounter}/${CHARACTER_LIMIT_ForAnswers}`:*/errorMessageExpectedAnswer}
                                 />
                               </Grid>
                               <Grid item xs={5} md={1}>
@@ -965,5 +986,3 @@ const PositionForm = () => {
 }
 
 export default PositionForm
-
-

@@ -147,19 +147,41 @@ const CreateJobbVacancy = () => {
 
         var msg = parse('<h3 style="text-align: center">A Sheet Is Already Uploaded Are You Sure You Want To Replace It?</h3>')
         confirmAlert({
-            message: msg,
-            buttons: [
-                {
-                    label: 'Confirm',
-                    onClick: () => setisShownselectedFile2222(false),
+            // message: msg,
+            // buttons: [
+            //     {
+            //         label: 'Confirm',
+            //         onClick: () => setisShownselectedFile2222(false),
 
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => setAnchorEl(null)
-                }
+            //     },
+            //     {
+            //         label: 'Cancel',
+            //         onClick: () => setAnchorEl(null)
+            //     }
 
-            ]
+            // ]
+
+            // ----change ui---
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+                        <h3>Confirmation Message</h3>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>A Sheet Is Already Uploaded Are You Sure You Want To Replace It?</p>
+
+                        <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                            <button onClick={() => {
+                                setAnchorEl(null)
+                                onClose()
+                            }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+                            <button onClick={() => {
+                                setisShownselectedFile2222(false)
+                                onClose()
+                            }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+                        </div>
+                    </div>
+                )
+            }
+            // ----//change ui---
         })
 
     }
@@ -172,19 +194,39 @@ const CreateJobbVacancy = () => {
 
         var msg = parse('<h3 style="text-align: center">Are You Sure You Want To Send Interview Invitations To Candidates?</h3>')
         confirmAlert({
-            message: msg,
-            buttons: [
-                {
-                    label: 'Confirm',
-                    onClick: () => handleSubmit(event),
+            // message: msg,
+            // buttons: [
+            //     {
+            //         label: 'Confirm',
+            //         onClick: () => handleSubmit(event),
 
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => setAnchorEl(null)
-                }
+            //     },
+            //     {
+            //         label: 'Cancel',
+            //         onClick: () => setAnchorEl(null)
+            //     }
 
-            ]
+            // ]
+
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%",marginLeft:"374px"}}>
+                        <h3>Confirmation Message</h3>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Send Interview Invitations To Candidates?</p>
+
+                        <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                            <button onClick={() => {
+                               setAnchorEl(null)
+                                onClose()
+                            }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+                            <button onClick={() => {
+                               handleSubmit(event)
+                                onClose()
+                            }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+                        </div>
+                    </div>
+                )
+            }
         })
 
     }
@@ -199,19 +241,38 @@ const CreateJobbVacancy = () => {
         var msg = parse('<h3 style="text-align: center">Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</h3>')
         confirmAlert({
             // title: 'Confirmation Message',
-            message: msg,
-            buttons: [
-                {
-                    label: 'Confirm',
-                    onClick: () => handleSubmit2(event),
+            // message: msg,
+            // buttons: [
+            //     {
+            //         label: 'Confirm',
+            //         onClick: () => handleSubmit2(event),
 
-                },
-                {
-                    label: 'Cancel',
-                    onClick: () => setAnchorEl(null)
-                }
+            //     },
+            //     {
+            //         label: 'Cancel',
+            //         onClick: () => setAnchorEl(null)
+            //     }
 
-            ]
+            // ]
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" ,marginLeft:"374px"}}>
+                        <h3>Confirmation Message</h3>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</p>
+
+                        <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+                            <button onClick={() => {
+                               setAnchorEl(null)
+                                onClose()
+                            }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
+                            <button onClick={() => {
+                               handleSubmit2(event)
+                                onClose()
+                            }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Confirm</button>
+                        </div>
+                    </div>
+                )
+            }
         })
 
     }
@@ -357,7 +418,7 @@ const CreateJobbVacancy = () => {
 
         console.log("No file have been uploaded");
         const Vacancy = { Positionnn: PositioArray, titleee: PositionChoosen, Esubjecttt: EmailSubject, Ebodyyy: EmailBody, linkExpDateee: value, linkExpTimeee: value, statusss: "Open" }
-//https://backend-pinnacle.herokuapp.com
+        //https://backend-pinnacle.herokuapp.com
         const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/Update', {
             method: 'POST',
             body: JSON.stringify(Vacancy),
