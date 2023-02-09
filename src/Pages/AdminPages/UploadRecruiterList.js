@@ -198,7 +198,7 @@ const UploadRecruiterList = () => {
 
                         <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
                             <button onClick={() => {
-                               setAnchorEl(null)
+                                setAnchorEl(null)
                                 onClose()
                             }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>Cancel</button>
                             <button onClick={() => {
@@ -251,200 +251,201 @@ const UploadRecruiterList = () => {
     return (
 
         <>
-
-            <Grid container
-                spacing={2}
-                sx={{
-                    padding: { xs: "20px", md: "20px" },
-                    marginBottom: { xs: "70px", md: "70px" },
-                }}>
-                <Grid
-                    item
-                    xs={12}
+            <Box className="contianer_main" >
+                <Grid container
+                    spacing={2}
                     sx={{
-                        boxShadow: "0px 0px 5px lightgray",
-                        borderRadius: "20px",
-                        padding: "10px",
-                    }}
-                >
-                    {/* ----content---- */}
-                    <Grid container>
+                        padding: { xs: "20px", md: "20px" },
+                        marginBottom: { xs: "70px", md: "70px" },
+                    }}>
+                    <Grid
+                        item
+                        xs={12}
+                        sx={{
+                            boxShadow: "0px 0px 5px lightgray",
+                            borderRadius: "20px",
+                            padding: "10px",
+                        }}
+                    >
+                        {/* ----content---- */}
+                        <Grid container>
 
 
 
 
-                        {/* ----Position Choose---- */}
-                        <Grid item xs={12}>
+                            {/* ----Position Choose---- */}
+                            <Grid item xs={12}>
 
 
 
-                            {/* ----File upload---- */}
-                            <Grid item xs={12} marginTop={4}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <Typography fontWeight={700}>
-                                            Upload Candidats Information
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12} md={6} xl={3}>
-                                        {/* input 3 */}
-                                        <FormControl
-                                            sx={{ mt: 3, ml: 3, width: "min(100% 279px)" }}
-                                            variant="outlined"
-                                        >
-
-                                            <Grid
-                                                item
-                                                xs={9}
-                                                sx={{
-                                                    mt: 2,
-                                                    p: 2,
-                                                    boxShadow: "0px 0px 5px lightgray",
-                                                    maxHeight: "200px",
-                                                    overflow: "auto",
-                                                    borderRadius: "20px",
-                                                    padding: "10px",
-                                                    marginTop: "-9px",
-                                                }}
+                                {/* ----File upload---- */}
+                                <Grid item xs={12} marginTop={4}>
+                                    <Grid container>
+                                        <Grid item xs={12}>
+                                            <Typography fontWeight={700}>
+                                                Upload Candidats Information
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12} md={6} xl={3}>
+                                            {/* input 3 */}
+                                            <FormControl
+                                                sx={{ mt: 3, ml: 3, width: "min(100% 279px)" }}
+                                                variant="outlined"
                                             >
-                                                {/* ----Questions---- */}
-                                                <Grid container  >
-                                                    <SiMicrosoftexcel style={{
-                                                        width: '87%', height: '68px', overflow: 'scroll',
-                                                        padding: "0px",
-                                                        marginTop: "-1px",
-                                                    }} />
+
+                                                <Grid
+                                                    item
+                                                    xs={9}
+                                                    sx={{
+                                                        mt: 2,
+                                                        p: 2,
+                                                        boxShadow: "0px 0px 5px lightgray",
+                                                        maxHeight: "200px",
+                                                        overflow: "auto",
+                                                        borderRadius: "20px",
+                                                        padding: "10px",
+                                                        marginTop: "-9px",
+                                                    }}
+                                                >
+                                                    {/* ----Questions---- */}
+                                                    <Grid container  >
+                                                        <SiMicrosoftexcel style={{
+                                                            width: '87%', height: '68px', overflow: 'scroll',
+                                                            padding: "0px",
+                                                            marginTop: "-1px",
+                                                        }} />
 
 
-                                                    {isShownselectedFile2222 ?
+                                                        {isShownselectedFile2222 ?
 
 
-                                                        <a
+                                                            <a
 
 
-                                                            //name="uploadfile"
-                                                            id="file-upload"
-                                                            onClick={showAlertConfirmationForSelectinFile}
-                                                            style={{
-                                                                width: "230px",
-                                                                height: "70px",
-                                                                color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
-                                                            }}
-                                                        // value={selectedFile}
-                                                        //accept=".xlsx"
-                                                        >File Has Been Choosen</a>
-                                                        :
-                                                        <input
-                                                            InputProps={{
-                                                                startAdornment: (
-                                                                    <InputAdornment position="start">
-                                                                        <MdAttachFile />
-                                                                    </InputAdornment>
-                                                                ),
-                                                            }}
-                                                            type="file"
-                                                            name="uploadfile"
-                                                            id="file-upload"
-                                                            onChange={handleselectedFile}
-                                                            style={{
-                                                                width: "230px",
-                                                                color: "#14359F", cursor: "pointer"
-                                                            }}
-                                                        // value={selectedFile}
-                                                        // accept=".xlsx"
-                                                        />
-                                                    }
+                                                                //name="uploadfile"
+                                                                id="file-upload"
+                                                                onClick={showAlertConfirmationForSelectinFile}
+                                                                style={{
+                                                                    width: "230px",
+                                                                    height: "70px",
+                                                                    color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
+                                                                }}
+                                                            // value={selectedFile}
+                                                            //accept=".xlsx"
+                                                            >File Has Been Choosen</a>
+                                                            :
+                                                            <input
+                                                                InputProps={{
+                                                                    startAdornment: (
+                                                                        <InputAdornment position="start">
+                                                                            <MdAttachFile />
+                                                                        </InputAdornment>
+                                                                    ),
+                                                                }}
+                                                                type="file"
+                                                                name="uploadfile"
+                                                                id="file-upload"
+                                                                onChange={handleselectedFile}
+                                                                style={{
+                                                                    width: "230px",
+                                                                    color: "#14359F", cursor: "pointer"
+                                                                }}
+                                                            // value={selectedFile}
+                                                            // accept=".xlsx"
+                                                            />
+                                                        }
 
 
+                                                    </Grid>
                                                 </Grid>
-                                            </Grid>
-                                        </FormControl>
+                                            </FormControl>
+                                        </Grid>
+                                        <Grid item xs={12} md={6} xl={3}>
+                                            {/* input 4 */}
+                                            <FormControl
+                                                sx={{ mt: 2, ml: -30, width: "min(100% 279px)" }}
+                                                variant="outlined"
+                                            >
+
+                                                <Grid elevation={3} style={{
+                                                    zIndex: '10', width: '2290%', height: '159px', overflow: 'scroll', radius: "20px", boxShadow: "0px 0px 5px lightgray",
+                                                    borderRadius: "20px",
+                                                    padding: "8px",
+                                                    backgroundColor: "white"
+                                                }} className="box">
+                                                    {isShown && (
+                                                        <FcFile style={{
+                                                            width: "250px",
+                                                            height: '78px',
+                                                            position: "absolute",
+                                                            left: "-70px",
+                                                            top: "40px",
+
+                                                        }} />)}
+                                                    <p style={{
+                                                        width: "250px", position: "absolute",
+                                                        left: "100px",
+                                                        top: "50px",
+                                                        fontSize: "28px"
+                                                    }}>{selectedFileName}</p>
+                                                </Grid>
+                                            </FormControl>
+
+                                        </Grid>
+                                        <Grid elevation={3} style={{
+                                            position: "absolute",
+                                            left: "840px",
+                                            paddingTop: "92px"
+
+                                        }}>
+                                            <a style={{
+                                                width: "330px",
+                                                height: "70px",
+                                                color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
+                                            }} onClick={downloadExcel}>Excel Format</a></Grid>
                                     </Grid>
-                                    <Grid item xs={12} md={6} xl={3}>
-                                        {/* input 4 */}
-                                        <FormControl
-                                            sx={{ mt: 2, ml: -30, width: "min(100% 279px)" }}
-                                            variant="outlined"
-                                        >
-
-                                            <Grid elevation={3} style={{
-                                                zIndex: '10', width: '2290%', height: '159px', overflow: 'scroll', radius: "20px", boxShadow: "0px 0px 5px lightgray",
-                                                borderRadius: "20px",
-                                                padding: "8px",
-                                                backgroundColor: "white"
-                                            }} className="box">
-                                                {isShown && (
-                                                    <FcFile style={{
-                                                        width: "250px",
-                                                        height: '78px',
-                                                        position: "absolute",
-                                                        left: "-70px",
-                                                        top: "40px",
-
-                                                    }} />)}
-                                                <p style={{
-                                                    width: "250px", position: "absolute",
-                                                    left: "100px",
-                                                    top: "50px",
-                                                    fontSize: "28px"
-                                                }}>{selectedFileName}</p>
-                                            </Grid>
-                                        </FormControl>
-
-                                    </Grid>
-                                    <Grid elevation={3} style={{
-                                        position: "absolute",
-                                        left: "840px",
-                                        paddingTop: "92px"
-
-                                    }}>
-                                        <a style={{
-                                            width: "330px",
-                                            height: "70px",
-                                            color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
-                                        }} onClick={downloadExcel}>Excel Format</a></Grid>
                                 </Grid>
+                                {/* ----// File upload---- */}
+
+
+
+
+
+
+                                {/* --- submit Button--- */}
+                                <Grid
+                                    item
+                                    xs={12}
+                                    margin={3}
+                                    sx={{
+                                        display: "flex",
+                                        gap: "10px",
+                                        justifyContent: "flex-end",
+                                    }}
+                                >
+
+
+                                    {/*   <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>*/}
+
+                                    <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
+
+                                </Grid>
+                                {/* --- submit Button--- */}
                             </Grid>
-                            {/* ----// File upload---- */}
 
 
 
 
 
 
-                            {/* --- submit Button--- */}
-                            <Grid
-                                item
-                                xs={12}
-                                margin={3}
-                                sx={{
-                                    display: "flex",
-                                    gap: "10px",
-                                    justifyContent: "flex-end",
-                                }}
-                            >
 
 
-                                {/*   <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>*/}
-
-                                <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
-
-                            </Grid>
-                            {/* --- submit Button--- */}
                         </Grid>
 
 
-
-
-
-
-
-
                     </Grid>
-
-
                 </Grid>
-            </Grid>
+            </Box>
         </>
 
 

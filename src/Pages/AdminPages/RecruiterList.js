@@ -394,7 +394,7 @@ const RecruiterList = () => {
   return (
     <>
       {/* table_main_container => add custom css */}
-      <Box className="table_main_container" >
+      <Box className="contianer_main" >
         {/*---bar--- */}
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static" sx={{ background: "transparent", color: "#222", boxShadow: "none" }}>

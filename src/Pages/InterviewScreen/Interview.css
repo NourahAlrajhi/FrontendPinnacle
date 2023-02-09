@@ -1,6 +1,5 @@
 .Interview_section {
-  background-image: url("../../images/pinnical-image1.png"),
-    url("../../images/pinnical-image2.png");
+  background-image: url("../../images/interFirst_back.svg"), url("../../images/interSecond_back.svg");
   background-position: -10% -10%, right bottom;
   background-repeat: no-repeat;
   background-size: min(50%, 600px), min(50%, 400px);
@@ -31,7 +30,7 @@
   left: 0%;
   height: 100%;
   width: 100%;
-  background: rgba(266, 266, 266, 0.4);
+  background: rgba(266, 266, 266, 0);
   /* backdrop-filter: blur(2px); */
 }
 
@@ -52,18 +51,19 @@
 }
 
 .BoxDiv .frame {
+  position: relative;
   padding: 1rem;
   border-radius: 20px;
   width: min(500px, 90%);
   margin: auto;
   /* filter: drop-shadow(0px 4px 4px rgba(100, 100, 111, 0.5)); */
-  box-shadow: 0px 0px 15px lightgray;
+  box-shadow: 0px 0px 10px lightgray;
   margin: 2rem 0;
-  background: rgba(266, 266, 266, 0.5);
+  background: rgba(266, 266, 266, 0.3);
   overflow: hidden;
-  backdrop-filter: saturate(180%) blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: saturate(180%) blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
+  /* backdrop-filter: blur(10px); */
 }
 
 .BoxDiv .frame::before {
