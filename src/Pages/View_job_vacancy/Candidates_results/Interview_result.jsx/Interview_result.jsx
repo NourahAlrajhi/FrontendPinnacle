@@ -121,7 +121,14 @@ export default function Interview_result() {
   const [CandidatePercentageResult, setCandidatePercentageResult] = useState(0.0)
   const [CandidatePercentageResultList, setCandidatePercentageResultList] = useState([])
 
+  const [FillerWordsNumber, setFillerWordsNumber] = useState([])
+  const [FillerWordsWORDS, setFillerWordsWORDS] = useState([''])
+
+
   const [CandidateChoosenPercentage, setCandidateChoosenPercentage] = useState(0.0)
+  const [CandidateChoosenPercentageFiller, setCandidateChoosenPercentageFiller] = useState(0.0)
+  const [CandidateChoosenPercentageFillerWord, setCandidateChoosenPercentageFillerWord] = useState('')
+
 
 
   const [CandidateInterview, setCandidateInterview] = useState([{}])
@@ -135,7 +142,7 @@ export default function Interview_result() {
 
     datasets: [{
         label: 'Applicants per Open Vacancy',
-        data: [CandidateChoosenPercentage],
+        data: [CandidateChoosenPercentageFiller],
         backgroundColor: [
             '#ae6fe1',
         ],
@@ -192,6 +199,8 @@ const dat2 = {
             setCandidatePercentageResult(item.ResultPersentage)
             setCandidateInterview(item.RECORDS)
             setCandidatePercentageResultList(item.SpecificResultPersentage)
+            setFillerWordsNumber(item.FillerWords)
+            setFillerWordsWORDS(item.FillerWordsWords)
 
           }
 
@@ -240,6 +249,8 @@ const dat2 = {
       if (item.QuestionAndAnswerID == ID) {
         setSelectedRecord(cld.video(item.publicId))
         setCandidateChoosenPercentage(CandidatePercentageResultList[INDEX])
+        setCandidateChoosenPercentageFiller(FillerWordsNumber[INDEX])
+        setCandidateChoosenPercentageFillerWord(FillerWordsWORDS[INDEX])
         // setCandidatePercentageResultList(CandidatePercentageResultList[i])
 
       }
@@ -396,7 +407,7 @@ const dat2 = {
               {/* <FilterWord_graph DATA={CandidateChoosenPercentage}/> */}
               <Stack direction="row" alignItems="center" justifyContent="center" gap="5px" mt={2} >
                 <Typography>Filler Words</Typography>
-                <Box component="span" sx={{ background: "#ae6fe1", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : CandidateChoosenPercentage}% </Box>
+                <Box component="span" sx={{ background: "#ae6fe1", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : `${CandidateChoosenPercentageFillerWord}`}</Box>
               </Stack>
             </Grid>
             {/* ---//graph 2--- */}

@@ -760,7 +760,7 @@ const PositionForm = () => {
                           }
                         }}
                         id="outlined-required"
-                        label="Notic Period"
+                        label="Notice Period"
                         onChange={onInputChange33}
                         value={noticePeriod}
                         InputProps={{
@@ -770,7 +770,7 @@ const PositionForm = () => {
                             </InputAdornment>
                           ),
                         }}
-                        placeholder="Enter Notic Period"
+                        placeholder="Enter Notice Period"
 
                         InputLabelProps={{
                           shrink: true,

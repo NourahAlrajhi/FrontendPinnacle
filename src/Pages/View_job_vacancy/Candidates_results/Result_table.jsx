@@ -45,7 +45,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IosShareIcon from '@mui/icons-material/IosShare';
-// import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 function createData(name, calories, fat) {
   return { name, calories, fat };
@@ -261,10 +261,10 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                         {item.Candidate_Name}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}> {item.Candidate_Phone__Number}</TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                      <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }}>
                         <RxDotFilled />    {item.Result}
                       </TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} onClick={() => {
+                      <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }} onClick={() => {
                         {
                           item.Result === "Not Attended" ?
                             showAlertSuccess()
@@ -273,7 +273,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
 
                         }
                       }}>
-                        <IosShareIcon size={20} style={{ transform: "rotate(90deg)", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} />
+                        <OpenInNewIcon size={20} style={{  color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }} />
                       </TableCell>
                     </TableRow>
                   )
@@ -294,10 +294,10 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                       {item.Candidate_Name}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "red" : item.Result == "Passed" ? "green" : "gray" }}>
+                    <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797" }}>
                       <RxDotFilled />    {item.Result}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#14359F" : [item.Result == "Passed" ? "#14359F" : "gray"] }} onClick={() => {
+                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : [item.Result == "Passed" ? "#4AA785" : "#979797"] }} onClick={() => {
                       {
                         item.Result === "Not Attended" ?
                           showAlertSuccess()
@@ -306,7 +306,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
 
                       }
                     }}>
-                      <IosShareIcon size={20} style={{ transform: "rotate(90deg)", color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} />
+                      <OpenInNewIcon size={20} style={{  color: item.Result == "Failed" ? "#14359F" : item.Result == "Passed" ? "#14359F" : "gray" }} />
                     </TableCell>
 
 

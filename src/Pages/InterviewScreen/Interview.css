@@ -59,7 +59,7 @@
   /* filter: drop-shadow(0px 4px 4px rgba(100, 100, 111, 0.5)); */
   box-shadow: 0px 0px 10px lightgray;
   margin: 2rem 0;
-  background: rgba(266, 266, 266, 0.3);
+  /* background:#1F278B; */
   overflow: hidden;
   /* backdrop-filter: saturate(180%) blur(10px); */
   /* -webkit-backdrop-filter: blur(10px); */
@@ -73,7 +73,7 @@
   left: -1%;
   height: 100%;
   width: 500%;
-  background-color: #1F278B;
+  background:#1F278B;
   border-radius: 15px;
   z-index: -1;
   transform: rotate(-3deg);

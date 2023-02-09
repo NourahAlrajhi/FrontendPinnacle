@@ -215,7 +215,7 @@ function Interview_welcome_screen() {
 
                             {/* <NavLink style={{ textDecoration: "none" }} >*/}
 
-                            {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => { navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`); SetIsEnterToInterview() }}>{"Start Interview"}</Button> : <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "gray", borderRadius: "8px", "&:hover": { background: "gray", color: "white" } }} >{"Start Interview"}</Button>}
+                            {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <Button variant="contained" sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }} onClick={() => { navigate(`/Question_interview/${VacancyID}/${CandidateDocID}/${CandidateID}`); SetIsEnterToInterview() }}>{"Start Interview"}</Button> :null}
 
                             {/* <Common_button btnText={"Start Interview"}  />*/}
                             {/*  </NavLink>*/}
