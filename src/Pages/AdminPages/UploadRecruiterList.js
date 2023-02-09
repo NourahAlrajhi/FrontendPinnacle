@@ -48,7 +48,11 @@ import { useParams } from "react-router-dom";
 import { read, utils, writeFile, useExcelDownloder } from 'xlsx';
 import { Popup_validate } from '../../component/Popup_validate'
 import * as XLSX from 'xlsx';
-
+import WarningIcon from '@material-ui/icons/Warning';
+import {CiWarning }  from "react-icons/ci";
+import {TiWarningOutline}  from "react-icons/ti";
+import {BsCheck2} from "react-icons/bs";
+import {VscWarning} from "react-icons/vsc";
 const UploadRecruiterList = () => {
 
 
@@ -241,11 +245,27 @@ const UploadRecruiterList = () => {
 
 
     const showAlertSuccess = () => {
-        var msg = parse('<h3 style="text-align: center">Employee Uploaded Successfully</h3>')
+        var msg = parse('<h3 style="text-align: center">Employees Uploaded Successfully</h3>')
+        // confirmAlert({
+        //     message: msg,
+        //     buttons: []
+        // })
+
         confirmAlert({
-            message: msg,
-            buttons: []
-        })
+            // ----change ui---
+            customUI: ({ onClose }) => {
+              return (
+      
+                <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+                  {/* <h3>Confirmation Message</h3> */}
+      
+                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employees Uploaded Successfully</p>
+                </div>
+              )
+            }
+            // ----//change ui---
+      
+          })
     }
 
     return (

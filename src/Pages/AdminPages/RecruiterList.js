@@ -29,7 +29,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import { useVacancyContext } from "../../Hook/UseVacancy"
 import { useEmployeeContext } from "../../Hook/UseEmployeeContext"
-
+import WarningIcon from '@material-ui/icons/Warning';
+import {CiWarning }  from "react-icons/ci";
+import {TiWarningOutline}  from "react-icons/ti";
+import {BsCheck2} from "react-icons/bs";
+import {VscWarning} from "react-icons/vsc";
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -332,17 +336,48 @@ const RecruiterList = () => {
 
   const showAlertSuccess = () => {
     var msg = parse('<h3 style="text-align: center">Employee Authorized Successfully</h3>')
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
     confirmAlert({
-      message: msg,
-      buttons: []
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employee Authorized Successfully</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
     })
   }
 
   const showAlertSuccess22 = () => {
     var msg = parse('<h3 style="text-align: center">Employee UnAuthorized Successfully</h3>')
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
+
     confirmAlert({
-      message: msg,
-      buttons: []
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employee UnAuthorized Successfully</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
     })
   }
 

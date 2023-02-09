@@ -30,7 +30,11 @@ import { useParams } from "react-router-dom";
 //import { useNavigate } from 'react-router-dom'
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import FormControl from "@mui/material/FormControl";
-
+import WarningIcon from '@material-ui/icons/Warning';
+import {CiWarning }  from "react-icons/ci";
+import {TiWarningOutline}  from "react-icons/ti";
+import {BsCheck2} from "react-icons/bs";
+import {VscWarning} from "react-icons/vsc";
 
 
 import { makeStyles } from '@mui/styles';
@@ -289,18 +293,49 @@ const EditPosition = () => {
 
   const showAlertSuccess = () => {
     var msg = parse('<h3 style="text-align: center">Position Details Edited Successfully</h3>')
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
+
     confirmAlert({
-      message: msg,
-      buttons: []
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Position Details Edited Successfully</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
     })
   }
 
 
   const showAlertSuccess33 = (error) => {
     var msg = parse(`<h3 style="text-align: center">${error}</h3>`)
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
     confirmAlert({
-      message: msg,
-      buttons: []
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; {error}</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
     })
   }
 

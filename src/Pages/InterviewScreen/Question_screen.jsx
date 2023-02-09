@@ -22,7 +22,11 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import Paper from '@mui/material/Paper';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import parse from 'html-react-parser';
-
+import WarningIcon from '@material-ui/icons/Warning';
+import {CiWarning }  from "react-icons/ci";
+import {TiWarningOutline}  from "react-icons/ti";
+import {BsCheck2} from "react-icons/bs";
+import {VscWarning} from "react-icons/vsc";
 function Question_screen(props) {
 
   // ----------popover function----
@@ -204,8 +208,8 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
   //const [recordingForFullInterview, setrecordingForFullInterview] = useState(false);
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
-  const [seconds, setSeconds] = useState(20)
-  const [minutes, setMinutes] = useState(8)
+  const [seconds, setSeconds] = useState(10)
+  const [minutes, setMinutes] = useState(1)
   const [CloseTheTimer, setCloseTheTimer] = useState(false);
 
   const mediaRecorderRef = useRef(null);
@@ -299,7 +303,23 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
 
       } catch (error) {
         console.error("Error: ", error);
-        alert("Please grant permission to use the camera and microphone");
+        // alert("Please grant permission to use the camera and microphone");
+
+        confirmAlert({
+          // ----change ui---
+          customUI: ({ onClose }) => {
+            return (
+    
+              <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+                {/* <h3>Confirmation Message</h3> */}
+    
+                <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; Please grant permission to use the camera and microphone</p>
+              </div>
+            )
+          }
+          // ----//change ui---
+    
+        })
       }
 
     }
@@ -395,7 +415,23 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
 
   const handleCutAndStartOverWhenTimerIsOut = () => {
     console.log("Enter the handleCutAndStartOverWhenTimerIsOut")
-    alert('The Time For This Question is Finish, You Will Be Move To The Next Question')
+    // alert('The Time For This Question is Finish, You Will Be Move To The Next Question')
+
+    confirmAlert({
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; The Time For This Question is Finish, You Will Be Move To The Next Question</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
+    })
 
     props.handleNext();
     {
@@ -538,9 +574,24 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
 
   const showAlertSuccess = () => {
     var msg = parse('<h3 style="text-align: center">The interview ended successfully</h3>')
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
     confirmAlert({
-      message: msg,
-      buttons: []
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; The interview ended successfully</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
     })
   }
 
