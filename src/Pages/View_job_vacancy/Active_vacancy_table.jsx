@@ -286,7 +286,7 @@ export default function Active_vacancy_table(props) {
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
                 {/* {props.barText} */}
-           Active Jop Vacancies 
+           Active Job Vacancies 
               </Typography>
               <Search>
                 <SearchIconWrapper>

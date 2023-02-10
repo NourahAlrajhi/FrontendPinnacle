@@ -96,7 +96,7 @@ export default function Applicants_vacancy_graph({ DATA1, DATA2 }) {
 
   return (
     <Box sx={{ backgroundColor: "#F7F9FB", borderRadius: "16px", padding: "1rem", }} className="calendar_graph_box">
-      <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Calendar</Typography>
+      <Typography sx={{ fontSize: "1.2rem", fontWeight: "600", color: "2D3748" }}>Job Vacancy Chart</Typography>
       <Bar options={options} data={data2} style={{ display: "inline-block", minWidth: "100%", maxHeight: "400px", marginTop: "1rem" }} />
     </Box>
   )

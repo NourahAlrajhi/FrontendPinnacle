@@ -211,7 +211,7 @@ const Sidebar = ({ children }) => {
             // ----set value localfun---
             setVlaue_local('Open_Jop_Vacancies')}>
             <ListItemButton component="a" href="/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main" sx={{ padding: "2px 10px", borderRadius: "8px" }} className={activeKeyValue == "Open_Jop_Vacancies" ? "said_bar_list_active" : ""}>
-                <ListItemText primary="Open Jop Vacancies" />
+                <ListItemText primary="Open Job Vacancies" />
             </ListItemButton>
         </ListItem>
         <ListItem disablePadding sx={{ margin: "5px 0 0 0" }} onClick={() =>
@@ -226,7 +226,7 @@ const Sidebar = ({ children }) => {
             // ----set value localfun---
             setVlaue_local('Closed_Jop_Vacancies')}>
             <ListItemButton component="a" href="/Dashboard/View_job_vacancy_main/Closed_jop_vacancies_main" sx={{ padding: "2px 10px", borderRadius: "8px" }} className={activeKeyValue == "Closed_Jop_Vacancies" ? "said_bar_list_active" : ""}>
-                <ListItemText primary="Closed Jop Vacancies" />
+                <ListItemText primary="Closed Job Vacancies" />
             </ListItemButton>
         </ListItem>
     </List>

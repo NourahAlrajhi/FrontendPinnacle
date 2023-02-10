@@ -15,6 +15,7 @@ import Active_vacancy_table_search_bar from "../../Table_components/table_search
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import { useRecruiterContext } from "../../../Hook/UseRecruiterContext"
+import {VscWarning} from "react-icons/vsc";
 
 import Button from "@mui/material/Button";
 // -------table component----------------
@@ -114,13 +115,13 @@ export default function Result_table({ exportBtnId, VacancyID }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
 
-  const showAlertSuccess = () => {
-    var msg = parse('<h3 style="text-align: center">No Result Yet!</h3>')
-    confirmAlert({
-      message: msg,
-      buttons: []
-    })
-  }
+  // const showAlertSuccess = () => {
+  //   var msg = parse('<h3 style="text-align: center">No Result Yet!</h3>')
+  //   confirmAlert({
+  //     message: msg,
+  //     buttons: []
+  //   })
+  // }
 
   const capitalizeWords = (str) => {
     return str
@@ -181,7 +182,29 @@ export default function Result_table({ exportBtnId, VacancyID }) {
 
   let navigate = useNavigate()
 
+  const showAlertSuccess33 = (error) => {
+    // var msg = parse(`<h3 style="text-align: center">${error}</h3>`)
+    // confirmAlert({
+    //   message: msg,
+    //   buttons: []
+    // })
 
+    confirmAlert({
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+
+          <div className='custom-ui' style={{ width: "max(145px, 154%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "-1%" }}>
+            {/* <h3>Confirmation Message</h3> */}
+
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-8px" }} /> &nbsp; No Result Yet!</p>
+          </div>
+        )
+      }
+      // ----//change ui---
+
+    })
+  }
 
 
   return (
@@ -267,7 +290,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                       <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }} onClick={() => {
                         {
                           item.Result === "Not Attended" ?
-                            showAlertSuccess()
+                          showAlertSuccess33()
                             :
                             navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 
@@ -300,7 +323,7 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : [item.Result == "Passed" ? "#4AA785" : "#979797"] }} onClick={() => {
                       {
                         item.Result === "Not Attended" ?
-                          showAlertSuccess()
+                        showAlertSuccess33()
                           :
                           navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 

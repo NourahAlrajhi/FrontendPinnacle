@@ -167,7 +167,7 @@ useEffect(() => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
-            Open Jop Vacancies 
+            Open Job Vacancies 
               </Typography>
               <Search>
                 <SearchIconWrapper>

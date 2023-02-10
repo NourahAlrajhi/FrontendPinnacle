@@ -214,7 +214,7 @@ const RecruiterList = () => {
         return (
           <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
             <h3>Confirmation Message</h3>
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to give authorization to this Recruiter?</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Give Authorization To This Recruiter?</p>
 
             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
               <button onClick={() => {
@@ -261,7 +261,7 @@ const RecruiterList = () => {
         return (
           <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
             <h3>Confirmation Message</h3>
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to restrict access on this Recruiter?</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Restrict Access On This Recruiter?</p>
 
             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
               <button onClick={() => {
@@ -348,7 +348,7 @@ const RecruiterList = () => {
           <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
             {/* <h3>Confirmation Message</h3> */}
 
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employee Authorized Successfully</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Recruiter Authorized Successfully</p>
           </div>
         )
       }
@@ -372,7 +372,7 @@ const RecruiterList = () => {
           <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
             {/* <h3>Confirmation Message</h3> */}
 
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employee UnAuthorized Successfully</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Recruiter UnAuthorized Successfully</p>
           </div>
         )
       }
@@ -440,7 +440,7 @@ const RecruiterList = () => {
                 component="div"
                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
               >
-                Employees
+                Recruiters
               </Typography>
               <Search>
                 <SearchIconWrapper>
@@ -503,7 +503,7 @@ const RecruiterList = () => {
                       <PersonIcon />
                       {row.Employee_Name}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
+                    <TableCell align="left" sx={{ paddingLeft: "13%", border: 0 }}>
                       {row.Employee_ID}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
@@ -574,10 +574,10 @@ const RecruiterList = () => {
                       <PersonIcon />
                       {row.Employee_Name}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
+                    <TableCell align="left" sx={{ paddingLeft: "13%", border: 0 }}>
                       {row.Employee_ID}
                     </TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "8%", border: 0 }}>
+                    <TableCell align="left" sx={{ paddingLeft: "10%", border: 0 }}>
                       {!row.IsAuth ?
                         <Button
                           className="download-table-xls-button"

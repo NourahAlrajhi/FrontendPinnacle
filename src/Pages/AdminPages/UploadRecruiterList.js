@@ -101,7 +101,24 @@ const UploadRecruiterList = () => {
         console.log(fileType)
         let validExtensions = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
         if (!validExtensions.includes(fileType)) {
-            alert("Only .XLSX and .CSV files are allowed");
+            // alert("Only .XLSX and .CSV files are allowed");
+
+            confirmAlert({
+                // ----change ui---
+                customUI: ({ onClose }) => {
+                  return (
+          
+                    <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+                      {/* <h3>Confirmation Message</h3> */}
+          
+                      <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; Only .XLSX and .CSV Files Are Allowed</p>
+                    </div>
+                  )
+                }
+                // ----//change ui---
+          
+              })
+
             event.target.value = "";
         } else {
             setisShownselectedFile(true)
@@ -198,7 +215,7 @@ const UploadRecruiterList = () => {
                 return (
                     <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
                         <h3>Confirmation Message</h3>
-                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</p>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Upload These Recruiters?</p>
 
                         <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
                             <button onClick={() => {
@@ -259,7 +276,7 @@ const UploadRecruiterList = () => {
                 <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
                   {/* <h3>Confirmation Message</h3> */}
       
-                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Employees Uploaded Successfully</p>
+                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Recruiters Uploaded Successfully</p>
                 </div>
               )
             }
@@ -303,7 +320,7 @@ const UploadRecruiterList = () => {
                                     <Grid container>
                                         <Grid item xs={12}>
                                             <Typography fontWeight={700}>
-                                                Upload Candidats Information
+                                                Upload Recruiters Information
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} md={6} xl={3}>
@@ -447,7 +464,7 @@ const UploadRecruiterList = () => {
 
                                     {/*   <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>*/}
 
-                                    <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
+                                    <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Upload </button>
 
                                 </Grid>
                                 {/* --- submit Button--- */}

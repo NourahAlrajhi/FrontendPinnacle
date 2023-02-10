@@ -128,7 +128,23 @@ const CreateJobbVacancy = () => {
         console.log(fileType)
         let validExtensions = ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
         if (!validExtensions.includes(fileType)) {
-            alert("Only .XLSX and .CSV files are allowed");
+            // alert("Only .XLSX and .CSV files are allowed");
+
+            confirmAlert({
+                // ----change ui---
+                customUI: ({ onClose }) => {
+                  return (
+          
+                    <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+                      {/* <h3>Confirmation Message</h3> */}
+          
+                      <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; Only .XLSX and .CSV Files Are Allowed</p>
+                    </div>
+                  )
+                }
+                // ----//change ui---
+          
+              })
             event.target.value = "";
         } else {
             setisShownselectedFile(true)

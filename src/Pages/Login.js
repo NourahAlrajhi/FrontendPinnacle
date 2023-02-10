@@ -53,7 +53,7 @@ const Login = () => {
                   {error && <div className="error">{error}</div>}
                   <div className="input">
                     <div>
-                      <label htmlFor="UserName">UserName</label>
+                      <label htmlFor="UserName">Username</label>
                       <FormControl fullWidth variant="outlined">
                         <OutlinedInput
                           id="outlined-adornment-username"
