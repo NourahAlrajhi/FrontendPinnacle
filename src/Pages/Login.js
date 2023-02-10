@@ -11,8 +11,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import { useLogin } from "../Hook/useLogin";
-import PinnaclLogo from '../images/PinnacleLogo.png'
-
+// import PinnaclLogo from '../images/PinnacleLogo.png'
+import PinnaclLogo from '../images/pinnacle_new_logo.png'
 import "../style/Login.css";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 <div className="name_heading">
                   <img src={PinnaclLogo} alt="#" />
-                  <p className="from_heading">Pinnacle</p>
+                  {/* <p className="from_heading">Pinnacle</p> */}
                 </div>
 
                 <div className="inputs_filds">

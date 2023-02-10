@@ -208,8 +208,8 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
   //const [recordingForFullInterview, setrecordingForFullInterview] = useState(false);
   //const [streamForFullInterview, setstreamForFullInterview] = useState(null);
   //const [recordedVideosForFullInterview, setrecordedVideosForFullInterview] = useState([]);
-  const [seconds, setSeconds] = useState(10)
-  const [minutes, setMinutes] = useState(1)
+  const [seconds, setSeconds] = useState(20)
+  const [minutes, setMinutes] = useState(8)
   const [CloseTheTimer, setCloseTheTimer] = useState(false);
 
   const mediaRecorderRef = useRef(null);
