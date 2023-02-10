@@ -79,6 +79,14 @@ function Sidebar_HeadingBox(props) {
         }
     }, [VacancyID, CandidateDocID, CandidateID]) 
 
+    const capitalizeWords = (str) => {
+        return str
+          .toLowerCase()
+          .split(' ')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      };
+
     return (
         <>
             <Box component="div" className="site_logo">
@@ -94,8 +102,8 @@ function Sidebar_HeadingBox(props) {
             </Box>
             <Box component="div" className="condidate_name">
                 <p className="name">Welcome, {CandidateName}!</p>
-                <p className="position">{VacancyName}</p>
-
+                <p className="position">  {capitalizeWords(VacancyName)}</p>
+              
             </Box>
         </>
     )

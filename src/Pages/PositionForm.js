@@ -313,8 +313,8 @@ const PositionForm = () => {
 
 
 
-  const isLetters = (str) => /^[ A-Za-z?.,]*$/.test(str)
-  const isLetters2 = (str) => /^[ A-Za-z0-9+.,]*$/.test(str)
+  const isLetters = (str) => /^[ A-Za-z?.,:'"!()''-_]*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()''-_]*$/.test(str)
 
   const onInputChange = (e) => {
     const { value } = e.target;
@@ -991,7 +991,9 @@ const PositionForm = () => {
                                     {!item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
                                       : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     }
-                                  </Grid> : null
+                                  </Grid> :  ( !item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
+                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
+                                    )
                               }
                             </Grid>
                           </Grid>

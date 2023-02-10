@@ -226,7 +226,7 @@ const EditPosition = () => {
         return (
           <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
             <h3>Confirmation Message</h3>
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Send Interview Invitations To Candidates?</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to Discard position changes?</p>
 
             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
               <button onClick={() => {
@@ -443,8 +443,8 @@ const EditPosition = () => {
   const helperTextStyles4 = useHelperTextStylesForQuestion()
   const helperTextStyles5 = useHelperTextStylesForAnswers()
 
-  const isLetters = (str) => /^[ A-Za-z?.,:'"]*$/.test(str)
-  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"]*$/.test(str)
+  const isLetters = (str) => /^[ A-Za-z?.,:'"!()''-_]*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()''-_]*$/.test(str)
 
 
   const onInputChange = (e) => {
@@ -595,7 +595,7 @@ const EditPosition = () => {
                           ),
                         }}
                         onChange={onInputChange}
-                        value={capitalizeWords(name)}
+                        value={name}
                         disabled={disabled}
                         placeholder="Enter Position Name"
                         style={{
@@ -887,7 +887,9 @@ const EditPosition = () => {
                                     {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
                                       : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
                                     }
-                                  </Grid> : null
+                                  </Grid> :  ( !arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
+                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                    )
                               }
                             </Grid>
                           </Grid>

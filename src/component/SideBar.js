@@ -18,6 +18,7 @@ import { ImProfile, ImHome } from "react-icons/im";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { useRecruiterContext } from "../Hook/UseRecruiterContext"*/
 
+import PinnaclLogo2 from '../images/pinnacle_new_logo.png'
 
 import { ImProfile, ImHome } from "react-icons/im";
 import { HiOutlineUserGroup } from "react-icons/hi";
