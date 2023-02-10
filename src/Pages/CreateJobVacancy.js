@@ -215,7 +215,7 @@ const CreateJobbVacancy = () => {
 
             customUI: ({ onClose }) => {
                 return (
-                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%",marginLeft:"374px"}}>
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%",marginLeft:"50px"}}>
                         <h3>Confirmation Message</h3>
                         <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Send Interview Invitations To Candidates?</p>
 
@@ -283,6 +283,13 @@ const CreateJobbVacancy = () => {
     }
 
 
+    const capitalizeWords = (str) => {
+        return str
+          .toLowerCase()
+          .split(' ')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      };
 
     const OnChoosenPosition = async (ID) => {
         setisShownPositioArray(true)
@@ -307,7 +314,7 @@ const CreateJobbVacancy = () => {
             // navigate('/PositionList');
             setPositionChoosen(json.name)
             console.log(json.name)
-            setEmailSubject(`ELM: ${json.name}`)
+            setEmailSubject(`ELM: ${capitalizeWords(json.name)}`)
 
             setEmailBody("Dear Candidate," +
                 `Thank you for your application to the ${json.name} role at ELM.` +
@@ -742,7 +749,7 @@ const CreateJobbVacancy = () => {
                                         >
                                             {Positions && Positions.map((option) => (
                                                 <MenuItem key={option.name} value={option.name} onClick={() => OnChoosenPosition(option._id)}>
-                                                    {option.name}
+                                                    {capitalizeWords(option.name)}
                                                 </MenuItem>
                                             ))}
                                         </TextField>
