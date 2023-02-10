@@ -496,7 +496,7 @@ const PositionForm = () => {
           return (
             <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
               <h3>Confirmation Message</h3>
-              <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you do not want to add this position?</p>
+              <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Discard This Position?</p>
 
               <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
                 <button onClick={() => {
@@ -845,7 +845,7 @@ const PositionForm = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography fontWeight={700}>
-                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4" }} /></p>
+                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question An Open Ended Question Please Click the <CiLock size={20}style={{ color: "#7024C4" , margin: "-3px"}} /> Icon</p>
                     </Typography>
                   </Grid>
                   <Grid

@@ -111,8 +111,8 @@ export default function Closed_job_table() {
     if (yearDirection === "asc") {
       setVacancyResult(
         VacancyResult.slice().sort((a, b) => {
-          console.log(a.createdAt);
-          return new Date(b.createdAt) - new Date(a.createdAt);
+          console.log(a.linkExpTime);
+          return new Date(b.linkExpTime) - new Date(a.linkExpTime);
         })
       );
       setYearDirection("desc");
@@ -122,8 +122,8 @@ export default function Closed_job_table() {
     if (yearDirection === "desc") {
       setVacancyResult(
         VacancyResult.slice().sort((a, b) => {
-          console.log(a.createdAt);
-          return new Date(a.createdAt) - new Date(b.createdAt);
+          console.log(a.linkExpTime);
+          return new Date(a.linkExpTime) - new Date(b.linkExpTime);
         })
       );
       setYearDirection("asc");
@@ -142,8 +142,8 @@ export default function Closed_job_table() {
 
       setVacancyResultAfterMonthAndYear(
         arr.sort(function (a, b) {
-          return months2.indexOf((new Date(b.createdAt).getMonth() + 1))
-            - months2.indexOf((new Date(a.createdAt).getMonth() + 1));
+          return months2.indexOf((new Date(b.linkExpTime).getMonth() + 1))
+            - months2.indexOf((new Date(a.linkExpTime).getMonth() + 1));
         })
       );
 
@@ -153,8 +153,8 @@ export default function Closed_job_table() {
     if (MonthDirection === "desc") {
       setVacancyResultAfterMonthAndYear(
         arr.sort(function (a, b) {
-          return months2.indexOf((new Date(a.createdAt).getMonth() + 1))
-            - months2.indexOf((new Date(b.createdAt).getMonth() + 1));
+          return months2.indexOf((new Date(a.linkExpTime).getMonth() + 1))
+            - months2.indexOf((new Date(b.linkExpTime).getMonth() + 1));
         })
       );
 
@@ -339,10 +339,10 @@ export default function Closed_job_table() {
                       {row.CandidateList}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      { (new Date(row.createdAt).getMonth() + 1)}
+                      { (new Date(row.linkExpTime).getMonth() + 1)}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
+                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.linkExpTime).getFullYear())}
                     </TableCell>
                   
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
@@ -375,10 +375,10 @@ export default function Closed_job_table() {
                     {row.CandidateList}
                   </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      { (new Date(row.createdAt).getMonth() + 1)}
+                      { (new Date(row.linkExpTime).getMonth() + 1)}
                     </TableCell>
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                    {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.createdAt).getFullYear())}
+                    {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" + */(new Date(row.linkExpTime).getFullYear())}
                   </TableCell>
                  
                   <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
@@ -408,10 +408,10 @@ export default function Closed_job_table() {
                       {row.CandidateList}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      { (new Date(row.createdAt).getMonth() + 1)}
+                      { (new Date(row.linkExpTime).getMonth() + 1)}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>
-                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" +*/ (new Date(row.createdAt).getFullYear())}
+                      {/*(new Date(row.createdAt).getDate()) + "-" + (new Date(row.createdAt).getMonth() + 1) + "-" +*/ (new Date(row.linkExpTime).getFullYear())}
                     </TableCell>
                   
                     <TableCell align="left" sx={{ paddingLeft: "6%", border: 0 }}>

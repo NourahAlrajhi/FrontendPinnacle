@@ -586,7 +586,7 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
           <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
             {/* <h3>Confirmation Message</h3> */}
 
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; The interview ended successfully</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; The Interview Ended Successfully</p>
           </div>
         )
       }
@@ -758,7 +758,7 @@ CallingTheModel()
           :
 
           <box component="div" className="thanksScreen">
-            You Finish The Interview
+            You Have Finished The Interview
             Thank You For Your Time, {CandidateName}!
             {/* <box component="div" className="thanksScreen">
               <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}  >{"Click Here To Finish The Interview"}</Button>     </box>   */}

@@ -61,7 +61,7 @@ export default function LongMenu2({ Vacancyy, VacancyyName }) {
                     return (
                         <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
                             <h3>Confirmation Message</h3>
-                            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are you sure you want to Delete this Job Vacancy?</p>
+                            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Delete This Job Vacancy?</p>
 
                             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
                                 <button onClick={() => {

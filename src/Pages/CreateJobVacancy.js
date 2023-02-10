@@ -263,7 +263,7 @@ const CreateJobbVacancy = () => {
                 return (
                     <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" ,marginLeft:"374px"}}>
                         <h3>Confirmation Message</h3>
-                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Save This Job Vacancy Without Sending Interview Invitations To Candidates?</p>
+                        <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Draft This Job Vacancy?</p>
 
                         <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
                             <button onClick={() => {
@@ -389,7 +389,32 @@ const CreateJobbVacancy = () => {
                 <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
                   {/* <h3>Confirmation Message</h3> */}
       
-                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Job Vacancy Opened Successfully</p>
+                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Job Vacancy Activated Successfully</p>
+                </div>
+              )
+            }
+            // ----//change ui---
+      
+          })
+    }
+
+
+    const showAlertSuccessForOpend = () => {
+        var msg = parse('<h3 style="text-align: center">Job Vacancy Opened Successfully</h3>')
+        // confirmAlert({
+        //     message: msg,
+        //     buttons: []
+        // })
+
+        confirmAlert({
+            // ----change ui---
+            customUI: ({ onClose }) => {
+              return (
+      
+                <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
+                  {/* <h3>Confirmation Message</h3> */}
+      
+                  <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><BsCheck2 size={35} style={{ color: "#A1E3CB", margin: "-13px" }} /> &nbsp; Job Vacancy Saved Successfully</p>
                 </div>
               )
             }
@@ -485,7 +510,7 @@ const CreateJobbVacancy = () => {
             if (isShownselectedFile) {
                 handleSubmitxsxlSheet2()
             }
-            showAlertSuccess()
+            showAlertSuccessForOpend()
             navigate(`/Dashboard/View_job_vacancy_main/Open_jop_vacancies_main`);
         }
 
