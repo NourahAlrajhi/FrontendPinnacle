@@ -19,7 +19,13 @@ function Closed_jop_vacancies_main() {
    // const [BarCharVacancyNameForActive, setBarCharVacancyNameForActive] = useState([]);
     const [BarCharVacancyCandidatEnterviwedForActualCandidate, setBarCharVacancyCandidatEnterviwedForActualCandidate] = useState([]);
 
-
+    const capitalizeWords = (str) => {
+        return str
+          .toLowerCase()
+          .split(' ')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      };
     useEffect(() => {
         console.log("formRows: ", Vacancy);
         const fetchPosition = async () => {
@@ -34,7 +40,7 @@ function Closed_jop_vacancies_main() {
                 console.log("===========")
                 var j = 0
                 json && json.map((item, i) => {
-                    BarCharVacancyName[j] = `${item.title}`
+                    BarCharVacancyName[j] = `${capitalizeWords(item.title)}`
                     BarCharVacancyCandidatEnterviwed[j] = item.InterviewedCandidates
                     BarCharVacancyCandidatEnterviwedForActualCandidate[j]=parseInt(item.CandidateList)
                     j = i + 1

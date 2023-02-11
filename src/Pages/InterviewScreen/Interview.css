@@ -1,3 +1,8 @@
+
+*{
+  font-family: 'Inter', sans-serif;
+}
+
 .Interview_section {
   background-image: url("../../images/interFirst_back.svg"), url("../../images/interSecond_back.svg");
   background-position: -10% -10%, right bottom;

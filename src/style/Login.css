@@ -1,3 +1,7 @@
+
+*{
+  font-family: 'Inter', sans-serif;
+}
 .login_section {
   background-image: url("../images/Vector.svg"),
     url("../images/Frame.svg");
@@ -76,11 +80,14 @@
   font-weight: 600;
   text-transform: capitalize;
   margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
 }
 
 .form_div .form .pera {
   font-size: 1rem;
   margin-bottom: -0.1em;
+  font-family: 'Inter', sans-serif;
+  color:#4B4B4B
 }
 
 .form_div .form .input {

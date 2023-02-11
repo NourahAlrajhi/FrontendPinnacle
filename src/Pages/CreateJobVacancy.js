@@ -806,7 +806,7 @@ const CreateJobbVacancy = () => {
                                         width: "330px",
                                         height: "70px",
                                         color: "#14359F", cursor: "pointer", textDecoration: "underline", padding: "17px",
-                                    }} onClick={() => navigate(`/PositionForm`)}>Add Position</a></Grid>
+                                    }} onClick={() => navigate(`/PositionForm`)}>Add A New Position</a></Grid>
 
                             </Grid>
                         </Grid>
@@ -1186,9 +1186,9 @@ const CreateJobbVacancy = () => {
                             >
 
 
-                                <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>
+                                <button style={!disabled ? { cursor: "pointer", borderRadius: "5px", color: "#14359F", backgroundColor: "#F7F9FB", border: "none", width: "110px", height: "30px", borderColor: "#14359F" } : { cursor: "pointer", borderRadius: "5px", color: "rgba(0, 0, 0,0.2)", backgroundColor: "rgba(0, 0, 0,0.1)", border: "none", width: "110px", height: "30px", borderColor: "gray" }} disabled={disabled} onClick={showAlertConfirmationForSave}> Save </button>
 
-                                <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgb(74, 74, 74)", backgroundColor: "gray", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
+                                <button style={!disabled2 ? { cursor: "pointer", borderRadius: "5px", color: "white", backgroundColor: "#14359F", border: "none", width: "110px", height: "30px" } : { cursor: "pointer", borderRadius: "5px", color: "rgba(0, 0, 0,0.2)", backgroundColor: "rgba(0, 0, 0,0.1)", border: "none", width: "110px", height: "30px" }} disabled={disabled2} onClick={showAlertConfirmation} > Send </button>
 
                             </Grid>
                             {/* --- submit Button--- */}

@@ -169,12 +169,12 @@ export default function Closed_job_graph({DATA1,DATA2,DATA2FORACTUAL}) {
             <Typography >
               <Badge variant='dot' sx={{ margin: "-2px 10px 0 0" }} color="secondary" >
               </Badge>
-              All Candidate
+              All Candidates
             </Typography>
             <Typography >
               <Badge variant='dot' sx={{ margin: "-2px 10px 0 0" }} color="primary">
               </Badge>
-              Interviewed Candidate
+              Interviewed Candidates
             </Typography>
           </Stack>
           {/* ---3dot btn--- */}

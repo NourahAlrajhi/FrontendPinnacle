@@ -183,7 +183,7 @@ function Interview_welcome_screen() {
                             {/* ---inputs--- */}
                             <div className='content'>
                                 <p className='heading'> Welcome {CandidateName}!</p>
-                                {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <p className='pera'>Make Sure Your Microphone and Camera are Working Before Starting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link Has Expired</p> : FinishInterview ? <p className='pera' style={{ padding: "40px", textAlign: "center" }}>You Already Finished The Interview</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Already Entered The Interview Once and Did Not Complete It!</p>}
+                                {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <p className='pera'>Make Sure Your Microphone and Camera are Working Before Starting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link Has Expired</p> : FinishInterview ? <p className='pera' style={{ padding: "40px", textAlign: "center" }}>You Have Conducted This Interview Already</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Have Already Started This Interview!</p>}
                                 {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <div className='filds'>
                                     {/* ----camra div----- */}
 
@@ -198,15 +198,21 @@ function Interview_welcome_screen() {
                                     </Box>
                                     {/* ----//mick div------ */}
                                     {/* -----setUpLine ---- */}
-                                    {/* <Box component="div" className='setUpLine'>
+                                    <Box component="div" className='setUpLine'>
+                                    {/* <p style={{marginLeft:"-402px" , color:"red"}}>
+                                    *Disclaimer:  
+                                        </p> */}
                                         <p className="doneIcon">
-                                            <DoneOutlinedIcon />
-                                        </p>
-                                        <hr />
-                                        <p >All Set Up</p>
-                                    </Box> */}
+                                        *Disclaimer:
+                                      Once Started, The Interview Cannot Be Paused And Resumed Later On
+                                      </p> 
+                                            {/* <DoneOutlinedIcon />
+                                      
+                                        {/* <hr /> */}
+                                        {/* <p >All Set Up</p> */}
+                                    </Box>
                                     {/* -----//setUpLine---- */}
-                                </div> : FinishDuration ? <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>Reply To The Invitation Email If You Think This Is An Issue</h3> : FinishInterview ? <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>Kindly Wait For Your Result</h3> : <h3 style={{ padding: "40px", textAlign: "center", color: "white" }}>Reply To The Invitation Email If You Think This Is An Issue</h3>}
+                                </div> : FinishDuration ? <p style={{ padding: "40px", textAlign: "center", color: "white",fontFamily:"'Inter', sans-serif" }}>Reply To The Invitation Email If You Think This Is An Issue</p> : FinishInterview ? <p style={{ padding: "40px", textAlign: "center", color: "white" }}>Reply To The Invitation Email If You Think This Is An Issue</p> : <p style={{ padding: "40px", textAlign: "center", color: "white" }}>Reply To The Invitation Email If You Think This Is An Issue</p>}
                             </div>
                             {/* ---//inputs--- */}
                         </div>

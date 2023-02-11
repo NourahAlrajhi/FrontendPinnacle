@@ -1,3 +1,7 @@
+*{
+    font-family: 'Inter', sans-serif;
+  }
+
 .contianer_main {
     background-color: #FFFFFF;
     height: 80vh;

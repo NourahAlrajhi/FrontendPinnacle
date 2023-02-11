@@ -144,7 +144,7 @@ export default function Interview_result() {
         label: 'Applicants per Open Vacancy',
         data: [CandidateChoosenPercentageFiller],
         backgroundColor: [
-            '#ae6fe1',
+            '#95A4FC',
         ],
         borderRadius: 10,
         barPercentage: 0.1,
@@ -259,6 +259,15 @@ const dat2 = {
 
   }
 
+
+  const capitalizeWords = (str) => {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   return (
     <>
       {/* ----Interview_result_box---- */}
@@ -302,7 +311,7 @@ const dat2 = {
             <Grid item xs={12} sm={6} lg={3} mt={2}>
               <Typography sx={{ background: "#EFF0F6", marginBottom: "10px", padding: "5px 1rem", borderRadius: "10px", display: "inline-block", fontWeight: "600" }}>Final Decision</Typography> <br />
               {/* <Typography variant='subtitle2' sx={{ fontSize: "1.3rem", fontWeight: "600" }}>{CandidateName}</Typography> */}
-              <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: CandidateResultr == "Passed" ? "#DEF8EE" : "red", fontWeight: "600", color: CandidateResultr == "Passed" ? "#4AA785" : "white", borderRadius: "10px" }}>{CandidateResultr} {CandidatePercentageResult}%</Box>
+              <Box component="span" sx={{ display: "inline-block", margin: "10px 0", padding: "5px 15px", background: CandidateResultr == "Passed" ? "#7BC9AC" : "#AE6EE0", fontWeight: "600", color: CandidateResultr == "Passed" ? "white" : "white", borderRadius: "10px" }}>{CandidateResultr} {CandidatePercentageResult}%</Box>
             </Grid>
 
           </Grid>
@@ -407,7 +416,7 @@ const dat2 = {
               {/* <FilterWord_graph DATA={CandidateChoosenPercentage}/> */}
               <Stack direction="row" alignItems="center" justifyContent="center" gap="5px" mt={2} >
                 <Typography>Filler Words</Typography>
-                <Box component="span" sx={{ background: "#ae6fe1", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : `${CandidateChoosenPercentageFillerWord}`}</Box>
+                <Box component="span" sx={{ background: "#95A4FC", borderRadius: "8px", padding: "6px 30px", color: "white", fontWeight: "600" }}>{ChooseOneQuestion ? '0' : `${capitalizeWords(CandidateChoosenPercentageFillerWord)}`}</Box>
               </Stack>
             </Grid>
             {/* ---//graph 2--- */}

@@ -284,13 +284,14 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                         {item.Candidate_Name}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}> {item.Candidate_Phone__Number}</TableCell>
-                      <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }}>
-                        <RxDotFilled />    {item.Result}
+                      <TableCell align="left" sx={{ paddingLeft: "7%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }}>
+                        <RxDotFilled sx={{color:"#7BC9AC"}}/>    {item.Result}
                       </TableCell>
                       <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797"  }} onClick={() => {
                         {
                           item.Result === "Not Attended" ?
-                          showAlertSuccess33()
+                          // showAlertSuccess33()
+                          null()
                             :
                             navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 
@@ -317,13 +318,14 @@ export default function Result_table({ exportBtnId, VacancyID }) {
                       {item.Candidate_Name}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "5%", border: 0 }}>{item.Candidate_Phone__Number}</TableCell>
-                    <TableCell align="left" sx={{ paddingLeft: "5%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797" }}>
-                      <RxDotFilled />    {item.Result}
+                    <TableCell align="left" sx={{ paddingLeft: "7%", border: 0, color: item.Result == "Failed" ? "#AE6EE0" : item.Result == "Passed" ? "#4AA785" : "#979797" }}>
+                      <RxDotFilled sx={{color:"#7BC9AC"}}/>    {item.Result}
                     </TableCell>
                     <TableCell align="left" sx={{ paddingLeft: "10%", border: 0, cursor: "pointer", color: item.Result == "Failed" ? "#AE6EE0" : [item.Result == "Passed" ? "#4AA785" : "#979797"] }} onClick={() => {
                       {
                         item.Result === "Not Attended" ?
-                        showAlertSuccess33()
+                        // showAlertSuccess33()
+                        null()
                           :
                           navigate(`/Dashboard/View_job_vacancy_main/Candidates_results_main/Interview_result/${item.id}/${CandidatIdDocument}/${VacancyID}`)
 

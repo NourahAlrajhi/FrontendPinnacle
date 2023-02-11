@@ -56,7 +56,13 @@ function Active_vacancy() {
   const [BarCharVacancyName, setBarCharVacancyName] = useState([]);
   const [BarCharVacancyCandidatEnterviwed, setBarCharVacancyCandidatEnterviwed] = useState([]);
 
-
+  const capitalizeWords = (str) => {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
   useEffect(() => {
 
     console.log("formRows: ", Vacancy);
@@ -87,7 +93,7 @@ function Active_vacancy() {
          
            eventsList[j] = {
               id: `event-${i+1}`,
-              label: `${item.title} Deadline`,
+              label: `${capitalizeWords(item.title)} Deadline`,
               color: backgroundColor[i],
               date: `${(new Date(item.linkExpTime).getFullYear()) + "-0" + (new Date(item.linkExpTime).getMonth() + 1) + "-" + (new Date(item.linkExpTime).getDate())}`,
               groupLabel: "Dr Shaun Murphy",
@@ -98,7 +104,7 @@ function Active_vacancy() {
               createdBy: "Nourah"
             }
   
-            BarCharVacancyName[j]=`${item.title}`
+            BarCharVacancyName[j]=`${capitalizeWords(item.title)}`
             BarCharVacancyCandidatEnterviwed[j]=item.InterviewedCandidates
 
             j = i + 1

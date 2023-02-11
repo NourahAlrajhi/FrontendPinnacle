@@ -13,7 +13,7 @@ function Dashboard_footer(props) {
                 <Grid container>
                     <Grid item xs={12} sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", }}>
                         <Typography sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", color: "#14359F" }}>
-                            <Typography>Info &nbsp;<RxDotFilled style={{  color: "gray",margin:"-4px"}}/></Typography>
+                            {/* <Typography>Info &nbsp;<RxDotFilled style={{  color: "gray",margin:"-4px"}}/></Typography> */}
                             <Typography style={{ cursor: "pointer" }} onClick={() => window.location = 'mailto:pinnaclesystem.sa@gmail.com'}> &nbsp;Support&nbsp; <RxDotFilled style={{  color: "gray",margin:"-4px"}}/></Typography>
                             <Typography style={{ cursor: "pointer" }} onClick={() => window.location = 'mailto:pinnaclesystem.sa@gmail.com'}> Contact</Typography>
                         </Typography>

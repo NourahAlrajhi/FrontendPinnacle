@@ -226,7 +226,7 @@ const EditPosition = () => {
         return (
           <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
             <h3>Confirmation Message</h3>
-            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Discard This Position?</p>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Discard This Position Changes?</p>
 
             <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
               <button onClick={() => {
@@ -738,7 +738,7 @@ const EditPosition = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography fontWeight={700}>
-                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question Open Ended Question Please Click the <CiLock style={{ color: "#7024C4" }} /></p>
+                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question Open Ended Question Please Click the <CiUnlock style={{ color: "#7024C4" }} /></p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -885,10 +885,10 @@ const EditPosition = () => {
                                       removeFormFieldsss(arr.id)
                                     } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
                                     {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
                                     }
                                   </Grid> :  ( !arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
                                     )
                               }
                             </Grid>

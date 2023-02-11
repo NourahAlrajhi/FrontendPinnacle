@@ -17,7 +17,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAdminContext } from "../Hook/useAdminContext"
-
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import Paper from '@mui/material/Paper';
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import parse from 'html-react-parser';
 const AdminNavBar = (props) => {
   let navigate = useNavigate();
   const { logout } = useLogoutAdmin()
@@ -25,6 +28,44 @@ const AdminNavBar = (props) => {
   const { Admin } = useAdminContext()
  // const [VacancyName, setVacancyName] = useState('')
   let myString;
+
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const showAlertSuccess22 = (event) => {
+    event.preventDefault()
+    console.log('enterrrrrrrrrrr cancel')
+
+  
+    confirmAlert({
+   
+      // ----change ui---
+      customUI: ({ onClose }) => {
+        return (
+          <div className='custom-ui' style={{ width: "min(600px , 117%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" }}>
+            <h3>Confirmation Message</h3>
+            <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Logout?</p>
+
+            <div style={{ padding: "1rem 0 0 0", display: "flex", justifyContent: "end", gap: "10px" }}>
+              <button onClick={() => {
+                setAnchorEl(null)
+                onClose()
+              }} style={{ padding: "5px 10px", background: "transparent", border: "none", fontSize: "1.2rem" }}>No</button>
+              <button onClick={() => {
+                handleClick()
+                onClose()
+              }} style={{ padding: "5px 10px", color: "#14359F", background: "transparent", border: "none", fontSize: "1.2rem" }}>Yes</button>
+            </div>
+          </div>
+        )
+      }
+      // ----//change ui---
+    })
+
+  }
+
+
   const handleClick = () => {
     logout()
     navigate(`/`);
@@ -134,7 +175,7 @@ const AdminNavBar = (props) => {
               <div>
 
 
-                <a onClick={handleClick}> <FiLogOut /></a>
+                <a onClick={showAlertSuccess22}> <FiLogOut /></a>
               </div>
             )}
             {!Admin && (

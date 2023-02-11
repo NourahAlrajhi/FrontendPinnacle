@@ -321,7 +321,7 @@ export default function Active_vacancy_table(props) {
                   <Common_table_button btnText={"Vacancy"} />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
-                  <Common_table_button btnText={"INTERVIEWED CANDIDATES"} />
+                  <Common_table_button btnText={"INTERVIEWED CANDIDATES"}  />
                 </TableCell>
                 <TableCell sx={{ border: 0 }}>
                   <Common_table_button btnText={"ALL CANDIDATES"} />

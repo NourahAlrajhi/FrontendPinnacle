@@ -46,14 +46,14 @@ const Login = () => {
                 </div>
 
                 <div className="inputs_filds">
-                  <p className="heading"> Log in </p>
+                  <p className="heading" > Log in </p>
                   <p className="pera">
                     Please fill your details to access your account.
                   </p>
                   {error && <div className="error">{error}</div>}
                   <div className="input">
                     <div>
-                      <label htmlFor="UserName">Username</label>
+                      <label htmlFor="UserName" style={{ color:"#4B4B4B}"}}>Username</label>
                       <FormControl fullWidth variant="outlined">
                         <OutlinedInput
                           id="outlined-adornment-username"

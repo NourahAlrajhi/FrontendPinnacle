@@ -107,7 +107,7 @@ const currencies = [
   },
   {
     value: 'EUR',
-    label: 'Select importance',
+    label: 'Select Importance',
   },
 
 ];
@@ -845,7 +845,7 @@ const PositionForm = () => {
                 <Grid container>
                   <Grid item xs={12}>
                     <Typography fontWeight={700}>
-                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question An Open Ended Question Please Click the <CiLock size={20}style={{ color: "#7024C4" , margin: "-3px"}} /> Icon</p>
+                      3. Questions <p style={{ fontSize: "10px", marginTop: '0px', marginLeft: '10px', }}> *To Make the Question An Open Ended Question Please Click the <CiUnlock size={20}style={{ color: "#7024C4" , margin: "-3px"}} /> Icon</p>
                     </Typography>
                   </Grid>
                   <Grid
@@ -965,7 +965,7 @@ const PositionForm = () => {
                                     //     onChange={handleChange}
                                     disabled={!item.SelectedToBeOpenQuestion ? disabled : !disabled}
                                     id={i}
-                                    label="importance"
+                                    label="Importance"
                                     defaultValue="EUR"
                                     className='imprtanceOfQ'
                                     style={{
@@ -989,10 +989,10 @@ const PositionForm = () => {
                                       removeFormFields(item.id)
                                     } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
                                     {!item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
+                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     }
                                   </Grid> :  ( !item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "gray", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
+                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     )
                               }
                             </Grid>
@@ -1027,7 +1027,7 @@ const PositionForm = () => {
 
 
                 <button className="CancelAddPosition" style={{ cursor: "pointer" }} onClick={showAlertSuccess22}>Cancel</button>
-                <button style={!disabled2 ? { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "white", backgroundColor: "#14359F", width: "13%" } : { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "white", backgroundColor: "gray", width: "13%" }} disabled={disabled2} onClick={handleSubmit}> Add Position </button>
+                <button style={!disabled2 ? { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "white", backgroundColor: "#14359F", width: "13%" } : { cursor: "pointer", border: "none", padding: "7px 20px", borderRadius: "5px", color: "rgba(0, 0, 0,0.2)", backgroundColor: "rgba(0, 0, 0,0.1)", width: "13%" }} disabled={disabled2} onClick={handleSubmit}> Add Position </button>
                 {/* <button className="AddPosition" style={{ cursor: "pointer" }} onClick={handleSubmit} >Add Position</button>*/}
 
               </Grid>
