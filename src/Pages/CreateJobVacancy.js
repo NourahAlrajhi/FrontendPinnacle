@@ -277,7 +277,7 @@ const CreateJobbVacancy = () => {
             // ]
             customUI: ({ onClose }) => {
                 return (
-                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" ,marginLeft:"374px"}}>
+                    <div className='custom-ui' style={{ width: "min(600px , 95%)", background: "white", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "5%" ,marginLeft:"70px"}}>
                         <h3>Confirmation Message</h3>
                         <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "gray" }}>Are You Sure You Want To Draft This Job Vacancy?</p>
 
