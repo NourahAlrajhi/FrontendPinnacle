@@ -181,7 +181,7 @@ function Interview_welcome_screen() {
                             </div>
 
                             {/* ---inputs--- */}
-                            <div className='content'>
+                            <div className='content' >
                                 <p className='heading'> Welcome {CandidateName}!</p>
                                 {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <p className='pera'>Make Sure Your Microphone and Camera are Working Before Starting the Interview!</p> : FinishDuration ? <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>This Interview Link Has Expired</p> : FinishInterview ? <p className='pera' style={{ padding: "40px", textAlign: "center" }}>You Have Conducted This Interview Already</p> : <p className='pera' style={{ padding: "40px", textAlign: "center", color: "red" }}>You Have Already Started This Interview!</p>}
                                 {!FinishDuration && !FinishInterview && !FinisHALFhInterview ? <div className='filds'>

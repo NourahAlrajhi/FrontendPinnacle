@@ -109,6 +109,8 @@
   font-weight: 600;
   text-transform: capitalize;
   margin: 0.8rem 0 0.5rem 0;
+  overflow-y: "hidden";
+  overflow-x: "auto",
 }
 
 .BoxDiv .frame .pera {

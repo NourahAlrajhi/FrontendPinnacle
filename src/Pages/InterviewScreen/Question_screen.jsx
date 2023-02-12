@@ -550,6 +550,7 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
           console.log(item.RECORDS)
         
           
+         
 
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
           //https://backend-pinnacle.herokuapp.com/

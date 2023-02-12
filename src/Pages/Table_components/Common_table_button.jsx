@@ -17,7 +17,8 @@ const Common_table_button = (props) => {
                     color: "#4F5E74",
                     width: "100%",
                     whiteSpace: "nowrap",
-                    overflow: "hidden",
+                    overflowY: "hidden",
+                    overflowX: "auto",
                     textOverflow: "ellipsis",
                 }}>
                     <Button variant="contained" sx={{ background: 'transparent', borderRadius: '7px', color: "#222", boxShadow: "none", padding: "0", "&:hover": { background: "transparent", boxShadow: "none" } }}>{props.btnText}</Button>
