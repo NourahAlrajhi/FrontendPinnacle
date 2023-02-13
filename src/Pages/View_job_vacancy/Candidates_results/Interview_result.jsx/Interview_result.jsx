@@ -63,10 +63,10 @@ export const options = {
           }
       },
       y: {
-          border: {
-              display: false
-          },
-      }
+        min: 0,
+        max: 50,
+        stepSize: 5,
+      },
   }
 
 };
@@ -98,11 +98,10 @@ export const options2 = {
           }
       },
       y: {
-          border: {
-              display: false
-          },
-
-      }
+        min: 0,
+        max: 100,
+        stepSize: 5,
+      },
   }
 
 };
