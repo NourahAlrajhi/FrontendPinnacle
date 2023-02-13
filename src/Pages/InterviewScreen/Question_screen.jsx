@@ -552,6 +552,7 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
           
          
 
+
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
           //https://backend-pinnacle.herokuapp.com/
           const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SendingDataToModel/' + CandidateDocID + '/' + CandidateID, {

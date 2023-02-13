@@ -310,15 +310,17 @@ const PositionForm = () => {
 
 
 
+  const isLettersOnlyLetters = (str) => /^[ A-Za-z?]*$/.test(str)
 
 
 
-  const isLetters = (str) => /^[ A-Za-z?.,:'"!()''-_]*$/.test(str)
-  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()''-_]*$/.test(str)
+  const isLetters = (str) => /^[ A-Za-z?.,:'"!()'']*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()'']*$/.test(str)
 
   const onInputChange = (e) => {
     const { value } = e.target;
-    if (isLetters(value)) {
+    if (isLettersOnlyLetters(value)) {
+      console.log("Enterrrrr With letter")
       setVALIDINPUTFEILDS(false)
       setErrorMessage("")
       setname(e.target.value);
@@ -420,7 +422,7 @@ const PositionForm = () => {
 
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
-    if (isLetters(value)) {
+    if (isLettersOnlyLetters(value)) {
       setVALIDINPUTFEILDSQuestion(false)
       seterrorMessageQuestion("")
       setLengthCounter22(LengthCounter22 + 1)
@@ -719,6 +721,10 @@ const PositionForm = () => {
 
                         helperText={!VALIDINPUTFEILDS ? `${name.length}/${CHARACTER_LIMIT_ForName}` : errorMessage}
                         error={VALIDINPUTFEILDS}
+                        sx={{
+                          fieldset: { borderColor: "black" },
+                      
+                        }}
                       />
                     </FormControl>
                   </Grid>
@@ -738,7 +744,7 @@ const PositionForm = () => {
                       onChange={onInputChange22}
                       value={description}
                       placeholder="Enter Job Description"
-                      sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
+                      sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" ,   fieldset: { borderColor: "black" }}}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -795,7 +801,11 @@ const PositionForm = () => {
 
                         }}
                         inputProps={{ min, max }}
-                        style={{ width: "250px" }}
+                        // style={{ width: "250px" }}
+                        sx={{
+                          fieldset: { borderColor: "black" },
+                          width: "250px" 
+                        }}
                       />
                     </FormControl>
                   </Grid>
@@ -829,7 +839,11 @@ const PositionForm = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        style={{ width: "250px" }}
+                        // style={{ width: "250px" }}
+                        sx={{
+                          fieldset: { borderColor: "black" },
+                          width: "250px" 
+                        }}
                         inputProps={{ maxlength: CHARACTER_LIMIT_ForNoticPeriod }}
                         helperText={!VALIDINPUTFEILDSNoticePeriod ? `${noticePeriod.length}/${CHARACTER_LIMIT_ForNoticPeriod}` : errorMessageNoticePeriod}
                       />
@@ -897,9 +911,13 @@ const PositionForm = () => {
                                   onChange={onInputChangeForQuestion}
                                   id={i}
                                   placeholder="Enter Question"
-                                  style={{ width: "200px" }}
+                                  // style={{ width: "200px"  }}
                                   InputLabelProps={{
                                     shrink: true,
+                                  }}
+                                  sx={{
+                                    fieldset: { borderColor: "black" },
+                                    width: "200px" 
                                   }}
                                 // inputProps={{ maxlength: CHARACTER_LIMIT_ForQuestion }}
 
@@ -947,9 +965,14 @@ const PositionForm = () => {
                                   onChange={onInputChangeForAnswers}
                                   id={i}
                                   placeholder="Enter Expected Answer"
-                                  style={{ marginLeft: '88px', width: "200px" }}
+                                  // style={{ marginLeft: '88px', width: "200px" }}
                                   InputLabelProps={{
                                     shrink: true,
+                                  }}
+                                  sx={{
+                                    fieldset: { borderColor: "black" },
+                                    width: "200px" ,
+                                    marginLeft: '88px'
                                   }}
                                 // inputProps={{ maxlength: CHARACTER_LIMIT_ForAnswers }}
 
@@ -968,7 +991,12 @@ const PositionForm = () => {
                                     label="Importance"
                                     defaultValue="EUR"
                                     className='imprtanceOfQ'
-                                    style={{
+                                    // style={{
+                                    //   marginLeft: '110px',
+                                    //   width: "200px"
+                                    // }}
+                                    sx={{
+                                      fieldset: { borderColor: "black" },
                                       marginLeft: '110px',
                                       width: "200px"
                                     }}
@@ -988,11 +1016,11 @@ const PositionForm = () => {
                                     <BiTrash onClick={() =>
                                       removeFormFields(item.id)
                                     } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
-                                    {!item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
+                                    {!item.SelectedToBeOpenQuestion ? <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
+                                      : <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     }
-                                  </Grid> :  ( !item.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
+                                  </Grid> :  ( !item.SelectedToBeOpenQuestion ? <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(item.id); handleTests(i) }} />
+                                      : <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(item.id); handleTests2(i) }} />
                                     )
                               }
                             </Grid>

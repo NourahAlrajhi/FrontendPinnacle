@@ -782,11 +782,15 @@ const CreateJobbVacancy = () => {
                                             label="Position"
                                             //defaultValue="EUR"
                                             className='imprtanceOfQ'
-                                            style={{
+                                            // style={{
 
 
+                                            //     width: "810px"
+                                            // }}
+                                            sx={{
+                                                fieldset: { borderColor: "black" },
                                                 width: "810px"
-                                            }}
+                                              }}
                                         >
                                             {Positions && Positions.map((option) => (
                                                 <MenuItem key={option.name} value={option.name} onClick={() => OnChoosenPosition(option._id)}>
@@ -1105,15 +1109,22 @@ const CreateJobbVacancy = () => {
                                                 onChange={(e) => setEmailSubject(e.target.value)}
                                                 value={EmailSubject}
                                                 // placeholder="Enter Email Subject"
-                                                style={{
+                                                // style={{
+                                                //     width: "450px",
+                                                //     position: "absolute",
+                                                //     left: "40px",
+                                                //     top: "60px"
+                                                // }}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                sx={{
+                                                    fieldset: { borderColor: "black" },
                                                     width: "450px",
                                                     position: "absolute",
                                                     left: "40px",
                                                     top: "60px"
-                                                }}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
+                                                  }}
                                             />
                                             <Box style={{
 
@@ -1132,7 +1143,7 @@ const CreateJobbVacancy = () => {
                                                         inputFormat="MM/DD/YYYY"
                                                         value={value}
                                                         onChange={handleChange}
-                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} error={false} />}
+                                                        renderInput={(params) => <TextField {...params} sx={{ mr: 2 ,   fieldset: { borderColor: "black" }}} error={false} />}
                                                         shouldDisableDate={disablePrevDates(startDate)}
                                                     />
                                                     {" "}
@@ -1141,7 +1152,7 @@ const CreateJobbVacancy = () => {
                                                         label="Time"
                                                         value={value}
                                                         onChange={handleChange}
-                                                        renderInput={(params) => <TextField {...params} />}
+                                                        renderInput={(params) => <TextField {...params}  sx={{   fieldset: { borderColor: "black" }}}/>}
                                                     />
 
                                                 </LocalizationProvider>
@@ -1155,12 +1166,20 @@ const CreateJobbVacancy = () => {
                                                 onChange={(e) => setEmailBody(e.target.value)}
                                                 value={EmailBody}
                                                 placeholder="Enter Email body"
-                                                style={{
+                                                // style={{
+                                                //     width: "870px",
+                                                //     position: "absolute",
+                                                //     left: "40px",
+                                                //     top: "160px"
+                                                // }}
+
+                                                sx={{
+                                                    fieldset: { borderColor: "black" },
                                                     width: "870px",
                                                     position: "absolute",
                                                     left: "40px",
                                                     top: "160px"
-                                                }}
+                                                  }}
                                                 InputLabelProps={{
                                                     shrink: true,
                                                 }}

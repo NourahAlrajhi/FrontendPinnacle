@@ -347,7 +347,8 @@ const EditPosition = () => {
       setError('You must be logged in')
       return
     }
-    { error && showAlertSuccess33(error) }
+    
+    // { error && showAlertSuccess33(error) }
     console.log("Enter beginingggggg")
     const Positionssss = { /*questions*//*expectedAnswers*/arr: consumer, description, name, noticePeriod,/* imprtanceOfQ,*/ ExpectedSalary }
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Position/' + id, {
@@ -364,6 +365,7 @@ const EditPosition = () => {
     if (!response.ok) {
       setError(json.error)
       setEmptyFields(json.emptyFields)
+      { json.error && showAlertSuccess33(json.error) }
     }
     if (response.ok) {
       console.log("Enter beginingggggg3")
@@ -443,13 +445,17 @@ const EditPosition = () => {
   const helperTextStyles4 = useHelperTextStylesForQuestion()
   const helperTextStyles5 = useHelperTextStylesForAnswers()
 
-  const isLetters = (str) => /^[ A-Za-z?.,:'"!()''-_]*$/.test(str)
-  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()''-_]*$/.test(str)
+
+  const isLettersOnlyLetters = (str) => /^[ A-Za-z?]*$/.test(str)
+
+  const isLetters = (str) => /^[ A-Za-z?.,:'"!()'']*$/.test(str)
+  const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()'']*$/.test(str)
 
 
   const onInputChange = (e) => {
     const { value } = e.target;
-    if (isLetters(value)) {
+    if (isLettersOnlyLetters(value)) {
+      console.log("Enterrrrr With letter")
       setVALIDINPUTFEILDS(false)
       setErrorMessage("")
       setname(e.target.value)
@@ -489,7 +495,7 @@ const EditPosition = () => {
 
   const onInputChangeForQuestion = (e) => {
     const { value } = e.target;
-    if (isLetters(value)) {
+    if (isLettersOnlyLetters(value)) {
       setLengthCounter22(LengthCounter22 + 1)
       const index = e.target.id;
       if (e.target.value == "") {
@@ -598,7 +604,11 @@ const EditPosition = () => {
                         value={name}
                         disabled={disabled}
                         placeholder="Enter Position Name"
-                        style={{
+                        // style={{
+                        //   width: "250px"
+                        // }}
+                        sx={{
+                          fieldset: { borderColor: "black" },
                           width: "250px"
                         }}
                         InputLabelProps={{
@@ -630,7 +640,7 @@ const EditPosition = () => {
 
                       value={description}
                       placeholder="Enter Job Description"
-                      sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" }}
+                      sx={{ mt: 3, ml: 3, width: "min(90% ,559px)" , fieldset: { borderColor: "black" }}}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -681,8 +691,12 @@ const EditPosition = () => {
                             </InputAdornment>
                           ),
                         }}
-                        style={{
-                          width: "250px"
+                        // style={{
+                        //   width: "250px"
+                        // }}
+                        sx={{
+                          fieldset: { borderColor: "black" },
+                          width: "250px" 
                         }}
                       />
                     </FormControl>
@@ -716,8 +730,12 @@ const EditPosition = () => {
                         }}
                         disabled={disabled}
                         placeholder="Enter Notic Period"
-                        style={{
-                          width: "250px"
+                        // style={{
+                        //   width: "250px"
+                        // }}
+                        sx={{
+                          fieldset: { borderColor: "black" },
+                          width: "250px" 
                         }}
                         InputLabelProps={{
                           shrink: true,
@@ -796,7 +814,11 @@ const EditPosition = () => {
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
-                                  style={{ width: "200px" }}
+                                  // style={{ width: "200px" }}
+                                  sx={{
+                                    fieldset: { borderColor: "black" },
+                                    width: "200px" 
+                                  }}
                                 // helperText={`${arr.questions.length}/${CHARACTER_LIMIT_ForQuestion}`}
                                 />
                               </Grid>
@@ -842,8 +864,12 @@ const EditPosition = () => {
                                   onChange={onInputChangeForAnswers}
                                   id={i}
                                   placeholder="Enter Expected Answer"
-                                  style={{ marginLeft: '88px', width: "200px" }}
-
+                                  // style={{ marginLeft: '88px', width: "200px" }}
+                                  sx={{
+                                    fieldset: { borderColor: "black" },
+                                    width: "200px" ,
+                                    marginLeft: '88px'
+                                  }}
                                   InputLabelProps={{
                                     shrink: true,
                                   }}
@@ -863,7 +889,12 @@ const EditPosition = () => {
                                     label="importance"
                                     defaultValue="EUR"
                                     className='imprtanceOfQ'
-                                    style={{
+                                    // style={{
+                                    //   marginLeft: '110px',
+                                    //   width: "200px"
+                                    // }}
+                                    sx={{
+                                      fieldset: { borderColor: "black" },
                                       marginLeft: '110px',
                                       width: "200px"
                                     }}
@@ -884,11 +915,11 @@ const EditPosition = () => {
                                     <BiTrash onClick={() =>
                                       removeFormFieldsss(arr.id)
                                     } style={{ marginTop: '6px', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} />
-                                    {!arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                    {!arr.SelectedToBeOpenQuestion ? <CiUnlock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
+                                      : <CiLock style={{ marginTop: '1%', marginLeft: '250px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
                                     }
-                                  </Grid> :  ( !arr.SelectedToBeOpenQuestion ? <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
-                                      : <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
+                                  </Grid> :  ( !arr.SelectedToBeOpenQuestion ? <CiUnlock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion(arr.id); handleTests(i) }} />
+                                      : <CiLock style={{ marginTop: '5%', marginLeft: '270px', color: "#7024C4", cursor: "pointer" }} onClick={() => { HandelOpenEndQuestion2(arr.id); handleTests2(i) }} />
                                     )
                               }
                             </Grid>
