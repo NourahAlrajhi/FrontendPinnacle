@@ -23,10 +23,11 @@ import Paper from '@mui/material/Paper';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import parse from 'html-react-parser';
 import WarningIcon from '@material-ui/icons/Warning';
-import {CiWarning }  from "react-icons/ci";
-import {TiWarningOutline}  from "react-icons/ti";
-import {BsCheck2} from "react-icons/bs";
-import {VscWarning} from "react-icons/vsc";
+import { CiWarning } from "react-icons/ci";
+import { TiWarningOutline } from "react-icons/ti";
+import { BsCheck2 } from "react-icons/bs";
+import { VscWarning } from "react-icons/vsc";
+import CircularProgress from '@mui/material/CircularProgress';
 function Question_screen(props) {
 
   // ----------popover function----
@@ -55,10 +56,9 @@ function Question_screen(props) {
   const [stepsForImportance, setstepsForImportance] = useState([''])
   const [stepsForQuestionId, setstepsForQuestionId] = useState([''])
   const [stepsForRecords, setstepsForRecords] = useState([{}])
-const [SubmitTheinterview,setSubmitTheinterview]=useState(false)
-const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
-
-
+  const [SubmitTheinterview, setSubmitTheinterview] = useState(false)
+  const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
+  const [isLoading, setIsLoading] = useState(false);
 
   let count = 0;
 
@@ -78,8 +78,8 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
   }, [])
 
   const handleTabClosing = () => {
-   // handleSendVideos()
-   handleStopRecording()
+    // handleSendVideos()
+    handleStopRecording()
   }
 
   const alertUser = (event: any) => {
@@ -106,7 +106,7 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
             console.log("enetr the condition of welcome page retriveing")
             console.log(item.Candidate_Name)
             // setFinisHALFhInterview(item.IsStartingTheInterview)
-           
+
             setCandidateName(item.Candidate_Name)
             setCandidateName(item.Candidate_Name)
             setSubmitTheinterview(item.SubmitTheinterview)
@@ -309,16 +309,16 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
           // ----change ui---
           customUI: ({ onClose }) => {
             return (
-    
+
               <div className='custom-ui' style={{ width: "max(148px, 110%)", background: "#333333", boxShadow: "0px 0px 8px lightgray", borderRadius: "8px", padding: "2%" }}>
                 {/* <h3>Confirmation Message</h3> */}
-    
+
                 <p style={{ padding: "1.5rem 0", textAlign: "center", fontWeight: "600", color: "white" }}><VscWarning size={35} style={{ color: "#7024C4", margin: "-13px" }} /> &nbsp; Please grant permission to use the camera and microphone</p>
               </div>
             )
           }
           // ----//change ui---
-    
+
         })
       }
 
@@ -630,13 +630,13 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
   }
 
   const PassingToTheModel = async (e) => {
-   
- //https://backend-pinnacle.herokuapp.com
- const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SetIsSubmitEnterview/' + CandidateDocID + '/' + CandidateID, {
-})
+    setIsLoading(true);
+    //https://backend-pinnacle.herokuapp.com
+    const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SetIsSubmitEnterview/' + CandidateDocID + '/' + CandidateID, {
+    })
+    setIsLoading(false);
 
-
-CallingTheModel()
+    CallingTheModel()
 
   }
 
@@ -670,16 +670,17 @@ CallingTheModel()
 
       <Container maxWidth="lg" sx={{ overflow: "auto", marginTop: "0px" }}>
         {props.activeStep === props.steps.length ? (
-          
+
           <box component="div" className="thanksScreen">
-            {ButtonAppearnce?     <box component="div" className="thanksScreen">
-            All Done
-            Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
-            </box> :null}
-           
+            {ButtonAppearnce ? <box component="div" className="thanksScreen">
+              All Done
+              Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+            </box> : null}
+
 
             {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
-              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
+              <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
+            {isLoading ?     <CircularProgress  sx={{position:"relative" , top:"-120px" , left:"-520px"}}/>: null}
 
           </box>
 
@@ -741,27 +742,29 @@ CallingTheModel()
 
             </Box>
           </>
-          : !SubmitTheinterview?
-          <box component="div" className="thanksScreen">
-          {ButtonAppearnce?     <box component="div" className="thanksScreen">
-          All Done
-          Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
-          </box> :null}
-         
+          : !SubmitTheinterview ?
+            <box component="div" className="thanksScreen">
+              {ButtonAppearnce ? <box component="div" className="thanksScreen">
+                All Done
+                Thank You For Your Time, {CandidateName}!{console.log(isRecording)}
+              </box> : null}
 
-          {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
-            <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? {padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
 
-        </box>
-          :
+              {!ButtonAppearnce ? <box component="div" className="thanksScreen" >
+                <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={PassingToTheModel} sx={!CLICKSENDTOMODEL ? { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "#1F278B", color: "white" } } : { padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "gray" } }}>{"Click Here To Finish The Interview"}</Button>     </box> : null}
+                {isLoading ?     <CircularProgress  sx={{position:"relative" , top:"-120px" , left:"-520px"}}/> : null}
+            </box>
+            :
 
-          <box component="div" className="thanksScreen">
-            You Have Finished The Interview
-            Thank You For Your Time, {CandidateName}!
-            {/* <box component="div" className="thanksScreen">
+            <box component="div" className="thanksScreen">
+              You Have Finished The Interview
+              Thank You For Your Time, {CandidateName}!
+              {/* <box component="div" className="thanksScreen">
               <Button variant="contained" disabled={CLICKSENDTOMODEL} onClick={CallingTheModel} sx={{ padding: "0.5rem 2rem", background: "#14359F", borderRadius: "8px", "&:hover": { background: "white", color: "#14359F" } }}  >{"Click Here To Finish The Interview"}</Button>     </box>   */}
-
-          </box>
+{/* {isLoading ? 
+              <CircularProgress  sx={{position:"relative" , top:"-120px" , left:"-520px"}}/>
+          : null} */}
+            </box>
 
         }
       </Container>
