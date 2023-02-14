@@ -545,7 +545,7 @@ function Question_screen(props) {
       console.log("Enter welcome page retriveing")
       json.Candidate_Info && json.Candidate_Info.map(async (item, i) => {
         console.log(`${item.id}`)
-  
+      
         if (item.id == CandidateID) {
           console.log(item.RECORDS)
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
@@ -631,6 +631,7 @@ function Question_screen(props) {
 
   const PassingToTheModel = async (e) => {
     setIsLoading(true);
+    setCLICKSENDTOMODEL(true)
     //https://backend-pinnacle.herokuapp.com
     const response = await fetch('https://backend-pinnacle.herokuapp.com/api/Recruiter/SetIsSubmitEnterview/' + CandidateDocID + '/' + CandidateID, {
     })
