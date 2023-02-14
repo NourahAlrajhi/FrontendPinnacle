@@ -545,7 +545,7 @@ const [SetCandidateINFOOO, setSetCandidateINFOOO] = useState([{}])
       console.log("Enter welcome page retriveing")
       json.Candidate_Info && json.Candidate_Info.map(async (item, i) => {
         console.log(`${item.id}`)
-
+  
         if (item.id == CandidateID) {
           console.log(item.RECORDS)
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
