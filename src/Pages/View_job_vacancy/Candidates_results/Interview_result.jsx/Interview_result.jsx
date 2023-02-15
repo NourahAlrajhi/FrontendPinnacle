@@ -64,7 +64,7 @@ export const options = {
       },
       y: {
         min: 0,
-        max: 50,
+        max: 20,
         stepSize: 5,
       },
   }
