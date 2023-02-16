@@ -310,7 +310,7 @@ const PositionForm = () => {
 
 
 
-  const isLettersOnlyLetters = (str) => /^[ A-Za-z?]*$/.test(str)
+  const isLettersOnlyLetters = (str) => /^[ A-Za-z?,]*$/.test(str)
 
 
 

@@ -470,10 +470,10 @@ function Question_screen(props) {
       recordedVideo.ondataavailable = (e) => {
         const videoBlob = new Blob([e.data], { type: 'video/webm' });
         const videoUrl = URL.createObjectURL(videoBlob);
-        const video = document.createElement('video');
-        video.src = videoUrl
-        video.controls = true;
-        document.body.appendChild(video);
+        // const video = document.createElement('video');
+        // video.src = videoUrl
+        // video.controls = true;
+        // document.body.appendChild(video);
 
         console.log(QUESTIONS[index].id)
 
@@ -545,7 +545,7 @@ function Question_screen(props) {
       console.log("Enter welcome page retriveing")
       json.Candidate_Info && json.Candidate_Info.map(async (item, i) => {
         console.log(`${item.id}`)
-      
+        
         if (item.id == CandidateID) {
           console.log(item.RECORDS)
           const MODEL = { steps, stepsForImportance, RECORDLISTTT: item.RECORDS, stepsForQuestionId }
@@ -626,7 +626,7 @@ function Question_screen(props) {
         RecrodsArrayForTheModel()
 
       }
-    }, 40000)
+    }, 70000)
   }
 
   const PassingToTheModel = async (e) => {

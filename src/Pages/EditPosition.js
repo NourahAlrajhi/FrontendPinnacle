@@ -446,7 +446,7 @@ const EditPosition = () => {
   const helperTextStyles5 = useHelperTextStylesForAnswers()
 
 
-  const isLettersOnlyLetters = (str) => /^[ A-Za-z?]*$/.test(str)
+  const isLettersOnlyLetters = (str) => /^[ A-Za-z?,]*$/.test(str)
 
   const isLetters = (str) => /^[ A-Za-z?.,:'"!()'']*$/.test(str)
   const isLetters2 = (str) => /^[ A-Za-z0-9+.,:"!()'']*$/.test(str)
