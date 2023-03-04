@@ -43,7 +43,12 @@ export const options = {
       grid: {
         color: 'transparent',
       }
-    }
+    },
+    y: {
+      min: 0,
+      max: 10,
+      stepSize: 5,
+    },
   }
 
 };
